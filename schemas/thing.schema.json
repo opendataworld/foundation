@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendataworld.org/foundation/schemas/thing.schema.json",
+  "title": "Thing",
+  "description": "Root schema for every identifiable governed object in OpenDataWorld Foundation.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "type",
+    "name",
+    "description",
+    "createdAt",
+    "updatedAt",
+    "lifecycleState",
+    "version"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Globally unique identifier for the object."
+    },
+    "canonicalId": {
+      "type": "string",
+      "description": "Stable canonical identifier across aliases, systems, versions, and migrations."
+    },
+    "type": {
+      "type": "string",
+      "description": "Canonical object type."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable name."
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description."
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "externalIds": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["system", "value"],
+        "properties": {
+          "system": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "additionalProperties": true
+      },
+      "default": []
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rel", "href"],
+        "properties": {
+          "rel": {
+            "type": "string"
+          },
+          "href": {
+            "type": "string",
+            "format": "uri"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      },
+      "default": []
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "createdBy": {
+      "type": "string"
+    },
+    "updatedBy": {
+      "type": "string"
+    },
+    "lifecycleState": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Proposed",
+        "Registered",
+        "Validated",
+        "Approved",
+        "Active",
+        "Published",
+        "Deprecated",
+        "Superseded",
+        "Archived",
+        "Retired",
+        "Revoked",
+        "Deleted"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "description": "Version identifier for this object state."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional descriptive, structural, technical, governance, or operational metadata.",
+      "additionalProperties": true
+    }
+  }
+}
