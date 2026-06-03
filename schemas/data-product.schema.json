@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendataworld.org/foundation/schemas/data-product.schema.json",
+  "title": "DataProduct",
+  "description": "Canonical OpenDataWorld schema for a governed data product.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "type",
+    "name",
+    "description",
+    "owner",
+    "steward",
+    "intendedConsumers",
+    "useCases",
+    "inputDataAssets",
+    "interfaces",
+    "qualityExpectations",
+    "accessPolicy",
+    "supportModel",
+    "changePolicy",
+    "classification",
+    "lifecycleState",
+    "version",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Canonical data product identifier."
+    },
+    "canonicalId": {
+      "type": "string",
+      "description": "Stable identifier across versions, aliases, and systems."
+    },
+    "type": {
+      "const": "DataProduct"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Identity reference for accountable data product owner."
+    },
+    "steward": {
+      "type": "string",
+      "description": "Identity reference for responsible steward."
+    },
+    "intendedConsumers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "useCases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "inputDataAssets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "interfaces": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["interfaceType", "reference"],
+        "properties": {
+          "interfaceType": {
+            "type": "string",
+            "enum": ["API", "Download", "Stream", "Dashboard", "Query", "File", "Subscription", "Other"]
+          },
+          "reference": {
+            "type": "string"
+          },
+          "schema": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "qualityExpectations": {
+      "type": "object",
+      "properties": {
+        "qualityTier": {
+          "type": "string",
+          "enum": ["Unassessed", "Bronze", "Silver", "Gold", "Platinum", "Certified"]
+        },
+        "freshness": {
+          "type": "string"
+        },
+        "availability": {
+          "type": "string"
+        },
+        "knownLimitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "slo": {
+      "type": "object",
+      "description": "Service-level objectives for the data product.",
+      "additionalProperties": true
+    },
+    "accessPolicy": {
+      "type": "string"
+    },
+    "supportModel": {
+      "type": "string"
+    },
+    "changePolicy": {
+      "type": "string"
+    },
+    "classification": {
+      "type": "object",
+      "required": ["domain", "dataSensitivity", "dataAccessLevel", "dataQualityTier", "dataTrustLevel"],
+      "properties": {
+        "domain": {
+          "type": "string"
+        },
+        "dataAssetType": {
+          "const": "DataProduct"
+        },
+        "dataSensitivity": {
+          "type": "string"
+        },
+        "dataAccessLevel": {
+          "type": "string"
+        },
+        "dataQualityTier": {
+          "type": "string"
+        },
+        "dataCriticality": {
+          "type": "string"
+        },
+        "dataTrustLevel": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "license": {
+      "type": "string"
+    },
+    "provenance": {
+      "type": "string"
+    },
+    "lineage": {
+      "type": "string"
+    },
+    "trustAssessment": {
+      "type": "string"
+    },
+    "lifecycleState": {
+      "type": "string",
+      "enum": ["Draft", "Proposed", "Registered", "Validated", "Approved", "Active", "Published", "Deprecated", "Superseded", "Archived", "Retired", "Revoked", "Deleted"]
+    },
+    "version": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "lifecycleState": {
+            "const": "Published"
+          }
+        }
+      },
+      "then": {
+        "required": ["license", "provenance", "trustAssessment", "accessPolicy"]
+      }
+    }
+  ]
+}
