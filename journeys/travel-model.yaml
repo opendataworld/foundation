@@ -1,0 +1,339 @@
+version: 0.1.0
+status: draft
+namespace: odw.travel
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical travel model for governed movement across locations, time, identities, routes, jurisdictions, approvals, costs, risks, and outcomes.
+
+coreIdea: >
+  Travel is a specialized journey where a subject moves from one location to another over time through routes, stops, modes, jurisdictions, permissions, constraints, events, and outcomes.
+
+travelPrinciples:
+  - id: odw.travel.principle.journey
+    name: Travel Is A Journey
+    description: Travel is a governed path through locations, stages, events, states, and outcomes.
+
+  - id: odw.travel.principle.spatiotemporal
+    name: Travel Is Spatiotemporal
+    description: Travel always has both time and location context.
+
+  - id: odw.travel.principle.identityBound
+    name: Travel Is Identity Bound
+    description: Travel subject, traveler, carrier, operator, approver, and responsible party must resolve to identities where governed.
+
+  - id: odw.travel.principle.jurisdictionAware
+    name: Travel Is Jurisdiction Aware
+    description: Travel may cross country, region, administrative, regulatory, or operating boundaries.
+
+  - id: odw.travel.principle.policyBound
+    name: Travel Is Policy Bound
+    description: Travel may require eligibility checks, permissions, approvals, documents, budgets, safety checks, or compliance controls.
+
+  - id: odw.travel.principle.observable
+    name: Travel Is Observable
+    description: Important travel events must preserve evidence, timestamps, route, status, and audit context.
+
+travelPrimitives:
+  - id: odw.travel.primitive.travelPlan
+    name: Travel Plan
+    description: Proposed or approved travel journey.
+
+  - id: odw.travel.primitive.trip
+    name: Trip
+    description: Actual or planned end-to-end travel instance.
+
+  - id: odw.travel.primitive.segment
+    name: Segment
+    description: One leg of travel between origin and destination.
+
+  - id: odw.travel.primitive.route
+    name: Route
+    description: Ordered path across locations, stops, or waypoints.
+
+  - id: odw.travel.primitive.stop
+    name: Stop
+    description: Intermediate location in a travel route.
+
+  - id: odw.travel.primitive.origin
+    name: Origin
+    description: Starting location of a travel plan, trip, or segment.
+
+  - id: odw.travel.primitive.destination
+    name: Destination
+    description: Ending location of a travel plan, trip, or segment.
+
+  - id: odw.travel.primitive.mode
+    name: Travel Mode
+    description: Method of travel such as walking, road, rail, air, water, or digital transfer.
+
+  - id: odw.travel.primitive.itinerary
+    name: Itinerary
+    description: Time-ordered travel plan including segments, stops, reservations, and constraints.
+
+  - id: odw.travel.primitive.reservation
+    name: Reservation
+    description: Booking, ticket, permit, allocation, or confirmed travel entitlement.
+
+  - id: odw.travel.primitive.travelEvent
+    name: Travel Event
+    description: Event that occurs during travel, such as departure, arrival, delay, cancellation, check-in, border crossing, or completion.
+
+  - id: odw.travel.primitive.travelDocument
+    name: Travel Document
+    description: Document, credential, permit, ticket, pass, authorization, or evidence required for travel.
+
+  - id: odw.travel.primitive.travelPolicy
+    name: Travel Policy
+    description: Policy governing eligibility, permission, budget, route, risk, approval, or compliance.
+
+travelSubjectTypes:
+  - Person
+  - Organization
+  - Team
+  - Agent
+  - Asset
+  - DataAsset
+  - Dataset
+  - Shipment
+  - Service
+  - Vehicle
+  - Device
+  - Credential
+  - Document
+
+travelModes:
+  - id: odw.travel.mode.walk
+    name: Walk
+    description: Human travel by walking.
+
+  - id: odw.travel.mode.road
+    name: Road
+    description: Travel by road vehicle.
+
+  - id: odw.travel.mode.rail
+    name: Rail
+    description: Travel by rail.
+
+  - id: odw.travel.mode.air
+    name: Air
+    description: Travel by aircraft.
+
+  - id: odw.travel.mode.water
+    name: Water
+    description: Travel by boat, ship, ferry, or other water transport.
+
+  - id: odw.travel.mode.pipeline
+    name: Pipeline
+    description: Movement through pipeline-like infrastructure.
+
+  - id: odw.travel.mode.digital
+    name: Digital Transfer
+    description: Movement of data, credential, content, or digital asset across digital locations or jurisdictions.
+
+  - id: odw.travel.mode.multimodal
+    name: Multimodal
+    description: Travel using multiple modes.
+
+canonicalTravelFields:
+  - id
+  - type
+  - name
+  - description
+  - subject
+  - subjectType
+  - traveler
+  - owner
+  - operator
+  - origin
+  - destination
+  - route
+  - segments
+  - stops
+  - mode
+  - itinerary
+  - policies
+  - approvals
+  - documents
+  - costs
+  - risks
+  - constraints
+  - status
+  - createdAt
+  - updatedAt
+  - plannedStartAt
+  - plannedEndAt
+  - actualStartAt
+  - actualEndAt
+  - lifecycleState
+  - version
+
+travelSegmentFields:
+  - id
+  - origin
+  - destination
+  - mode
+  - carrier
+  - vehicle
+  - departureTime
+  - arrivalTime
+  - plannedDuration
+  - actualDuration
+  - distance
+  - route
+  - status
+  - evidence
+
+travelEventTypes:
+  - id: odw.travel.event.planned
+    name: Travel Planned
+    description: Travel plan created.
+
+  - id: odw.travel.event.approved
+    name: Travel Approved
+    description: Required approval granted.
+
+  - id: odw.travel.event.started
+    name: Travel Started
+    description: Travel started.
+
+  - id: odw.travel.event.departed
+    name: Departed
+    description: Subject departed from origin or stop.
+
+  - id: odw.travel.event.arrived
+    name: Arrived
+    description: Subject arrived at destination or stop.
+
+  - id: odw.travel.event.delayed
+    name: Delayed
+    description: Travel delayed.
+
+  - id: odw.travel.event.cancelled
+    name: Cancelled
+    description: Travel cancelled.
+
+  - id: odw.travel.event.crossedBoundary
+    name: Boundary Crossed
+    description: Subject crossed jurisdiction, region, country, policy, or administrative boundary.
+
+  - id: odw.travel.event.completed
+    name: Travel Completed
+    description: Travel completed.
+
+travelLifecycleStates:
+  - Draft
+  - Planned
+  - SubmittedForApproval
+  - Approved
+  - Rejected
+  - Scheduled
+  - InProgress
+  - Delayed
+  - Completed
+  - Cancelled
+  - Archived
+
+travelOperators:
+  - id: odw.travel.operator.from
+    name: from
+    description: Starting location.
+
+  - id: odw.travel.operator.to
+    name: to
+    description: Ending location.
+
+  - id: odw.travel.operator.via
+    name: via
+    description: Intermediate stop or route point.
+
+  - id: odw.travel.operator.between
+    name: between
+    description: Travel between two locations.
+
+  - id: odw.travel.operator.nearest
+    name: nearest
+    description: Nearest reachable location or service.
+
+  - id: odw.travel.operator.withinDistance
+    name: withinDistance
+    description: Travel or reachability within a distance.
+
+  - id: odw.travel.operator.withinTime
+    name: withinTime
+    description: Travel or reachability within a duration.
+
+  - id: odw.travel.operator.crosses
+    name: crosses
+    description: Travel crosses a boundary or jurisdiction.
+
+  - id: odw.travel.operator.requiresApproval
+    name: requiresApproval
+    description: Travel requires approval under policy.
+
+referenceTravelJourneys:
+  - id: odw.travel.reference.personTrip.v1
+    type: TravelJourney
+    name: Person Trip Journey
+    description: Generic journey for a person traveling from origin to destination.
+    stages:
+      - Purpose Defined
+      - Origin Selected
+      - Destination Selected
+      - Route Planned
+      - Eligibility Checked
+      - Policy Evaluated
+      - Approval Requested If Required
+      - Reservation Created If Required
+      - Travel Started
+      - Boundary Crossed If Applicable
+      - Destination Reached
+      - Outcome Recorded
+
+  - id: odw.travel.reference.dataMovement.v1
+    type: TravelJourney
+    name: Data Movement Journey
+    description: Journey for data, dataset, file, message, credential, or digital asset moving between systems, regions, or jurisdictions.
+    stages:
+      - Source Identified
+      - Destination Identified
+      - Data Classification Checked
+      - Jurisdiction Checked
+      - Transfer Policy Evaluated
+      - Approval Requested If Required
+      - Transfer Executed
+      - Receipt Confirmed
+      - Lineage Recorded
+      - Audit Recorded
+
+  - id: odw.travel.reference.serviceAccess.v1
+    type: TravelJourney
+    name: Service Access Journey
+    description: Journey for a user or agent moving through physical or digital locations to access a service.
+    stages:
+      - Need Identified
+      - Nearest Service Located
+      - Eligibility Checked
+      - Route Or Access Path Selected
+      - Arrival Or Connection Established
+      - Service Delivered
+      - Outcome Measured
+
+travelRules:
+  - Every governed travel record must have subject, origin, destination, lifecycleState, version, createdAt, and updatedAt.
+  - Every travel segment must have origin, destination, mode, departure or start time, and arrival or end time where known.
+  - Every jurisdiction-crossing travel event should preserve boundary, country, jurisdiction, eventTime, and recordedAt.
+  - Travel requiring approval must preserve approval record, approver identity, policy reference, and approval time.
+  - Travel involving data movement must preserve classification, source, destination, policy decision, lineage, and audit event.
+  - Travel involving people may require eligibility, document, safety, budget, or consent context depending on policy.
+  - Route and boundary data should preserve provenance and version where used for decisions.
+  - Travel current state must be reproducible from travel events.
+
+relationshipToPrimitives:
+  identity: Travel subject, traveler, owner, operator, carrier, approver, and auditor must resolve to identities.
+  time: Travel has planned, actual, event, departure, arrival, duration, delay, and completion times.
+  location: Travel is movement across origins, destinations, stops, routes, boundaries, and jurisdictions.
+  journey: Travel is a specialized journey with route and movement semantics.
+  policy: Travel may require eligibility, approval, budget, document, jurisdiction, or transfer rules.
+  graph: Travel connects subjects, locations, routes, events, policies, outcomes, and evidence.
+  lineage: Data travel or asset movement must preserve lineage.
+  audit: Governed travel must preserve event trace and audit context.
