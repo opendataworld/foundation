@@ -1,0 +1,286 @@
+version: 0.1.0
+status: draft
+namespace: odw.capability
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical capability model for OpenDataWorld identities, agents, services, tools, products, solutions, organizations, workflows, policies, controls, and outcomes.
+
+coreIdea: >
+  A capability is the governed ability to do something in a defined context. It states what can be done, by whom or what, using which tools or resources, under which policies and constraints, with which evidence, quality, trust, and outcome expectations.
+
+abstraction: |
+  Capability = Actor + Action + Resource + Context + Tool + Policy + Constraint + Evidence + Outcome
+
+classification:
+  primitive: true
+  reason: >
+    Capability is a root primitive because people, organizations, teams, agents, systems, services, products, workflows, and solutions are all understood by what they can do under governed conditions.
+
+capabilityPrinciples:
+  - id: odw.capability.principle.contextual
+    name: Contextual Capability
+    description: Capability exists within context such as domain, policy, role, jurisdiction, data class, tool, or operating environment.
+
+  - id: odw.capability.principle.policyBound
+    name: Policy Bound
+    description: Capability may be allowed, denied, limited, approval-gated, delegated, suspended, or revoked by policy.
+
+  - id: odw.capability.principle.identityBound
+    name: Identity Bound
+    description: Capability must be assigned to, provided by, or executed by an identity, service, system, role, team, product, or agent.
+
+  - id: odw.capability.principle.evidenceBacked
+    name: Evidence Backed
+    description: Important capabilities should be backed by evidence such as certification, test results, evaluation, credential, approval, or successful execution history.
+
+  - id: odw.capability.principle.temporal
+    name: Temporal Capability
+    description: Capability can be active, expired, suspended, revoked, delegated, or valid only during a time window.
+
+  - id: odw.capability.principle.measurable
+    name: Measurable Capability
+    description: Capability should define performance, quality, reliability, cost, risk, or outcome expectations where applicable.
+
+capabilityPrimitives:
+  - id: odw.capability.primitive.capability
+    name: Capability
+    description: Governed ability to perform an action or deliver an outcome.
+
+  - id: odw.capability.primitive.provider
+    name: Provider
+    description: Identity, organization, team, agent, service, product, or system that provides the capability.
+
+  - id: odw.capability.primitive.consumer
+    name: Consumer
+    description: Identity, user, workflow, agent, system, or solution that consumes the capability.
+
+  - id: odw.capability.primitive.action
+    name: Action
+    description: Operation the capability enables.
+
+  - id: odw.capability.primitive.resource
+    name: Resource
+    description: Object, data, service, tool, environment, or asset used or affected by the capability.
+
+  - id: odw.capability.primitive.tool
+    name: Tool
+    description: Concrete instrument used to execute the capability.
+
+  - id: odw.capability.primitive.skill
+    name: Skill
+    description: Human, agent, or organizational competency that supports the capability.
+
+  - id: odw.capability.primitive.permission
+    name: Permission
+    description: Governed allowance to use or execute the capability.
+
+  - id: odw.capability.primitive.requirement
+    name: Requirement
+    description: Prerequisite needed before the capability can be used.
+
+  - id: odw.capability.primitive.outcome
+    name: Outcome
+    description: Expected result or value produced by the capability.
+
+capabilityFamilies:
+  - id: odw.capability.family.data
+    name: Data Capabilities
+    description: Capabilities for discovering, registering, modeling, ingesting, validating, publishing, and governing data.
+
+  - id: odw.capability.family.governance
+    name: Governance Capabilities
+    description: Capabilities for policies, controls, approvals, audits, exceptions, risks, and compliance.
+
+  - id: odw.capability.family.analytics
+    name: Analytics Capabilities
+    description: Capabilities for metrics, KPIs, reporting, dashboards, insights, forecasting, decisions, outcomes, and value.
+
+  - id: odw.capability.family.agent
+    name: Agent Capabilities
+    description: Capabilities for agent planning, tool use, memory, context retrieval, policy evaluation, action, validation, and evaluation.
+
+  - id: odw.capability.family.platform
+    name: Platform Capabilities
+    description: Capabilities for registry, graph, schema, search, API, workflow, storage, identity, and observability services.
+
+  - id: odw.capability.family.product
+    name: Product Capabilities
+    description: Capabilities packaged into reusable product modules.
+
+  - id: odw.capability.family.solution
+    name: Solution Capabilities
+    description: Capabilities composed into outcome-oriented solution packages.
+
+canonicalCapabilityTypes:
+  - id: odw.capability.type.discover
+    family: odw.capability.family.data
+    name: Discover
+    description: Find relevant data, metadata, policies, graph records, analytics, products, or solutions.
+
+  - id: odw.capability.type.register
+    family: odw.capability.family.data
+    name: Register
+    description: Create governed registry records for official objects.
+
+  - id: odw.capability.type.classify
+    family: odw.capability.family.data
+    name: Classify
+    description: Assign classification values such as sensitivity, access, lifecycle, trust, quality, criticality, or license class.
+
+  - id: odw.capability.type.validate
+    family: odw.capability.family.governance
+    name: Validate
+    description: Check an object, action, transition, relationship, schema, graph, or output against rules.
+
+  - id: odw.capability.type.approve
+    family: odw.capability.family.governance
+    name: Approve
+    description: Grant approval for access, publication, policy, exception, decision, or agent action.
+
+  - id: odw.capability.type.audit
+    family: odw.capability.family.governance
+    name: Audit
+    description: Preserve and review evidence of actions, decisions, events, transitions, and policy evaluations.
+
+  - id: odw.capability.type.scan
+    family: odw.capability.family.data
+    name: Scan
+    description: Observe, inspect, index, validate, detect change, and produce findings.
+
+  - id: odw.capability.type.transform
+    family: odw.capability.family.data
+    name: Transform
+    description: Convert, derive, map, aggregate, enrich, or otherwise change data or artifacts.
+
+  - id: odw.capability.type.publish
+    family: odw.capability.family.data
+    name: Publish
+    description: Make approved artifacts available to intended audiences.
+
+  - id: odw.capability.type.measure
+    family: odw.capability.family.analytics
+    name: Measure
+    description: Create or compute governed metrics and observations.
+
+  - id: odw.capability.type.generateInsight
+    family: odw.capability.family.analytics
+    name: Generate Insight
+    description: Produce evidence-backed insights, explanations, trends, anomalies, opportunities, or risks.
+
+  - id: odw.capability.type.decide
+    family: odw.capability.family.analytics
+    name: Decide
+    description: Make or support a data-informed, evidence-backed decision.
+
+  - id: odw.capability.type.simulate
+    family: odw.capability.family.analytics
+    name: Simulate
+    description: Explore hypothetical scenarios without mutating actual current state.
+
+  - id: odw.capability.type.executeAgentAction
+    family: odw.capability.family.agent
+    name: Execute Agent Action
+    description: Perform a governed agent action with policy, approval, trace, and audit context.
+
+  - id: odw.capability.type.search
+    family: odw.capability.family.platform
+    name: Search
+    description: Search records, data, metadata, graph, schemas, policies, analytics, or artifacts.
+
+  - id: odw.capability.type.observe
+    family: odw.capability.family.platform
+    name: Observe
+    description: Monitor health, events, state, traces, outcomes, and usage.
+
+canonicalFields:
+  capability:
+    - id
+    - type
+    - name
+    - description
+    - family
+    - provider
+    - consumers
+    - actions
+    - resources
+    - tools
+    - skills
+    - policies
+    - controls
+    - constraints
+    - requirements
+    - evidence
+    - trustAssessment
+    - riskLevel
+    - qualityExpectations
+    - performanceExpectations
+    - costModel
+    - outcomes
+    - validFrom
+    - validTo
+    - lifecycleState
+    - version
+  assignment:
+    - id
+    - capability
+    - assignee
+    - assigneeType
+    - scope
+    - authority
+    - delegatedBy
+    - validFrom
+    - validTo
+    - status
+    - evidence
+  execution:
+    - id
+    - capability
+    - actor
+    - action
+    - resource
+    - tool
+    - input
+    - output
+    - policyDecision
+    - approval
+    - startedAt
+    - completedAt
+    - status
+    - traceId
+    - auditEvent
+
+capabilityLifecycleStates:
+  - Draft
+  - Proposed
+  - Active
+  - Suspended
+  - Deprecated
+  - Retired
+  - Revoked
+  - Archived
+
+capabilityRules:
+  - Every capability must declare id, name, description, family, lifecycleState, and version.
+  - Every active capability should declare provider, actions, resources, policies, and constraints where applicable.
+  - Every assigned capability must declare assignee, scope, status, validFrom, and validTo where temporal restriction applies.
+  - Capability execution must preserve actor, action, resource, tool where applicable, policy decision, status, timing, and trace ID.
+  - High-risk capabilities should require trust assessment, approval rules, audit, and evidence.
+  - Capabilities may be delegated only within the authority of the delegator.
+  - Capability revocation must preserve reason, actor, and time.
+  - Product capabilities must map to product registry records.
+  - Agent capabilities must map to allowed actions, allowed tools, policies, and evaluations.
+  - Capability current availability must be derived from lifecycle state, policy, assignment, validity window, and revocation status.
+
+relationshipToFoundation:
+  identity: Capabilities are provided by, assigned to, delegated by, or executed by identities.
+  time: Capabilities have validity windows, lifecycle state, execution time, and revocation time.
+  location: Capabilities may be scoped to country, jurisdiction, site, service area, or region.
+  relationship: Capabilities create relationships such as provides, consumes, enables, requires, dependsOn, and produces.
+  state: Capability availability is a state over time.
+  event: Capability execution, assignment, suspension, and revocation are events.
+  policy: Policies allow, deny, constrain, or approval-gate capabilities.
+  control: Controls validate whether capability use is allowed or ready.
+  journey: Journeys use capabilities at stages and transitions.
+  scan: Scan identifies available, missing, overlapping, or risky capabilities.
+  product: Products package capabilities.
+  solution: Solutions compose product capabilities to deliver outcomes.
