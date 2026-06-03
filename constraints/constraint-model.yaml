@@ -1,0 +1,289 @@
+version: 0.1.0
+status: draft
+namespace: odw.constraint
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical constraint model for OpenDataWorld policies, controls, validation, eligibility, boundaries, limits, budgets, approvals, safety, governance, and capability execution.
+
+coreIdea: >
+  A constraint is a condition, limit, boundary, requirement, prohibition, dependency, or invariant that restricts what can exist, change, execute, publish, access, or be considered valid in a defined context.
+
+abstraction: |
+  Constraint = Subject + Condition + Scope + Severity + Enforcement + Evidence + Exception
+
+classification:
+  primitive: true
+  reason: >
+    Constraint is a root primitive because policies, controls, validations, approvals, eligibility checks, spatial boundaries, temporal limits, budgets, safety rules, and capability restrictions all depend on explicit constraints.
+
+constraintPrinciples:
+  - id: odw.constraint.principle.explicit
+    name: Explicit Constraint
+    description: Important limits, requirements, prohibitions, and invariants must be explicitly modeled.
+
+  - id: odw.constraint.principle.contextual
+    name: Contextual Constraint
+    description: Constraint meaning depends on scope, subject, actor, time, location, policy, and purpose.
+
+  - id: odw.constraint.principle.enforceable
+    name: Enforceable Constraint
+    description: A constraint should define whether it blocks, warns, requires approval, requires evidence, escalates, or only records.
+
+  - id: odw.constraint.principle.exceptionAware
+    name: Exception Aware
+    description: Constraints may allow exceptions only with owner, reason, approver, expiry, and audit trail.
+
+  - id: odw.constraint.principle.temporal
+    name: Temporal Constraint
+    description: Constraints may be effective only during a time window.
+
+  - id: odw.constraint.principle.auditable
+    name: Auditable Constraint
+    description: Constraint evaluation and override should be recorded where governance matters.
+
+constraintFamilies:
+  - id: odw.constraint.family.identity
+    name: Identity Constraints
+    description: Requirements on actor, owner, role, authority, delegation, account, credential, or identity lifecycle.
+
+  - id: odw.constraint.family.temporal
+    name: Temporal Constraints
+    description: Requirements on time windows, deadlines, validity, recurrence, expiry, review, or ordering.
+
+  - id: odw.constraint.family.spatial
+    name: Spatial Constraints
+    description: Requirements on country, jurisdiction, boundary, distance, location, region, or service area.
+
+  - id: odw.constraint.family.data
+    name: Data Constraints
+    description: Requirements on schema, source, quality, classification, lineage, provenance, license, access, and publication.
+
+  - id: odw.constraint.family.policy
+    name: Policy Constraints
+    description: Requirements derived from policies, rules, obligations, approvals, or exceptions.
+
+  - id: odw.constraint.family.capability
+    name: Capability Constraints
+    description: Limits on who or what can execute a capability, with which resources, tools, scope, and authority.
+
+  - id: odw.constraint.family.resource
+    name: Resource Constraints
+    description: Limits on budget, compute, storage, rate, quota, cost, capacity, or availability.
+
+  - id: odw.constraint.family.safety
+    name: Safety Constraints
+    description: Requirements that prevent unsafe, unapproved, high-risk, invalid, or harmful action.
+
+  - id: odw.constraint.family.quality
+    name: Quality Constraints
+    description: Requirements on completeness, accuracy, freshness, validity, consistency, uniqueness, or trust.
+
+  - id: odw.constraint.family.agent
+    name: Agent Constraints
+    description: Requirements on agent identity, purpose, tools, actions, approvals, output, memory, and audit.
+
+constraintTypes:
+  - id: odw.constraint.type.requirement
+    family: odw.constraint.family.policy
+    name: Requirement
+    description: Something must be present or true.
+
+  - id: odw.constraint.type.prohibition
+    family: odw.constraint.family.policy
+    name: Prohibition
+    description: Something must not happen or must not be true.
+
+  - id: odw.constraint.type.limit
+    family: odw.constraint.family.resource
+    name: Limit
+    description: A maximum or minimum bound.
+
+  - id: odw.constraint.type.boundary
+    family: odw.constraint.family.spatial
+    name: Boundary
+    description: A spatial, jurisdictional, organizational, or conceptual boundary.
+
+  - id: odw.constraint.type.deadline
+    family: odw.constraint.family.temporal
+    name: Deadline
+    description: A time by which something must happen.
+
+  - id: odw.constraint.type.validityWindow
+    family: odw.constraint.family.temporal
+    name: Validity Window
+    description: Time interval during which something is valid.
+
+  - id: odw.constraint.type.dependency
+    family: odw.constraint.family.data
+    name: Dependency
+    description: A required upstream object, event, state, relationship, approval, or capability.
+
+  - id: odw.constraint.type.invariant
+    family: odw.constraint.family.quality
+    name: Invariant
+    description: Rule that must always remain true.
+
+  - id: odw.constraint.type.eligibility
+    family: odw.constraint.family.identity
+    name: Eligibility
+    description: Conditions that determine whether actor, subject, or resource is eligible.
+
+  - id: odw.constraint.type.approvalGate
+    family: odw.constraint.family.policy
+    name: Approval Gate
+    description: Constraint that requires approval before transition, access, publication, or execution.
+
+  - id: odw.constraint.type.evidenceGate
+    family: odw.constraint.family.quality
+    name: Evidence Gate
+    description: Constraint that requires evidence before trust, publication, decision, or certification.
+
+  - id: odw.constraint.type.safetyGate
+    family: odw.constraint.family.safety
+    name: Safety Gate
+    description: Constraint that blocks unsafe or high-risk action until requirements are satisfied.
+
+canonicalFields:
+  constraint:
+    - id
+    - type
+    - name
+    - description
+    - family
+    - constraintType
+    - subject
+    - subjectType
+    - condition
+    - scope
+    - severity
+    - enforcement
+    - policies
+    - controls
+    - evidenceRequired
+    - exceptionAllowed
+    - validFrom
+    - validTo
+    - lifecycleState
+    - version
+  evaluation:
+    - id
+    - constraint
+    - subject
+    - actor
+    - context
+    - result
+    - reason
+    - evidence
+    - evaluatedAt
+    - traceId
+  exception:
+    - id
+    - constraint
+    - subject
+    - requestedBy
+    - approver
+    - reason
+    - riskAssessment
+    - conditions
+    - validFrom
+    - validTo
+    - status
+    - recordedAt
+
+enforcementModes:
+  - id: odw.constraint.enforcement.block
+    name: Block
+    description: Constraint violation blocks action, publication, state transition, or execution.
+
+  - id: odw.constraint.enforcement.warn
+    name: Warn
+    description: Constraint violation creates warning but does not block by default.
+
+  - id: odw.constraint.enforcement.requireApproval
+    name: Require Approval
+    description: Constraint requires approval before continuation.
+
+  - id: odw.constraint.enforcement.requireEvidence
+    name: Require Evidence
+    description: Constraint requires evidence before continuation.
+
+  - id: odw.constraint.enforcement.escalate
+    name: Escalate
+    description: Constraint requires escalation to owner, steward, reviewer, auditor, or authority.
+
+  - id: odw.constraint.enforcement.log
+    name: Log
+    description: Constraint evaluation is recorded without blocking.
+
+constraintLifecycleStates:
+  - Draft
+  - Proposed
+  - Active
+  - Deprecated
+  - Superseded
+  - Revoked
+  - Archived
+
+referenceConstraints:
+  - id: odw.constraint.reference.ownerRequired.v1
+    family: odw.constraint.family.identity
+    constraintType: Requirement
+    name: Owner Required
+    description: Governed object must have an accountable owner.
+    condition: owner exists
+    enforcement: Block
+    mapsTo:
+      - odw.control.data.ownerRequired.v1
+
+  - id: odw.constraint.reference.validPolicyWindow.v1
+    family: odw.constraint.family.temporal
+    constraintType: ValidityWindow
+    name: Policy Effective Window Required
+    description: Active policy must have effectiveFrom and optional effectiveTo.
+    condition: lifecycleState != Active or effectiveFrom exists
+    enforcement: Block
+    mapsTo:
+      - odw.schema.Policy.v1
+
+  - id: odw.constraint.reference.sensitiveNotOpenAccess.v1
+    family: odw.constraint.family.data
+    constraintType: Prohibition
+    name: Sensitive Data Not Open Access
+    description: Sensitive data must not be open access without explicit governed exception.
+    condition: not (sensitivity in [Confidential, Restricted, PersonalData, HealthData] and accessLevel == OpenAccess)
+    enforcement: Block
+    mapsTo:
+      - odw.control.access.sensitiveNotOpen.v1
+
+  - id: odw.constraint.reference.agentToolApproval.v1
+    family: odw.constraint.family.agent
+    constraintType: ApprovalGate
+    name: Agent Tool Approval Required
+    description: High-risk agent tool use requires approval before execution.
+    condition: riskLevel not in [High, Critical] or approval exists
+    enforcement: RequireApproval
+    mapsTo:
+      - odw.control.agent.actionEvaluatedAndAudited.v1
+
+constraintRules:
+  - Every constraint must have id, family, constraintType, condition, severity, enforcement, lifecycleState, and version.
+  - Every active constraint should have scope and subject type.
+  - Every constraint evaluation must preserve result, evaluatedAt, subject, context, and trace ID where applicable.
+  - Blocking constraints must prevent promotion, publication, access, or execution unless an explicit exception exists.
+  - Exceptions must preserve requester, approver, reason, risk assessment, validity window, and audit record.
+  - Constraints should map to policies and controls where applicable.
+  - Constraints must not silently override legal or jurisdictional requirements.
+  - Constraint language should be portable across schemas, graph validation, policy engines, and workflow gates.
+
+relationshipToFoundation:
+  identity: Constraints may apply to actors, owners, roles, authority, delegation, and credentials.
+  time: Constraints may define deadlines, validity windows, ordering, expiry, recurrence, and review windows.
+  location: Constraints may apply within countries, jurisdictions, boundaries, regions, or service areas.
+  relationship: Constraints define required, forbidden, limited, or conditional relationships.
+  state: Constraints govern allowed states and transitions.
+  event: Constraint evaluations are events and may trigger actions, approvals, or audit records.
+  capability: Constraints define when capabilities are available, allowed, limited, or blocked.
+  policy: Policies group and apply constraints.
+  control: Controls operationalize and validate constraints.
+  scan: Scans identify constraint violations or missing evidence.
+  journey: Constraints block or allow journey transitions.
