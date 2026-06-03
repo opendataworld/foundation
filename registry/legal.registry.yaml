@@ -1,0 +1,115 @@
+version: 0.1.0
+status: draft
+namespace: odw.legal
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical registry index for OpenDataWorld legal, licensing, notice, copyright, contributor, and usage-right records.
+
+records:
+  - id: odw.legal.license.apache2.v1
+    type: LicenseRecord
+    name: Apache License 2.0
+    description: Recommended license for code, schemas, validators, machine-readable specifications, and implementation-oriented artifacts.
+    lifecycleState: Draft
+    version: 0.1.0
+    appliesTo:
+      - schemas
+      - graph
+      - contexts
+      - validators
+      - reference-apis
+      - reference-events
+      - software
+
+  - id: odw.legal.license.ccBy4.v1
+    type: LicenseRecord
+    name: Creative Commons Attribution 4.0
+    description: Recommended license for documentation, models, architectures, primers, diagrams, and educational content.
+    lifecycleState: Draft
+    version: 0.1.0
+    appliesTo:
+      - docs
+      - reference-models
+      - reference-architectures
+      - primer
+      - diagrams
+      - educational-content
+
+  - id: odw.legal.license.cc0.v1
+    type: LicenseRecord
+    name: Creative Commons Zero
+    description: Recommended dedication for example data and seed data where public-domain style reuse is intended and legally appropriate.
+    lifecycleState: Draft
+    version: 0.1.0
+    appliesTo:
+      - example-data
+      - seed-data
+      - public-domain-compatible-fixtures
+
+  - id: odw.legal.notice.foundation.v1
+    type: NoticeRecord
+    name: OpenDataWorld Foundation Notice
+    description: Notice record for attribution, licensing summary, third-party references, and contributor acknowledgement.
+    lifecycleState: Draft
+    version: 0.1.0
+    expectedPath: NOTICE
+
+  - id: odw.legal.copyright.contributors.v1
+    type: CopyrightRecord
+    name: OpenDataWorld Contributors Copyright
+    description: Copyright record for OpenDataWorld Foundation contributors and authored artifacts.
+    lifecycleState: Draft
+    version: 0.1.0
+    copyrightNotice: Copyright © 2026 OpenDataWorld Contributors.
+    expectedPath: COPYRIGHT.md
+
+  - id: odw.legal.policy.trademark.v1
+    type: TrademarkPolicyRecord
+    name: OpenDataWorld Trademark Policy
+    description: Policy record for names, marks, logos, product names, solution names, taglines, domains, and brand usage.
+    lifecycleState: Draft
+    version: 0.1.0
+    expectedPath: TRADEMARKS.md
+
+  - id: odw.legal.policy.contribution.v1
+    type: ContributionPolicyRecord
+    name: Contribution Policy
+    description: Policy record for contributions, contributor expectations, sign-off, rights, and contribution governance.
+    lifecycleState: Draft
+    version: 0.1.0
+    expectedPath: CONTRIBUTING.md
+
+  - id: odw.legal.policy.codeOfConduct.v1
+    type: CommunityPolicyRecord
+    name: Code of Conduct
+    description: Community participation and behavior policy record.
+    lifecycleState: Draft
+    version: 0.1.0
+    expectedPath: CODE_OF_CONDUCT.md
+
+  - id: odw.legal.policy.patent.v1
+    type: PatentPolicyRecord
+    name: Patent Policy
+    description: Policy record for patent grants, patent claims, defensive termination, and patent-related contribution expectations where applicable.
+    lifecycleState: Draft
+    version: 0.1.0
+    expectedPath: PATENTS.md
+
+  - id: odw.legal.usage.dataExamples.v1
+    type: UsageRightsRecord
+    name: Example Data Usage Rights
+    description: Usage-rights record for examples, fixtures, seed data, and sample graph data.
+    lifecycleState: Draft
+    version: 0.1.0
+    appliesTo:
+      - graph/example-health-dataset.graph.json
+      - examples
+
+registryRules:
+  - Every legal registry record must declare lifecycleState and version.
+  - Every repository artifact should map to a license or usage-rights record.
+  - Machine-readable specifications should generally use Apache-2.0 unless explicitly stated otherwise.
+  - Documentation and narrative models should generally use CC-BY-4.0 unless explicitly stated otherwise.
+  - Example data should use CC0 where legally appropriate, otherwise CC-BY-4.0.
+  - Brand names, logos, product names, solution names, taglines, and domains are governed by trademark policy, not open content license.
+  - Private scoring weights, customer-specific playbooks, pricing models, and unreleased commercial implementation details should not be published in the open foundation repository.
