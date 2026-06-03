@@ -1,0 +1,479 @@
+version: 0.1.0
+status: draft
+namespace: odw.controls
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical control catalog for OpenDataWorld governance, data, trust, publication, analytics, decision, and agent controls.
+
+controlFamilies:
+  - id: odw.controls.family.identity
+    name: Identity Controls
+    description: Controls ensuring accountable identity for subjects, resources, assets, systems, and agents.
+
+  - id: odw.controls.family.dataGovernance
+    name: Data Governance Controls
+    description: Controls for ownership, stewardship, classification, schema, provenance, lineage, quality, and publication readiness.
+
+  - id: odw.controls.family.access
+    name: Access Controls
+    description: Controls for data access, purpose capture, policy evaluation, approval, and revocation.
+
+  - id: odw.controls.family.trust
+    name: Trust Controls
+    description: Controls for evidence-backed trust, review, certification, revocation, and contextual confidence.
+
+  - id: odw.controls.family.analytics
+    name: Analytics Controls
+    description: Controls for metrics, insights, dashboards, decisions, outcomes, and value realization.
+
+  - id: odw.controls.family.agent
+    name: Agent Controls
+    description: Controls for agent identity, allowed actions, tool use, policy evaluation, approval, provenance, lineage, and audit.
+
+  - id: odw.controls.family.audit
+    name: Audit Controls
+    description: Controls ensuring traceability, decision records, policy versions, action logs, and evidence preservation.
+
+controls:
+  - id: odw.control.identity.everyGovernedObjectHasId.v1
+    family: odw.controls.family.identity
+    name: Every Governed Object Has Identity
+    description: Every governed object must have a stable identifier and type.
+    objective: Ensure every governed object is addressable, traceable, and auditable.
+    appliesTo:
+      - Dataset
+      - DataProduct
+      - Policy
+      - TrustAssessment
+      - Metric
+      - Insight
+      - Decision
+      - Outcome
+      - Agent
+    requiredEvidence:
+      - Object record with id and type
+    mapsTo:
+      graphConstraint: EveryNodeMustHaveIdentity
+      graphValidationRule: ValidNodeShape
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.data.ownerRequired.v1
+    family: odw.controls.family.dataGovernance
+    name: Data Owner Required
+    description: Every governed data asset must have an accountable owner.
+    objective: Ensure ownership and accountability for governed data assets.
+    appliesTo:
+      - DataAsset
+      - Dataset
+      - DataProduct
+    requiredEvidence:
+      - Owner identity reference
+      - Registry record
+    mapsTo:
+      graphConstraint: EveryDataAssetMustHaveOwner
+      schema:
+        - odw.schema.Dataset.v1
+        - odw.schema.DataProduct.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.data.stewardRequired.v1
+    family: odw.controls.family.dataGovernance
+    name: Data Steward Required
+    description: Every governed data asset must have a responsible steward.
+    objective: Ensure operational responsibility for data quality, metadata, classification, and lifecycle review.
+    appliesTo:
+      - DataAsset
+      - Dataset
+      - DataProduct
+    requiredEvidence:
+      - Steward identity reference
+      - Registry record
+    mapsTo:
+      graphConstraint: EveryDataAssetMustHaveSteward
+      schema:
+        - odw.schema.Dataset.v1
+        - odw.schema.DataProduct.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.data.classificationRequired.v1
+    family: odw.controls.family.dataGovernance
+    name: Data Classification Required
+    description: Every governed data asset must be classified.
+    objective: Ensure discovery, access, policy, protection, publication, and trust workflows can operate correctly.
+    appliesTo:
+      - DataAsset
+      - Dataset
+      - DataProduct
+      - DataSource
+    requiredEvidence:
+      - Classification record
+    mapsTo:
+      graphConstraint: EveryDataAssetMustHaveClassification
+      schema:
+        - odw.schema.Dataset.v1
+        - odw.schema.DataProduct.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.data.datasetSourceRequired.v1
+    family: odw.controls.family.dataGovernance
+    name: Dataset Source Required
+    description: Every dataset must reference its source.
+    objective: Preserve source accountability, provenance, trust, and lineage.
+    appliesTo:
+      - Dataset
+    requiredEvidence:
+      - DataSource reference
+      - Provenance record where available
+    mapsTo:
+      graphConstraint: EveryDatasetMustHaveSource
+      schema:
+        - odw.schema.Dataset.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.data.schemaRequired.v1
+    family: odw.controls.family.dataGovernance
+    name: Dataset Schema Required
+    description: Every dataset must conform to a schema unless an explicit schema exception exists.
+    objective: Ensure data structure is understandable, validateable, and reusable.
+    appliesTo:
+      - Dataset
+    requiredEvidence:
+      - Schema reference
+      - Schema exception record if applicable
+    mapsTo:
+      graphConstraint: EveryDatasetMustHaveSchemaOrException
+      schema:
+        - odw.schema.Dataset.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.publication.datasetCompleteness.v1
+    family: odw.controls.family.dataGovernance
+    name: Published Dataset Completeness
+    description: Published datasets must have owner, steward, source, schema, classification, policy, provenance, trust assessment, license, access policy, and version.
+    objective: Prevent incomplete or ungoverned data publication.
+    appliesTo:
+      - Dataset
+    trigger:
+      lifecycleState: Published
+    requiredEvidence:
+      - Owner
+      - Steward
+      - Source
+      - Schema
+      - Classification
+      - Policy
+      - Provenance
+      - Trust assessment
+      - License
+      - Access policy
+      - Version
+    mapsTo:
+      graphConstraint: PublishedDatasetMustBeComplete
+      graphValidationRule: PublishedDatasetGate
+      schema:
+        - odw.schema.Dataset.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.publication.noUnknownSensitivity.v1
+    family: odw.controls.family.dataGovernance
+    name: Published Asset Sensitivity Must Be Known
+    description: Published datasets must not have unknown sensitivity.
+    objective: Prevent publication without data sensitivity review.
+    appliesTo:
+      - Dataset
+    trigger:
+      lifecycleState: Published
+    requiredEvidence:
+      - Sensitivity classification
+    mapsTo:
+      graphConstraint: PublishedDatasetMustNotHaveUnknownSensitivity
+      schema:
+        - odw.schema.Dataset.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.access.sensitiveNotOpen.v1
+    family: odw.controls.family.access
+    name: Sensitive Data Must Not Be Open Access
+    description: Sensitive data assets must not be classified as open access.
+    objective: Ensure sensitive data is not exposed through open access classification.
+    appliesTo:
+      - Dataset
+      - DataProduct
+      - DataAsset
+    requiredEvidence:
+      - Sensitivity classification
+      - Access classification
+      - Policy evaluation where applicable
+    mapsTo:
+      graphConstraint: SensitiveDatasetMustNotBeOpenAccess
+      graphValidationRule: SensitiveDataAccessGate
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.policy.versionRequired.v1
+    family: odw.controls.family.audit
+    name: Policy Version Required For Decisions
+    description: Every access or policy decision must preserve the policy version used.
+    objective: Ensure decisions remain auditable and reproducible after policies change.
+    appliesTo:
+      - AccessDecision
+      - PolicyDecision
+    requiredEvidence:
+      - Policy ID
+      - Policy version
+      - Decision timestamp
+    mapsTo:
+      graphConstraint: EveryAccessDecisionMustReferencePolicyVersion
+      graphValidationRule: PolicyVersionRequired
+      schema:
+        - odw.schema.Policy.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.trust.evidenceRequired.v1
+    family: odw.controls.family.trust
+    name: Trust Evidence Required
+    description: Trust assessments must reference evidence or explicitly state that evidence is unavailable.
+    objective: Prevent unsupported trust claims.
+    appliesTo:
+      - TrustAssessment
+    requiredEvidence:
+      - Evidence reference
+      - Evidence unavailable flag where applicable
+    mapsTo:
+      graphConstraint: EveryTrustAssessmentMustHaveEvidence
+      graphValidationRule: TrustEvidenceRequired
+      schema:
+        - odw.schema.TrustAssessment.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.trust.certifiedReviewerRequired.v1
+    family: odw.controls.family.trust
+    name: Certified Trust Requires Reviewer
+    description: Certified trust assessments require an authorized reviewer.
+    objective: Ensure certified trust has human or authority-backed review.
+    appliesTo:
+      - TrustAssessment
+    trigger:
+      trustLevel: Certified
+    requiredEvidence:
+      - Reviewer identity
+      - Review timestamp
+    mapsTo:
+      graphConstraint: CertifiedTrustRequiresReviewer
+      graphValidationRule: CertifiedTrustReviewRequired
+      schema:
+        - odw.schema.TrustAssessment.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.analytics.metricDefinitionRequired.v1
+    family: odw.controls.family.analytics
+    name: Metric Definition Required
+    description: Every metric must have a definition, formula or calculation method, owner, and input data references.
+    objective: Ensure metrics are understandable, reusable, and traceable.
+    appliesTo:
+      - Metric
+    requiredEvidence:
+      - Metric definition
+      - Formula or calculation method
+      - Owner
+      - Input data assets
+    mapsTo:
+      schema:
+        - odw.schema.Metric.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.analytics.insightEvidenceRequired.v1
+    family: odw.controls.family.analytics
+    name: Insight Evidence Required
+    description: Every insight must reference evidence, based-on records, confidence, explanation, and review status.
+    objective: Prevent unsupported interpretations from becoming decision inputs.
+    appliesTo:
+      - Insight
+    requiredEvidence:
+      - Based-on reference
+      - Evidence reference
+      - Confidence score
+      - Explanation
+      - Review status
+    mapsTo:
+      schema:
+        - odw.schema.Insight.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.decision.dataVersionRequired.v1
+    family: odw.controls.family.analytics
+    name: Decision Data Version Required
+    description: Every data-informed decision must reference data asset versions used.
+    objective: Ensure decisions are reproducible and reviewable.
+    appliesTo:
+      - Decision
+    requiredEvidence:
+      - Data asset ID
+      - Data asset version
+      - Decision timestamp
+    mapsTo:
+      graphConstraint: EveryDecisionUsingDataMustReferenceDataVersion
+      graphValidationRule: DecisionDataVersionRequired
+      schema:
+        - odw.schema.Decision.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.decision.evidenceOrReasonRequired.v1
+    family: odw.controls.family.analytics
+    name: Decision Evidence Or Reason Required
+    description: Every decision must reference evidence or document why evidence is unavailable.
+    objective: Make decision rationale explicit and auditable.
+    appliesTo:
+      - Decision
+    requiredEvidence:
+      - Evidence reference or evidence-unavailable reason
+      - Rationale
+    mapsTo:
+      graphConstraint: EveryDecisionMustHaveEvidenceOrReason
+      graphValidationRule: DecisionEvidenceRequired
+      schema:
+        - odw.schema.Decision.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.outcome.linkBackRequired.v1
+    family: odw.controls.family.analytics
+    name: Outcome Link Back Required
+    description: Outcomes should link back to the decision, action, workflow, service, or program that produced them.
+    objective: Connect outcomes to accountable decisions and actions.
+    appliesTo:
+      - Outcome
+    requiredEvidence:
+      - Producer reference
+      - Measurement timestamp
+    mapsTo:
+      graphConstraint: EveryOutcomeMustLinkBackToDecisionOrAction
+      schema:
+        - odw.schema.Outcome.v1
+    severity: warning
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.agent.ownerOperatorRequired.v1
+    family: odw.controls.family.agent
+    name: Agent Owner And Operator Required
+    description: Every agent must have owner, operator, purpose, risk level, policies, and lifecycle state.
+    objective: Ensure agent accountability and operational responsibility.
+    appliesTo:
+      - Agent
+    requiredEvidence:
+      - Owner identity
+      - Operator identity
+      - Purpose
+      - Risk level
+      - Policy references
+    mapsTo:
+      graphConstraint: EveryAgentMustHaveOwnerAndOperator
+      graphValidationRule: AgentIdentityRequired
+      schema:
+        - odw.schema.Agent.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.agent.policyRequired.v1
+    family: odw.controls.family.agent
+    name: Agent Policy Required
+    description: Every agent must be governed by at least one policy.
+    objective: Ensure agents operate under explicit governance.
+    appliesTo:
+      - Agent
+    requiredEvidence:
+      - Policy reference
+    mapsTo:
+      graphConstraint: EveryAgentMustBeGovernedByPolicy
+      graphValidationRule: AgentPolicyRequired
+      schema:
+        - odw.schema.Agent.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.agent.actionEvaluatedAndAudited.v1
+    family: odw.controls.family.agent
+    name: Agent Action Evaluated And Audited
+    description: Every governed agent action must be policy-evaluated and audit-recorded.
+    objective: Ensure agent activity is explainable, reviewable, and accountable.
+    appliesTo:
+      - AgentAction
+    requiredEvidence:
+      - Agent identity
+      - Resource reference
+      - Tool reference where applicable
+      - Policy decision
+      - Audit event
+      - Trace ID
+    mapsTo:
+      graphConstraint: EveryAgentActionMustBePolicyEvaluated
+      graphValidationRule: AgentActionAuditRequired
+      schema:
+        - odw.schema.Agent.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.control.agent.outputProvenanceRequired.v1
+    family: odw.controls.family.agent
+    name: Agent Output Provenance Required
+    description: Agent-produced outputs must preserve provenance and disclose agent involvement.
+    objective: Ensure generated, enriched, transformed, or assisted outputs remain traceable.
+    appliesTo:
+      - AgentOutput
+      - Insight
+      - Dataset
+      - MetadataRecord
+    requiredEvidence:
+      - Agent identity
+      - Output reference
+      - Provenance record
+      - AI or agent involvement flag where applicable
+    mapsTo:
+      schema:
+        - odw.schema.Agent.v1
+        - odw.schema.Insight.v1
+    severity: error
+    lifecycleState: Draft
+    version: 0.1.0
+
+controlRules:
+  - Every control must have id, family, name, description, objective, appliesTo, severity, lifecycleState, and version.
+  - Every control should map to schemas, graph constraints, validation rules, policies, or audit records where possible.
+  - Controls with severity error must block publication, certification, or automated action until satisfied or formally excepted.
+  - Controls with severity warning must be reviewable and visible in governance dashboards.
+  - Every exception to a control must have owner, reason, approver, expiry, and audit trail.
+  - Control mappings should use canonical registry IDs where available.
