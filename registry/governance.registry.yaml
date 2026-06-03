@@ -1,0 +1,101 @@
+version: 0.1.0
+status: draft
+namespace: odw.governance
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical registry index for OpenDataWorld governance records.
+
+records:
+  - id: odw.governance.policy.openDataAccess.v1
+    type: Policy
+    name: Open Data Access Policy
+    description: Reference policy record for open data access.
+    policyType: AccessPolicy
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Policy.v1
+
+  - id: odw.governance.policy.publicationReadiness.v1
+    type: Policy
+    name: Publication Readiness Policy
+    description: Reference policy record for publication readiness.
+    policyType: PublicationPolicy
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Policy.v1
+
+  - id: odw.governance.policy.agentAction.v1
+    type: Policy
+    name: Agent Action Policy
+    description: Reference policy record for governed agent actions.
+    policyType: AgentPolicy
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Policy.v1
+
+  - id: odw.governance.control.datasetOwnerRequired.v1
+    type: Control
+    name: Dataset Owner Required
+    description: Reference control requiring accountable ownership for governed datasets.
+    controlType: DataGovernanceControl
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.governance.control.datasetStewardRequired.v1
+    type: Control
+    name: Dataset Steward Required
+    description: Reference control requiring stewardship for governed datasets.
+    controlType: DataGovernanceControl
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.governance.control.publishedDatasetCompleteness.v1
+    type: Control
+    name: Published Dataset Completeness
+    description: Reference control for minimum published dataset completeness.
+    controlType: PublicationControl
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.governance.control.trustEvidenceRequired.v1
+    type: Control
+    name: Trust Evidence Required
+    description: Reference control for evidence-backed trust assessments.
+    controlType: TrustControl
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.governance.approval.publicationReview.v1
+    type: ApprovalWorkflow
+    name: Publication Review Approval
+    description: Reference approval workflow for publication review.
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.governance.audit.datasetAccess.v1
+    type: AuditEventType
+    name: Dataset Access Audit Event
+    description: Reference audit event type for dataset access.
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.governance.audit.policyDecision.v1
+    type: AuditEventType
+    name: Policy Decision Audit Event
+    description: Reference audit event type for policy decisions.
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.governance.exception.policyException.v1
+    type: ExceptionType
+    name: Policy Exception
+    description: Reference exception type for controlled policy exceptions.
+    lifecycleState: Draft
+    version: 0.1.0
+
+registryRules:
+  - Every governance registry record must declare lifecycleState and version.
+  - Every policy should reference the canonical Policy schema.
+  - Every control should map to a graph constraint or schema rule where possible.
+  - Every approval workflow should define its review scope in implementation profiles.
+  - Every audit event type should define required fields in implementation profiles.
