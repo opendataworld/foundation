@@ -1,0 +1,175 @@
+version: 0.1.0
+status: draft
+namespace: odw.foundation
+owner: OpenDataWorld Contributors
+license: CC-BY-4.0
+purpose: Canonical registry of OpenDataWorld Foundation models and meaning-layer artifacts.
+
+records:
+  - id: odw.foundation.primer
+    type: Primer
+    name: OpenDataWorld Primer
+    description: Human entry point for understanding OpenDataWorld Foundation.
+    path: PRIMER.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.map
+    type: FoundationMap
+    name: OpenDataWorld Map
+    description: One-page map of OpenDataWorld planes, layers, products, solutions, and value chain.
+    path: docs/opendataworld-map.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.positioning.dataAnalyticsSolutionsAsAService
+    type: PositioningDocument
+    name: Data and Analytics Solutions as a Service for Everyone
+    description: Canonical positioning artifact for OpenDataWorld.
+    path: docs/data-analytics-solutions-as-a-service.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.productSolutionsPlatform
+    type: ProductDefinition
+    name: Product, Solutions, and Platform Definition
+    description: Defines Foundation, Platform, Products, Solutions, Services, and packaging.
+    path: docs/product-solutions-platform.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.glossary
+    type: Glossary
+    name: OpenDataWorld Glossary
+    description: Canonical vocabulary for OpenDataWorld Foundation.
+    path: glossary.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.ontology.dataCentricCore
+    type: Ontology
+    name: Data-Centric Core Ontology
+    description: Core ontology defining data-centric concepts and relationships.
+    path: ontology/data-centric-core-ontology.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.taxonomy.canonicalData
+    type: Taxonomy
+    name: Canonical Data Taxonomy
+    description: Canonical classification model for data and analytics artifacts.
+    path: taxonomy/canonical-data-taxonomy.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.model.canonicalMeta
+    type: ReferenceModel
+    name: Canonical Meta Model
+    description: Root structural model for governed OpenDataWorld objects.
+    path: reference-models/canonical-meta-model.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.model.dataModeling
+    type: ReferenceModel
+    name: Data Modeling Model
+    description: Canonical model for conceptual, semantic, logical, physical, operational, governance, and AI-ready data modeling.
+    path: reference-models/data-modeling-model.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.model.capabilityMap
+    type: CapabilityMap
+    name: Capability Map
+    description: Capability map for Data and Analytics Solutions as a Service.
+    path: reference-models/capability-map.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.model.serviceCatalog
+    type: ServiceCatalog
+    name: Service Catalog
+    description: Canonical catalog of OpenDataWorld service domains and services.
+    path: reference-models/service-catalog.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.model.operatingModel
+    type: OperatingModel
+    name: Operating Model
+    description: Roles, responsibilities, gates, loops, and accountability model.
+    path: reference-models/operating-model.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.model.temporal
+    type: ReferenceModel
+    name: Temporal Model
+    description: Time, events, versions, snapshots, projections, and temporal governance model.
+    path: reference-models/temporal-model.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.model.identity
+    type: ReferenceModel
+    name: Identity Model
+    description: Canonical model for persistent identity across people, organizations, systems, services, assets, and agents.
+    path: reference-models/identity-model.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.model.trust
+    type: ReferenceModel
+    name: Trust Model
+    description: Contextual, temporal, evidence-backed trust model.
+    path: reference-models/trust-model.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.model.provenance
+    type: ReferenceModel
+    name: Provenance Model
+    description: Origin, custody, source, evidence, publication, and AI involvement model.
+    path: reference-models/provenance-model.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.model.lineage
+    type: ReferenceModel
+    name: Lineage Model
+    description: Data flow, transformation, dependency, analytics, decision, and impact lineage model.
+    path: reference-models/lineage-model.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.model.knowledgeGraph
+    type: ReferenceModel
+    name: Knowledge Graph Model
+    description: Canonical model for connected data, governance, trust, lineage, analytics, decisions, outcomes, and agents.
+    path: reference-models/knowledge-graph-model.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.model.registry
+    type: ReferenceModel
+    name: Registry Model
+    description: Canonical model for governed registries and registry records.
+    path: reference-models/registry-model.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.model.decisionIntelligence
+    type: ReferenceModel
+    name: Decision Intelligence Model
+    description: Data-to-value decision intelligence model connecting trust, insights, decisions, outcomes, value, learning, and improvement.
+    path: reference-models/decision-intelligence-model.md
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.foundation.model.namespace
+    type: ReferenceModel
+    name: Namespace and Bucket Model
+    description: Canonical namespace and bucket model for segregating foundation, specification, graph, schema, platform, product, solution, legal, brand, and community assets.
+    path: reference-models/namespace-model.md
+    lifecycleState: Draft
+    version: 0.1.0
