@@ -1,0 +1,319 @@
+version: 0.1.0
+status: draft
+namespace: odw.journey
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical journey model for OpenDataWorld lifecycle paths, user journeys, data journeys, policy journeys, decision journeys, agent journeys, and value-realization journeys.
+
+coreIdea: >
+  A journey is a governed path through states, events, actors, actions, decisions, controls, time, location, evidence, outcomes, learning, and improvement.
+
+journeyPrinciples:
+  - id: odw.journey.principle.pathNotList
+    name: Journey Is A Path, Not A List
+    description: A journey is an ordered and conditional path through stages, states, events, decisions, and outcomes.
+
+  - id: odw.journey.principle.stateful
+    name: Journey Is Stateful
+    description: A journey has current state, prior states, possible next states, and terminal states.
+
+  - id: odw.journey.principle.temporal
+    name: Journey Is Temporal
+    description: Every journey stage, event, action, and transition has time context.
+
+  - id: odw.journey.principle.spatial
+    name: Journey Can Be Spatial
+    description: A journey may have location, jurisdiction, route, coverage, or spatial scope.
+
+  - id: odw.journey.principle.governed
+    name: Journey Is Governed
+    description: A journey may be constrained by policies, controls, approvals, and audit requirements.
+
+  - id: odw.journey.principle.observable
+    name: Journey Is Observable
+    description: A journey must preserve evidence, trace, metrics, and audit events where applicable.
+
+  - id: odw.journey.principle.replayable
+    name: Journey Is Replayable
+    description: Important journeys should be reconstructable from events, states, decisions, and timestamps.
+
+journeyPrimitives:
+  - id: odw.journey.primitive.journey
+    name: Journey
+    description: Governed end-to-end path followed by a subject, object, dataset, policy, decision, agent, user, or organization.
+
+  - id: odw.journey.primitive.stage
+    name: Stage
+    description: Major phase in a journey.
+
+  - id: odw.journey.primitive.step
+    name: Step
+    description: Atomic unit of progress within a stage.
+
+  - id: odw.journey.primitive.transition
+    name: Transition
+    description: Movement from one state, stage, or step to another.
+
+  - id: odw.journey.primitive.event
+    name: Event
+    description: Something that happened and may advance, block, branch, or terminate the journey.
+
+  - id: odw.journey.primitive.actor
+    name: Actor
+    description: Identity participating in or affecting the journey.
+
+  - id: odw.journey.primitive.action
+    name: Action
+    description: Operation performed by an actor, system, or agent during the journey.
+
+  - id: odw.journey.primitive.decision
+    name: Decision
+    description: Choice that affects journey direction, approval, routing, or outcome.
+
+  - id: odw.journey.primitive.condition
+    name: Condition
+    description: Rule or predicate that determines whether a transition, action, or stage is allowed.
+
+  - id: odw.journey.primitive.checkpoint
+    name: Checkpoint
+    description: Required validation, control, approval, or review point in the journey.
+
+  - id: odw.journey.primitive.outcome
+    name: Outcome
+    description: Result produced by the journey or a stage of the journey.
+
+journeyTypes:
+  - id: odw.journey.type.user
+    name: User Journey
+    description: Journey followed by a user, contributor, publisher, consumer, steward, decision maker, or administrator.
+
+  - id: odw.journey.type.data
+    name: Data Journey
+    description: Journey of a data asset from source to registration, governance, publication, analytics, decision, and outcome.
+
+  - id: odw.journey.type.policy
+    name: Policy Journey
+    description: Journey of a policy from draft to review, approval, activation, enforcement, review, retirement, or revocation.
+
+  - id: odw.journey.type.trust
+    name: Trust Journey
+    description: Journey of trust from unknown to assessed, verified, certified, monitored, expired, revoked, or renewed.
+
+  - id: odw.journey.type.decision
+    name: Decision Journey
+    description: Journey from context to data, evidence, insight, alternatives, decision, action, outcome, value, and learning.
+
+  - id: odw.journey.type.agent
+    name: Agent Journey
+    description: Journey of an agent action from objective to context, policy evaluation, approval, execution, validation, audit, and evaluation.
+
+  - id: odw.journey.type.product
+    name: Product Journey
+    description: Journey of a product module from concept to definition, packaging, deployment, adoption, improvement, and retirement.
+
+  - id: odw.journey.type.solution
+    name: Solution Journey
+    description: Journey of a solution from problem definition to implementation, adoption, outcome, value, learning, and scale.
+
+canonicalJourneyFields:
+  - id
+  - type
+  - name
+  - description
+  - subject
+  - subjectType
+  - owner
+  - actors
+  - stages
+  - currentStage
+  - currentState
+  - allowedTransitions
+  - policies
+  - controls
+  - evidence
+  - metrics
+  - outcomes
+  - createdAt
+  - updatedAt
+  - startedAt
+  - completedAt
+  - lifecycleState
+  - version
+
+stageFields:
+  - id
+  - name
+  - description
+  - entryCriteria
+  - exitCriteria
+  - requiredActions
+  - requiredControls
+  - requiredEvidence
+  - possibleNextStages
+  - startedAt
+  - completedAt
+  - status
+
+transitionFields:
+  - id
+  - from
+  - to
+  - trigger
+  - condition
+  - actor
+  - policyDecision
+  - approval
+  - evidence
+  - eventTime
+  - recordedAt
+  - status
+
+genericJourneyLifecycle:
+  - Draft
+  - Started
+  - InProgress
+  - Blocked
+  - WaitingForApproval
+  - Approved
+  - Rejected
+  - Completed
+  - Failed
+  - Cancelled
+  - Archived
+
+journeyOperators:
+  - id: odw.journey.operator.start
+    name: start
+    description: Begin a journey.
+
+  - id: odw.journey.operator.advance
+    name: advance
+    description: Move to the next stage or state.
+
+  - id: odw.journey.operator.branch
+    name: branch
+    description: Choose a journey path based on condition or decision.
+
+  - id: odw.journey.operator.block
+    name: block
+    description: Prevent progress until condition is satisfied.
+
+  - id: odw.journey.operator.approve
+    name: approve
+    description: Approve a transition, stage, action, or publication.
+
+  - id: odw.journey.operator.reject
+    name: reject
+    description: Reject a transition, stage, action, or publication.
+
+  - id: odw.journey.operator.escalate
+    name: escalate
+    description: Route to higher authority, review, or control path.
+
+  - id: odw.journey.operator.complete
+    name: complete
+    description: Mark journey or stage as complete.
+
+  - id: odw.journey.operator.reopen
+    name: reopen
+    description: Reopen a completed or closed journey for correction, review, or update.
+
+  - id: odw.journey.operator.rollback
+    name: rollback
+    description: Return to previous state while preserving history.
+
+referenceJourneys:
+  - id: odw.journey.reference.datasetToValue.v1
+    type: DataJourney
+    name: Dataset To Value Journey
+    description: Canonical journey from data source to dataset, governance, trust, publication, analytics, decision, outcome, value, and learning.
+    stages:
+      - Source Identified
+      - Dataset Registered
+      - Metadata Completed
+      - Schema Linked
+      - Classified
+      - Provenance Captured
+      - Lineage Captured
+      - Policy Evaluated
+      - Trust Assessed
+      - Published
+      - Metric Created
+      - Insight Generated
+      - Decision Informed
+      - Action Taken
+      - Outcome Measured
+      - Value Realized
+      - Learning Captured
+    dependsOn:
+      - odw.schema.Dataset.v1
+      - odw.schema.TrustAssessment.v1
+      - odw.schema.Metric.v1
+      - odw.schema.Insight.v1
+      - odw.schema.Decision.v1
+      - odw.schema.Outcome.v1
+
+  - id: odw.journey.reference.decisionIntelligence.v1
+    type: DecisionJourney
+    name: Decision Intelligence Journey
+    description: Canonical journey from context to evidence, insight, recommendation, decision, outcome, value, learning, and improvement.
+    stages:
+      - Context Defined
+      - Data Identified
+      - Trust Checked
+      - Metrics Reviewed
+      - Insight Created
+      - Alternatives Compared
+      - Decision Made
+      - Action Executed
+      - Outcome Measured
+      - Value Assessed
+      - Learning Captured
+      - Improvement Proposed
+    dependsOn:
+      - odw.foundation.model.decisionIntelligence
+      - odw.schema.Decision.v1
+      - odw.schema.Outcome.v1
+
+  - id: odw.journey.reference.agentAction.v1
+    type: AgentJourney
+    name: Governed Agent Action Journey
+    description: Canonical journey for a governed agent action.
+    stages:
+      - Objective Received
+      - Identity Resolved
+      - Context Retrieved
+      - Policy Evaluated
+      - Tool Permission Checked
+      - Approval Requested If Required
+      - Plan Created
+      - Action Executed
+      - Output Validated
+      - Provenance Captured
+      - Audit Recorded
+      - Evaluation Updated
+    dependsOn:
+      - odw.schema.Agent.v1
+      - odw.policy.agent.actionGovernance.v1
+      - odw.control.agent.actionEvaluatedAndAudited.v1
+
+journeyRules:
+  - Every journey must have subject, owner, lifecycleState, version, createdAt, and updatedAt.
+  - Every journey transition must preserve from, to, trigger, actor, eventTime, and recordedAt.
+  - Every governed journey must reference applicable policies and controls.
+  - Every approval-gated journey must preserve approval record and approver identity.
+  - Every journey state change must be append-only and auditable.
+  - Journey current state must be reproducible from recorded events or transitions.
+  - Journey stages may be temporal, spatial, identity-scoped, and policy-bound.
+  - A journey may branch, pause, resume, fail, rollback, or complete, but history must not be destroyed.
+  - Decision journeys must preserve evidence and data versions.
+  - Agent journeys must preserve policy decision, tool use, trace ID, output validation, and audit record.
+
+relationshipToPrimitives:
+  identity: Journey actors, owners, approvers, operators, and subjects must resolve to identities.
+  time: Journey stages, events, transitions, and deadlines are temporal.
+  location: Journeys may be scoped to country, jurisdiction, region, boundary, route, or service area.
+  graph: Journeys are paths through graph states, relationships, and events.
+  policy: Policies govern allowed journey transitions, actions, and approvals.
+  control: Controls validate whether a journey may advance.
+  audit: Audit records prove what happened during the journey.
