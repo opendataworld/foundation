@@ -1,0 +1,132 @@
+version: 0.1.0
+status: draft
+namespace: odw.data
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical registry index for OpenDataWorld data assets, datasets, data products, sources, metadata, quality, provenance, and lineage records.
+
+records:
+  - id: odw.data.type.dataAsset.v1
+    type: DataObjectType
+    name: Data Asset
+    description: Governed object that contains, references, describes, produces, transforms, indexes, exposes, or represents data.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Dataset.v1
+    dependsOn:
+      - odw.foundation.model.dataModeling
+      - odw.foundation.model.registry
+
+  - id: odw.data.type.dataset.v1
+    type: DataObjectType
+    name: Dataset
+    description: Governed collection of structured, semi-structured, or unstructured data.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Dataset.v1
+    graphNode: odw.graph.node.Dataset
+    dependsOn:
+      - odw.schema.Dataset.v1
+      - odw.graph.node.Dataset
+
+  - id: odw.data.type.dataProduct.v1
+    type: DataObjectType
+    name: Data Product
+    description: Packaged data asset with intended consumers, interfaces, access rules, quality expectations, support model, and change policy.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.DataProduct.v1
+    graphNode: odw.graph.node.DataProduct
+    dependsOn:
+      - odw.schema.DataProduct.v1
+      - odw.graph.node.DataProduct
+
+  - id: odw.data.type.dataSource.v1
+    type: DataObjectType
+    name: Data Source
+    description: Origin or immediate provider of data.
+    lifecycleState: Draft
+    version: 0.1.0
+    graphNode: odw.graph.node.DataSource
+    dependsOn:
+      - odw.graph.node.DataSource
+      - odw.foundation.model.provenance
+
+  - id: odw.data.type.dataElement.v1
+    type: DataObjectType
+    name: Data Element
+    description: Individual data field, attribute, column, property, or element.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.foundation.model.dataModeling
+
+  - id: odw.data.type.distribution.v1
+    type: DataObjectType
+    name: Data Distribution
+    description: Download, API, stream, file, view, or other access form for a dataset or data product.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.schema.Dataset.v1
+      - odw.schema.DataProduct.v1
+
+  - id: odw.data.type.metadataRecord.v1
+    type: DataObjectType
+    name: Metadata Record
+    description: Descriptive, structural, technical, governance, quality, operational, usage, provenance, or lineage metadata.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.foundation.model.dataModeling
+
+  - id: odw.data.type.qualityProfile.v1
+    type: DataObjectType
+    name: Quality Profile
+    description: Quality tier, score, dimensions, validation results, known issues, and freshness information for a data asset.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.foundation.model.trust
+      - odw.schema.TrustAssessment.v1
+
+  - id: odw.data.type.provenanceRecord.v1
+    type: DataObjectType
+    name: Provenance Record
+    description: Origin, source, custody, collection method, evidence, and publication history for a data asset.
+    lifecycleState: Draft
+    version: 0.1.0
+    graphNode: odw.graph.node.ProvenanceRecord
+    dependsOn:
+      - odw.foundation.model.provenance
+      - odw.graph.node.ProvenanceRecord
+
+  - id: odw.data.type.lineageRecord.v1
+    type: DataObjectType
+    name: Lineage Record
+    description: Flow, dependency, transformation, and impact record for data assets and downstream use.
+    lifecycleState: Draft
+    version: 0.1.0
+    graphNode: odw.graph.node.LineageRecord
+    dependsOn:
+      - odw.foundation.model.lineage
+      - odw.graph.node.LineageRecord
+
+  - id: odw.data.example.publicHealthFacilities.v1
+    type: ExampleDataRecord
+    name: Public Health Facilities Dataset Example
+    description: Reference example dataset used by the OpenDataWorld graph example.
+    lifecycleState: Draft
+    version: 0.1.0
+    graphExample: odw.graph.example.healthDataset.v1
+    dependsOn:
+      - odw.graph.example.healthDataset.v1
+      - odw.schema.Dataset.v1
+
+registryRules:
+  - Every data registry record must declare lifecycleState and version.
+  - Every official dataset should reference the Dataset schema.
+  - Every official data product should reference the DataProduct schema.
+  - Every data source should preserve provenance context.
+  - Every transformed data asset should preserve lineage context.
+  - Every published data asset should have owner, steward, classification, license, access policy, provenance, and trust context.
