@@ -1,0 +1,350 @@
+version: 0.1.0
+status: draft
+namespace: https://opendataworld.org/ns#
+
+validationPhases:
+  - phase: syntax
+    description: Validate file structure, required fields, and parseability.
+  - phase: identity
+    description: Validate identifiers, canonical IDs, namespaces, aliases, and duplicate records.
+  - phase: type
+    description: Validate node and edge types against graph contracts.
+  - phase: relationship
+    description: Validate source and target compatibility for every edge.
+  - phase: cardinality
+    description: Validate cardinality and required relationships.
+  - phase: governance
+    description: Validate ownership, stewardship, policy, access, approval, and audit requirements.
+  - phase: temporal
+    description: Validate timestamps, validity periods, lifecycle transitions, and version references.
+  - phase: trust
+    description: Validate trust assessments, evidence, provenance, and certification rules.
+  - phase: lineage
+    description: Validate data flow, transformation, dependency, and impact links.
+  - phase: publication
+    description: Validate publication gates for public or shared assets.
+  - phase: agentic
+    description: Validate agent identity, policy evaluation, tool permission, human approval, and audit.
+
+rules:
+  ValidGraphDocument:
+    phase: syntax
+    severity: error
+    description: Graph documents must contain nodes and edges arrays.
+    checks:
+      requiredTopLevelFields:
+        - nodes
+        - edges
+
+  ValidNodeShape:
+    phase: syntax
+    severity: error
+    description: Every node must include id, type, and lifecycleState when governed.
+    checks:
+      nodeRequiredFields:
+        - id
+        - type
+
+  ValidEdgeShape:
+    phase: syntax
+    severity: error
+    description: Every edge must include id, type, source, target, and recordedAt.
+    checks:
+      edgeRequiredFields:
+        - id
+        - type
+        - source
+        - target
+        - recordedAt
+
+  UniqueNodeIds:
+    phase: identity
+    severity: error
+    description: Node IDs must be unique within a graph document.
+    checks:
+      uniqueNodeIds: true
+
+  UniqueEdgeIds:
+    phase: identity
+    severity: error
+    description: Edge IDs must be unique within a graph document.
+    checks:
+      uniqueEdgeIds: true
+
+  KnownNodeTypes:
+    phase: type
+    severity: error
+    description: Node types must exist in graph/node-types.yaml.
+    checks:
+      nodeTypesMustExistIn: graph/node-types.yaml
+
+  KnownEdgeTypes:
+    phase: type
+    severity: error
+    description: Edge types must exist in graph/edge-types.yaml.
+    checks:
+      edgeTypesMustExistIn: graph/edge-types.yaml
+
+  EdgeSourceTargetCompatibility:
+    phase: relationship
+    severity: error
+    description: Edge source and target node types must match the edge contract.
+    checks:
+      validateSourceTypes: true
+      validateTargetTypes: true
+      contract: graph/edge-types.yaml
+
+  EdgeReferencesExistingNodes:
+    phase: relationship
+    severity: error
+    description: Every edge source and target must reference an existing node.
+    checks:
+      edgeSourceMustExist: true
+      edgeTargetMustExist: true
+
+  RequiredNodeProperties:
+    phase: type
+    severity: error
+    description: Node required properties must be present based on node type contract.
+    checks:
+      validateRequiredPropertiesFrom: graph/node-types.yaml
+
+  RequiredGraphConstraints:
+    phase: governance
+    severity: error
+    description: Graph constraints must pass before publication, certification, or automated action.
+    checks:
+      validateConstraintsFrom: graph/constraints.yaml
+
+  PublishedDatasetGate:
+    phase: publication
+    severity: error
+    description: Published Dataset nodes must pass minimum publication readiness.
+    appliesTo:
+      nodeType: Dataset
+      when:
+        lifecycleState: Published
+    checks:
+      requiredProperties:
+        - license
+        - accessPolicy
+        - version
+      requiredOutgoingEdges:
+        - ownedBy
+        - stewardedBy
+        - sourcedFrom
+        - conformsTo
+        - classifiedAs
+        - governedBy
+        - hasProvenance
+        - hasTrustAssessment
+
+  DataProductGate:
+    phase: governance
+    severity: error
+    description: Data products must declare consumers and link to contained or served data assets.
+    appliesTo:
+      nodeType: DataProduct
+    checks:
+      requiredProperties:
+        - intendedConsumers
+      anyOutgoingEdge:
+        - contains
+        - servedThrough
+
+  SensitiveDataAccessGate:
+    phase: governance
+    severity: error
+    description: Sensitive assets cannot be OpenAccess.
+    checks:
+      prohibitOpenAccessForSensitivity:
+        - Confidential
+        - Restricted
+        - Secret
+        - PersonalData
+        - SensitivePersonalData
+        - FinancialData
+        - HealthData
+        - GovernmentRestrictedData
+        - ChildData
+        - LocationData
+        - BiometricData
+        - CredentialData
+
+  PolicyVersionRequired:
+    phase: governance
+    severity: error
+    description: Access decisions must reference the policy version used.
+    appliesTo:
+      nodeType: AccessDecision
+    checks:
+      requiredProperties:
+        - policyVersion
+        - decision
+        - decidedAt
+      requiredOutgoingEdges:
+        - evaluatedBy
+        - appliesTo
+
+  TrustEvidenceRequired:
+    phase: trust
+    severity: error
+    description: Trust assessments must be evidence-backed or explicitly disclose unavailable evidence.
+    appliesTo:
+      nodeType: TrustAssessment
+    checks:
+      anyOf:
+        - requiredOutgoingEdges:
+            - hasEvidence
+        - requiredProperties:
+            - evidenceUnavailable
+
+  CertifiedTrustReviewRequired:
+    phase: trust
+    severity: error
+    description: Certified trust assessments require reviewer linkage.
+    appliesTo:
+      nodeType: TrustAssessment
+      when:
+        trustLevel: Certified
+    checks:
+      requiredOutgoingEdges:
+        - reviewedBy
+
+  LineageTemporalRequired:
+    phase: lineage
+    severity: error
+    description: Lineage edges must preserve recordedAt and source/target versions where available.
+    appliesToEdges:
+      - sourcedFrom
+      - derivedFrom
+      - transformedInto
+      - dependsOn
+      - feeds
+    checks:
+      requiredEdgeProperties:
+        - recordedAt
+      recommendedEdgeProperties:
+        - sourceVersion
+        - targetVersion
+
+  DecisionEvidenceRequired:
+    phase: governance
+    severity: error
+    description: Decisions must have evidence or a documented evidence-unavailable reason.
+    appliesTo:
+      nodeType: Decision
+    checks:
+      anyOf:
+        - requiredOutgoingEdges:
+            - supportedBy
+        - requiredOutgoingEdges:
+            - hasEvidence
+        - requiredProperties:
+            - evidenceUnavailableReason
+
+  DecisionDataVersionRequired:
+    phase: temporal
+    severity: error
+    description: Decisions based on data must preserve data version references.
+    appliesTo:
+      nodeType: Decision
+    checks:
+      whenOutgoingEdgeExists: basedOn
+      requiredEdgeProperties:
+        basedOn:
+          - targetVersion
+          - recordedAt
+
+  AgentIdentityRequired:
+    phase: agentic
+    severity: error
+    description: Agents must have owner, operator, purpose, and lifecycle state.
+    appliesTo:
+      nodeType: Agent
+    checks:
+      requiredProperties:
+        - owner
+        - operator
+        - purpose
+        - lifecycleState
+
+  AgentPolicyRequired:
+    phase: agentic
+    severity: error
+    description: Agents must be governed by policy.
+    appliesTo:
+      nodeType: Agent
+    checks:
+      requiredOutgoingEdges:
+        - governedBy
+
+  AgentActionAuditRequired:
+    phase: agentic
+    severity: error
+    description: Agent actions must be policy-evaluated and audited.
+    appliesToEdges:
+      - actsOn
+      - accesses
+    whenSourceType: Agent
+    checks:
+      requiredCompanionEdges:
+        - evaluatedBy
+        - recordedBy
+
+  NoOrphanPublishedAssets:
+    phase: relationship
+    severity: error
+    description: Published assets must not be disconnected from owner, provenance, and governance.
+    appliesTo:
+      nodeTypes:
+        - Dataset
+        - DataProduct
+        - Insight
+        - Report
+        - Dashboard
+      when:
+        lifecycleState: Published
+    checks:
+      requiredOutgoingEdges:
+        - ownedBy
+        - hasProvenance
+        - governedBy
+
+  GraphProjectionTraceability:
+    phase: temporal
+    severity: error
+    description: Graph projections must trace back to source records, events, or snapshots.
+    appliesTo:
+      nodeTypes:
+        - GraphProjection
+        - CatalogProjection
+        - RegistryProjection
+    checks:
+      anyOf:
+        - requiredOutgoingEdges:
+            - derivedFrom
+        - requiredProperties:
+            - sourceEvents
+        - requiredProperties:
+            - sourceSnapshot
+
+severity:
+  error: Invalid graph state. Must be corrected before publication, certification, or automated execution.
+  warning: Weak graph state. Should be reviewed before high-impact use.
+  info: Advisory recommendation for graph quality improvement.
+
+outputs:
+  validationReport:
+    requiredFields:
+      - graphId
+      - validatedAt
+      - validatorVersion
+      - status
+      - errors
+      - warnings
+      - info
+  allowedStatusValues:
+    - passed
+    - passedWithWarnings
+    - failed
