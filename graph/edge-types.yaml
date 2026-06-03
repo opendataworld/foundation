@@ -1,0 +1,298 @@
+version: 0.1.0
+status: draft
+namespace: https://opendataworld.org/ns#
+
+edgeTypes:
+  ownedBy:
+    description: Connects an asset or governed object to its accountable owner.
+    sourceTypes: [DataAsset, Dataset, DataProduct, Schema, Policy, Workflow, Metric]
+    targetTypes: [Person, Team, Organization]
+    cardinality: many-to-one
+    requiredFor: [DataAsset, Dataset, DataProduct]
+    temporal: true
+    provenanceRequired: true
+    evidenceRequired: false
+
+  stewardedBy:
+    description: Connects a data asset to the person or team responsible for day-to-day stewardship.
+    sourceTypes: [DataAsset, Dataset, DataProduct, DataElement]
+    targetTypes: [Person, Team]
+    cardinality: many-to-many
+    requiredFor: [Dataset, DataProduct]
+    temporal: true
+    provenanceRequired: true
+    evidenceRequired: false
+
+  operates:
+    description: Connects an organization, team, person, or system to a service, system, or agent it operates.
+    sourceTypes: [Organization, Team, Person, System]
+    targetTypes: [System, Service, Agent]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+    evidenceRequired: false
+
+  operatedBy:
+    description: Inverse of operates.
+    sourceTypes: [System, Service, Agent]
+    targetTypes: [Organization, Team, Person, System]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+    inverseOf: operates
+
+  publishes:
+    description: Connects a publisher identity to a published asset.
+    sourceTypes: [Person, Team, Organization, System, Agent]
+    targetTypes: [Dataset, DataProduct, Report, Dashboard, Insight, KnowledgeAsset]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+    evidenceRequired: true
+
+  publishedBy:
+    description: Inverse of publishes.
+    sourceTypes: [Dataset, DataProduct, Report, Dashboard, Insight, KnowledgeAsset]
+    targetTypes: [Person, Team, Organization, System, Agent]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+    inverseOf: publishes
+
+  creates:
+    description: Connects an actor to an object it created.
+    sourceTypes: [Person, Team, Organization, System, Agent]
+    targetTypes: [DataAsset, Dataset, DataProduct, Schema, Policy, Evidence, Insight, Decision, Workflow]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+
+  createdBy:
+    description: Inverse of creates.
+    sourceTypes: [DataAsset, Dataset, DataProduct, Schema, Policy, Evidence, Insight, Decision, Workflow]
+    targetTypes: [Person, Team, Organization, System, Agent]
+    cardinality: many-to-one
+    temporal: true
+    provenanceRequired: true
+    inverseOf: creates
+
+  sourcedFrom:
+    description: Connects a data asset to its source.
+    sourceTypes: [Dataset, DataAsset, DataProduct, LineageRecord]
+    targetTypes: [DataSource, Dataset, DataAsset, System, API]
+    cardinality: many-to-many
+    requiredFor: [Dataset]
+    temporal: true
+    provenanceRequired: true
+    evidenceRequired: true
+
+  produces:
+    description: Connects a source, action, workflow, decision, or system to its output.
+    sourceTypes: [DataSource, System, Agent, Action, Workflow, Decision, Insight]
+    targetTypes: [Dataset, DataAsset, DataProduct, Insight, Outcome, Evidence, Report, Dashboard]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+
+  conformsTo:
+    description: Connects a data asset to the schema or standard it follows.
+    sourceTypes: [Dataset, DataAsset, DataProduct, DataStream, DataAPI]
+    targetTypes: [Schema, OntologyClass, Standard]
+    cardinality: many-to-many
+    requiredFor: [Dataset]
+    temporal: true
+    provenanceRequired: true
+
+  classifiedAs:
+    description: Connects an object to a classification value.
+    sourceTypes: [DataAsset, Dataset, DataProduct, DataSource, DataElement, Policy, Agent]
+    targetTypes: [Classification, TaxonomyClass]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+
+  governedBy:
+    description: Connects a governed object to an applicable policy.
+    sourceTypes: [DataAsset, Dataset, DataProduct, DataSource, Schema, Agent, Workflow, Service, Metric, Insight]
+    targetTypes: [Policy]
+    cardinality: many-to-many
+    requiredFor: [Dataset, DataProduct, Agent]
+    temporal: true
+    provenanceRequired: true
+
+  appliesTo:
+    description: Connects a policy, rule, or access decision to the object it applies to.
+    sourceTypes: [Policy, Rule, AccessDecision]
+    targetTypes: [DataAsset, Dataset, DataProduct, Agent, Workflow, Service, Organization, Person, Team]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+
+  contains:
+    description: Connects a container object to contained objects.
+    sourceTypes: [DataProduct, Policy, Workflow, Schema, Dataset]
+    targetTypes: [Dataset, Rule, Action, DataElement, DataAsset]
+    cardinality: one-to-many
+    temporal: true
+    provenanceRequired: false
+
+  defines:
+    description: Connects a schema, ontology, taxonomy, or glossary to the thing it defines.
+    sourceTypes: [Schema, OntologyClass, TaxonomyClass, GlossaryTerm]
+    targetTypes: [DataElement, Entity, DataAsset, Relationship, Metric]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+
+  validates:
+    description: Connects a schema, rule, or validation process to what it validates.
+    sourceTypes: [Schema, Rule, Workflow, System, Agent]
+    targetTypes: [Dataset, DataAsset, DataRecord, MetadataRecord, Policy]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+
+  hasProvenance:
+    description: Connects an object to its provenance record.
+    sourceTypes: [DataAsset, Dataset, DataProduct, Evidence, Insight, Decision, Outcome]
+    targetTypes: [ProvenanceRecord]
+    cardinality: many-to-many
+    requiredFor: [Dataset, DataProduct]
+    temporal: true
+    provenanceRequired: false
+
+  hasLineage:
+    description: Connects an object to its lineage record.
+    sourceTypes: [DataAsset, Dataset, DataProduct, Report, Dashboard, Insight, Decision]
+    targetTypes: [LineageRecord]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+
+  hasTrustAssessment:
+    description: Connects an object to a trust assessment.
+    sourceTypes: [DataAsset, Dataset, DataProduct, DataSource, Agent, Evidence, Insight, Decision, Service]
+    targetTypes: [TrustAssessment]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+    evidenceRequired: true
+
+  hasEvidence:
+    description: Connects a claim, decision, trust assessment, or record to supporting evidence.
+    sourceTypes: [TrustAssessment, Decision, Insight, AccessDecision, ProvenanceRecord, LineageRecord, AuditEvent]
+    targetTypes: [Evidence]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+
+  basedOn:
+    description: Connects analytics, insights, decisions, trust assessments, or evidence to source material.
+    sourceTypes: [Metric, Insight, Decision, TrustAssessment, Evidence, Report, Dashboard]
+    targetTypes: [Dataset, DataAsset, Evidence, Metric, Insight, ProvenanceRecord, LineageRecord]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+    evidenceRequired: true
+
+  derivedFrom:
+    description: Connects a derived object to its upstream object.
+    sourceTypes: [Dataset, DataAsset, DataProduct, Metric, Insight, Report, Dashboard, Model]
+    targetTypes: [Dataset, DataAsset, DataProduct, DataSource, Metric]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+    evidenceRequired: true
+
+  transformedInto:
+    description: Connects an input data asset to a transformed output.
+    sourceTypes: [Dataset, DataAsset, DataProduct, LineageRecord]
+    targetTypes: [Dataset, DataAsset, DataProduct, LineageRecord]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+    evidenceRequired: true
+
+  dependsOn:
+    description: Connects an object to another object it depends on.
+    sourceTypes: [Dataset, DataProduct, Dashboard, Report, Metric, Insight, Workflow, Agent, Service]
+    targetTypes: [Dataset, DataAsset, Schema, API, Policy, Service, DataSource]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+
+  feeds:
+    description: Connects a data asset to downstream analytics, products, or workflows it feeds.
+    sourceTypes: [Dataset, DataAsset, DataProduct, DataSource]
+    targetTypes: [DataProduct, Dashboard, Report, Metric, Model, Workflow, Agent]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+
+  supports:
+    description: Connects an asset, evidence, metric, or insight to something it supports.
+    sourceTypes: [Dataset, DataAsset, DataProduct, Evidence, Metric, Insight]
+    targetTypes: [Decision, UseCase, Outcome, DataProduct, Policy]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+
+  informs:
+    description: Connects an insight, metric, report, or dashboard to a decision or action it informs.
+    sourceTypes: [Insight, Metric, Report, Dashboard]
+    targetTypes: [Decision, Action, Workflow]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+
+  leadsTo:
+    description: Connects decisions or actions to downstream actions or outcomes.
+    sourceTypes: [Decision, Action, Workflow]
+    targetTypes: [Action, Outcome, Impact]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+
+  impacts:
+    description: Connects outcomes, actions, or decisions to impacted things.
+    sourceTypes: [Outcome, Action, Decision]
+    targetTypes: [Impact, Metric, Organization, Community, DataProduct]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+
+  accesses:
+    description: Connects a subject to a resource it accessed.
+    sourceTypes: [Person, Team, Organization, System, Agent]
+    targetTypes: [Dataset, DataAsset, DataProduct, API, Service]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+    auditRequired: true
+
+  evaluatedBy:
+    description: Connects a request, action, or access decision to the policy or evaluator that evaluated it.
+    sourceTypes: [Action, AccessDecision, Agent, Workflow]
+    targetTypes: [Policy, Rule, System, Service]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+    auditRequired: true
+
+  approvedBy:
+    description: Connects a request, action, decision, or publication to its approver.
+    sourceTypes: [Action, AccessDecision, Decision, Dataset, DataProduct, Insight, Policy]
+    targetTypes: [Person, Team, Organization]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+    auditRequired: true
+
+  recordedBy:
+    description: Connects an event, action, or decision to the audit event or system that recorded it.
+    sourceTypes: [Action, Decision, AccessDecision, Agent, Workflow]
+    targetTypes: [AuditEvent, System, Service]
+    cardinality: many-to-many
+    temporal: true
+    provenanceRequired: true
+    auditRequired: true
