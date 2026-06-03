@@ -1,0 +1,194 @@
+version: 0.1.0
+status: draft
+namespace: odw.agent
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical registry index for OpenDataWorld governed agents, skills, tools, actions, memory, evaluations, trust, and audit records.
+
+records:
+  - id: odw.agent.type.discovery.v1
+    type: AgentType
+    name: Discovery Agent
+    description: Agent type for finding relevant data assets, data products, policies, metrics, insights, and graph context.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Agent.v1
+    graphNode: odw.graph.node.Agent
+    dependsOn:
+      - odw.schema.Agent.v1
+      - odw.foundation.model.identity
+      - odw.foundation.model.trust
+
+  - id: odw.agent.type.metadataEnrichment.v1
+    type: AgentType
+    name: Metadata Enrichment Agent
+    description: Agent type for suggesting descriptions, tags, glossary mappings, classifications, and missing metadata.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Agent.v1
+    graphNode: odw.graph.node.Agent
+
+  - id: odw.agent.type.classification.v1
+    type: AgentType
+    name: Classification Agent
+    description: Agent type for suggesting domain, sensitivity, access level, lifecycle, quality, license, and trust classifications.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Agent.v1
+    graphNode: odw.graph.node.Agent
+
+  - id: odw.agent.type.schemaMapping.v1
+    type: AgentType
+    name: Schema Mapping Agent
+    description: Agent type for mapping source schemas to canonical schemas and detecting schema drift.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Agent.v1
+    graphNode: odw.graph.node.Agent
+
+  - id: odw.agent.type.quality.v1
+    type: AgentType
+    name: Quality Agent
+    description: Agent type for suggesting quality checks, identifying quality issues, and supporting quality review.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Agent.v1
+    graphNode: odw.graph.node.Agent
+
+  - id: odw.agent.type.lineage.v1
+    type: AgentType
+    name: Lineage Agent
+    description: Agent type for suggesting lineage relationships based on transformations, usage, workflows, and analytics dependencies.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Agent.v1
+    graphNode: odw.graph.node.Agent
+
+  - id: odw.agent.type.analytics.v1
+    type: AgentType
+    name: Analytics Agent
+    description: Agent type for drafting metrics, analyses, forecasts, dashboard summaries, and analytical explanations from governed data.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Agent.v1
+    graphNode: odw.graph.node.Agent
+    dependsOn:
+      - odw.schema.Metric.v1
+      - odw.schema.Insight.v1
+
+  - id: odw.agent.type.insight.v1
+    type: AgentType
+    name: Insight Agent
+    description: Agent type for drafting evidence-backed insight cards with confidence, explanation, limitations, and review status.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Agent.v1
+    graphNode: odw.graph.node.Agent
+    dependsOn:
+      - odw.schema.Insight.v1
+
+  - id: odw.agent.type.publishing.v1
+    type: AgentType
+    name: Publishing Agent
+    description: Agent type for preparing datasets, data products, metadata, and analytics artifacts for publication subject to policy and approval.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Agent.v1
+    graphNode: odw.graph.node.Agent
+
+  - id: odw.agent.type.governance.v1
+    type: AgentType
+    name: Governance Agent
+    description: Agent type for recommending governance actions, review queues, metadata fixes, policy mappings, and control checks.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Agent.v1
+    graphNode: odw.graph.node.Agent
+    dependsOn:
+      - odw.schema.Policy.v1
+      - odw.governance.policy.agentAction.v1
+
+  - id: odw.agent.type.decisionSupport.v1
+    type: AgentType
+    name: Decision Support Agent
+    description: Agent type for preparing decision briefs using governed data, metrics, insights, evidence, assumptions, constraints, and alternatives.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Agent.v1
+    graphNode: odw.graph.node.Agent
+    dependsOn:
+      - odw.schema.Decision.v1
+      - odw.foundation.model.decisionIntelligence
+
+  - id: odw.agent.object.skill.v1
+    type: AgentObjectType
+    name: Skill
+    description: Reusable capability an agent can perform under governance.
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.agent.object.tool.v1
+    type: AgentObjectType
+    name: Tool
+    description: Governed callable capability with input schema, output schema, permission, risk level, and audit requirements.
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.agent.object.action.v1
+    type: AgentObjectType
+    name: Agent Action
+    description: Recorded agent action with objective, resource, tool, policy decision, approval reference, status, and trace ID.
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.agent.object.task.v1
+    type: AgentObjectType
+    name: Task
+    description: Unit of work assigned to or performed by an agent.
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.agent.object.plan.v1
+    type: AgentObjectType
+    name: Plan
+    description: Proposed or approved sequence of steps for agent execution.
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.agent.object.memory.v1
+    type: AgentObjectType
+    name: Memory
+    description: Governed retained context used by agents under access, freshness, and provenance rules.
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.agent.object.evaluation.v1
+    type: AgentObjectType
+    name: Evaluation
+    description: Evaluation record for agent correctness, policy compliance, data safety, output quality, traceability, and reliability.
+    lifecycleState: Draft
+    version: 0.1.0
+
+  - id: odw.agent.object.agentTrustAssessment.v1
+    type: AgentObjectType
+    name: Agent Trust Assessment
+    description: Trust assessment for agent behavior, compliance history, evaluation results, failure rate, and human override patterns.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.TrustAssessment.v1
+
+  - id: odw.agent.object.agentAuditEvent.v1
+    type: AgentObjectType
+    name: Agent Audit Event
+    description: Audit event record for agent actions, tool use, outputs, policy decisions, approvals, and traces.
+    lifecycleState: Draft
+    version: 0.1.0
+
+registryRules:
+  - Every agent registry record must declare lifecycleState and version.
+  - Every agent type must reference the canonical Agent schema.
+  - Every active agent implementation must declare owner, operator, purpose, allowed actions, allowed tools, policies, and risk level.
+  - Every governed tool should declare input schema, output schema, risk level, approval requirement, and audit requirement.
+  - Every agent action should reference agent identity, resource, tool, policy decision, approval reference where applicable, status, and trace ID.
+  - Every high-risk or critical-risk agent should reference a trust assessment and approval requirements.
+  - Agent memory must not override current registry, policy, or access state.
