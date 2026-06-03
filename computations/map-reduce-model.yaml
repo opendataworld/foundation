@@ -1,0 +1,276 @@
+version: 0.1.0
+status: draft
+namespace: odw.computation.mapreduce
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical MapReduce model for governed distributed transformation over datasets, partitions, functions, intermediate records, reductions, outputs, lineage, trust, policy, and audit.
+
+coreIdea: >
+  MapReduce is a governed distributed computation journey where input data is partitioned, mapped into intermediate records, grouped or shuffled by key, reduced into output records, validated, recorded, and linked through lineage and audit.
+
+abstraction: |
+  MapReduce = Data + Partition + Function + Map + Shuffle + Reduce + Output + Lineage + Time + Policy + Audit
+
+classification:
+  primitive: false
+  composition: true
+  composedFrom:
+    - Data
+    - Function
+    - Journey
+    - Time
+    - Relationship
+    - Policy
+    - Control
+    - Lineage
+    - Audit
+
+mapReducePrinciples:
+  - id: odw.mapreduce.principle.governedTransformation
+    name: Governed Transformation
+    description: MapReduce is not only compute; it is a governed transformation from input data to output data.
+
+  - id: odw.mapreduce.principle.partitionExplicit
+    name: Partition Strategy Is Explicit
+    description: Partitioning must be recorded because it affects performance, determinism, cost, lineage, and reproducibility.
+
+  - id: odw.mapreduce.principle.functionVersioned
+    name: Functions Are Versioned
+    description: Map, combiner, partitioner, and reduce functions must preserve version and execution context.
+
+  - id: odw.mapreduce.principle.intermediateTraceable
+    name: Intermediate State Is Traceable
+    description: Intermediate records, groups, and shuffle stages must be traceable at least by metadata and lineage, even if not fully retained.
+
+  - id: odw.mapreduce.principle.outputGoverned
+    name: Output Is Governed Data
+    description: Output datasets must have schema, provenance, lineage, quality, trust, and policy context.
+
+  - id: odw.mapreduce.principle.replayable
+    name: Replayable Computation
+    description: A MapReduce job should be reproducible from input versions, function versions, parameters, and execution environment metadata.
+
+mapReducePrimitives:
+  - id: odw.mapreduce.primitive.job
+    name: MapReduce Job
+    description: Governed computation instance from input data to output data.
+
+  - id: odw.mapreduce.primitive.inputDataset
+    name: Input Dataset
+    description: Dataset or data product consumed by the computation.
+
+  - id: odw.mapreduce.primitive.partition
+    name: Partition
+    description: Subset, shard, chunk, split, or unit of input processed independently.
+
+  - id: odw.mapreduce.primitive.mapFunction
+    name: Map Function
+    description: Function applied to input partition records to emit intermediate key-value or structured records.
+
+  - id: odw.mapreduce.primitive.mappedRecord
+    name: Mapped Record
+    description: Intermediate record emitted by map function.
+
+  - id: odw.mapreduce.primitive.shuffle
+    name: Shuffle
+    description: Regrouping or redistribution of intermediate records by key, relation, partition, or grouping rule.
+
+  - id: odw.mapreduce.primitive.group
+    name: Group
+    description: Collection of intermediate records associated with the same key or grouping relation.
+
+  - id: odw.mapreduce.primitive.reduceFunction
+    name: Reduce Function
+    description: Function applied to grouped intermediate records to produce output records or aggregates.
+
+  - id: odw.mapreduce.primitive.outputDataset
+    name: Output Dataset
+    description: Dataset or data product produced by the computation.
+
+  - id: odw.mapreduce.primitive.executionPlan
+    name: Execution Plan
+    description: Planned execution topology, partitioning, function versions, resources, and dependencies.
+
+  - id: odw.mapreduce.primitive.executionTrace
+    name: Execution Trace
+    description: Runtime trace of job execution, task status, timings, retries, failures, costs, and outputs.
+
+canonicalFlow:
+  - Input Dataset Selected
+  - Input Version Resolved
+  - Policy Evaluated
+  - Partition Strategy Selected
+  - Map Function Applied
+  - Intermediate Records Emitted
+  - Shuffle Or Grouping Performed
+  - Reduce Function Applied
+  - Output Dataset Produced
+  - Output Schema Validated
+  - Quality Checks Executed
+  - Lineage Recorded
+  - Provenance Recorded
+  - Trust Assessment Updated
+  - Audit Recorded
+
+canonicalFields:
+  job:
+    - id
+    - type
+    - name
+    - description
+    - owner
+    - operator
+    - inputDatasets
+    - outputDataset
+    - partitionStrategy
+    - mapFunction
+    - combinerFunction
+    - partitionerFunction
+    - reduceFunction
+    - parameters
+    - executionEnvironment
+    - policies
+    - controls
+    - status
+    - startedAt
+    - completedAt
+    - createdAt
+    - updatedAt
+    - version
+    - lifecycleState
+  function:
+    - id
+    - name
+    - functionType
+    - version
+    - inputSchema
+    - outputSchema
+    - parameters
+    - owner
+    - runtime
+    - checksum
+    - createdAt
+    - updatedAt
+  partition:
+    - id
+    - inputDataset
+    - inputVersion
+    - partitionKey
+    - partitionRange
+    - recordCount
+    - byteSize
+    - createdAt
+  executionTrace:
+    - traceId
+    - job
+    - taskId
+    - stage
+    - partition
+    - startedAt
+    - completedAt
+    - status
+    - retryCount
+    - error
+    - metrics
+
+functionTypes:
+  - id: odw.mapreduce.function.map
+    name: Map Function
+    description: Emits intermediate records from input records or partitions.
+
+  - id: odw.mapreduce.function.combiner
+    name: Combiner Function
+    description: Optional local aggregation before shuffle.
+
+  - id: odw.mapreduce.function.partitioner
+    name: Partitioner Function
+    description: Determines how intermediate keys are assigned to reduce partitions.
+
+  - id: odw.mapreduce.function.reduce
+    name: Reduce Function
+    description: Produces output records from grouped intermediate records.
+
+partitionStrategies:
+  - id: odw.mapreduce.partition.byRecordRange
+    name: By Record Range
+    description: Partition input by record range or offset.
+
+  - id: odw.mapreduce.partition.byKey
+    name: By Key
+    description: Partition input by key value.
+
+  - id: odw.mapreduce.partition.byHash
+    name: By Hash
+    description: Partition input or intermediate records by hash.
+
+  - id: odw.mapreduce.partition.byTimeWindow
+    name: By Time Window
+    description: Partition input by temporal window.
+
+  - id: odw.mapreduce.partition.byLocation
+    name: By Location
+    description: Partition input by spatial region, jurisdiction, tile, or boundary.
+
+  - id: odw.mapreduce.partition.custom
+    name: Custom
+    description: Custom partitioning strategy with explicit description and version.
+
+lineageRequirements:
+  - Input dataset ID and version must be preserved.
+  - Output dataset ID and version must be preserved.
+  - Map function ID and version must be preserved.
+  - Reduce function ID and version must be preserved.
+  - Partition strategy must be preserved.
+  - Execution time and environment must be preserved.
+  - Output schema must be preserved.
+  - Quality and validation results should be linked.
+  - Job trace ID must be linked to audit record.
+
+governanceRules:
+  - Every governed MapReduce job must have owner, operator, input dataset references, output dataset reference, function versions, execution time, and audit trace.
+  - Input datasets must pass applicable access and policy checks before execution.
+  - Output datasets must pass schema validation before publication or downstream use.
+  - Sensitive input data must not produce open output unless policy, transformation, anonymization, and approval requirements are satisfied.
+  - Function versions must be immutable for a completed job.
+  - Job retries must preserve retry count and error context.
+  - Failed jobs must preserve failure state, partial output status, and audit trace.
+  - Intermediate data retention must follow policy.
+  - Every output dataset must have lineage back to input datasets and function versions.
+  - Every published output must have provenance and trust assessment.
+
+referencePrograms:
+  - id: odw.mapreduce.reference.datasetAggregation.v1
+    name: Dataset Aggregation
+    description: Reference MapReduce program for aggregating records by key.
+    flow:
+      - Resolve input dataset version
+      - Partition input dataset
+      - Map records to key-value pairs
+      - Shuffle by key
+      - Reduce grouped values
+      - Write output dataset
+      - Validate output schema
+      - Record lineage and audit
+
+  - id: odw.mapreduce.reference.spatialCoverageAggregation.v1
+    name: Spatial Coverage Aggregation
+    description: Reference MapReduce program for aggregating records by geography or administrative boundary.
+    flow:
+      - Resolve input dataset version
+      - Resolve boundary version
+      - Partition by location
+      - Map records to boundary keys
+      - Shuffle by boundary key
+      - Reduce coverage metrics
+      - Produce output metric dataset
+      - Record spatial lineage and boundary version
+
+relationshipToFoundation:
+  data: MapReduce consumes and produces governed datasets and data products.
+  time: MapReduce has job time, partition time, function version time, execution time, and output time.
+  location: MapReduce may partition, aggregate, or validate by spatial scope.
+  journey: MapReduce is a computation journey from input to output.
+  graph: MapReduce creates lineage edges from input datasets and functions to output datasets.
+  policy: MapReduce execution and output use are governed by policies and controls.
+  trust: MapReduce output trust depends on input trust, function trust, validation, and execution evidence.
+  audit: MapReduce must preserve execution trace and decision context where applicable.
