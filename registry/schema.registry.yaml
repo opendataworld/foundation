@@ -1,0 +1,143 @@
+version: 0.1.0
+status: draft
+namespace: odw.schema
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical registry of OpenDataWorld machine-readable JSON Schemas.
+
+records:
+  - id: odw.schema.Thing.v1
+    type: JSONSchema
+    name: Thing Schema
+    description: Root schema for every identifiable governed object in OpenDataWorld Foundation.
+    path: schemas/thing.schema.json
+    schemaId: https://opendataworld.org/foundation/schemas/thing.schema.json
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn: []
+
+  - id: odw.schema.Dataset.v1
+    type: JSONSchema
+    name: Dataset Schema
+    description: Canonical schema for a governed dataset.
+    path: schemas/dataset.schema.json
+    schemaId: https://opendataworld.org/foundation/schemas/dataset.schema.json
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.schema.Thing.v1
+      - odw.foundation.model.dataModeling
+      - odw.foundation.model.provenance
+      - odw.foundation.model.lineage
+      - odw.foundation.model.trust
+
+  - id: odw.schema.DataProduct.v1
+    type: JSONSchema
+    name: Data Product Schema
+    description: Canonical schema for a governed data product.
+    path: schemas/data-product.schema.json
+    schemaId: https://opendataworld.org/foundation/schemas/data-product.schema.json
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.schema.Dataset.v1
+      - odw.foundation.model.serviceCatalog
+      - odw.foundation.model.registry
+
+  - id: odw.schema.Policy.v1
+    type: JSONSchema
+    name: Policy Schema
+    description: Canonical schema for governed policies and rules.
+    path: schemas/policy.schema.json
+    schemaId: https://opendataworld.org/foundation/schemas/policy.schema.json
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.foundation.model.operatingModel
+      - odw.foundation.model.temporal
+
+  - id: odw.schema.TrustAssessment.v1
+    type: JSONSchema
+    name: Trust Assessment Schema
+    description: Canonical schema for contextual, temporal, evidence-backed trust assessments.
+    path: schemas/trust-assessment.schema.json
+    schemaId: https://opendataworld.org/foundation/schemas/trust-assessment.schema.json
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.schema.Policy.v1
+      - odw.foundation.model.trust
+      - odw.foundation.model.provenance
+
+  - id: odw.schema.Metric.v1
+    type: JSONSchema
+    name: Metric Schema
+    description: Canonical schema for governed metric definitions.
+    path: schemas/metric.schema.json
+    schemaId: https://opendataworld.org/foundation/schemas/metric.schema.json
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.schema.Dataset.v1
+      - odw.foundation.model.decisionIntelligence
+
+  - id: odw.schema.Insight.v1
+    type: JSONSchema
+    name: Insight Schema
+    description: Canonical schema for governed evidence-backed insights.
+    path: schemas/insight.schema.json
+    schemaId: https://opendataworld.org/foundation/schemas/insight.schema.json
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.schema.Metric.v1
+      - odw.schema.TrustAssessment.v1
+      - odw.foundation.model.decisionIntelligence
+
+  - id: odw.schema.Decision.v1
+    type: JSONSchema
+    name: Decision Schema
+    description: Canonical schema for data-informed, evidence-backed decision records.
+    path: schemas/decision.schema.json
+    schemaId: https://opendataworld.org/foundation/schemas/decision.schema.json
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.schema.Dataset.v1
+      - odw.schema.Insight.v1
+      - odw.schema.Policy.v1
+      - odw.foundation.model.decisionIntelligence
+
+  - id: odw.schema.Outcome.v1
+    type: JSONSchema
+    name: Outcome Schema
+    description: Canonical schema for measured outcomes, impact, value, learning, and improvement.
+    path: schemas/outcome.schema.json
+    schemaId: https://opendataworld.org/foundation/schemas/outcome.schema.json
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.schema.Decision.v1
+      - odw.schema.Metric.v1
+      - odw.foundation.model.decisionIntelligence
+
+  - id: odw.schema.Agent.v1
+    type: JSONSchema
+    name: Agent Schema
+    description: Canonical schema for governed software agents.
+    path: schemas/agent.schema.json
+    schemaId: https://opendataworld.org/foundation/schemas/agent.schema.json
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.schema.Policy.v1
+      - odw.schema.TrustAssessment.v1
+      - odw.foundation.model.identity
+      - odw.foundation.model.trust
+
+registryRules:
+  - Every schema record must have id, path, schemaId, version, lifecycleState, and license.
+  - Schema IDs must be stable and resolvable in published releases.
+  - Breaking schema changes must increment the major version.
+  - Schemas used in decisions, policies, or data products must remain queryable after supersession.
+  - Schema dependencies must reference canonical registry IDs where possible.
