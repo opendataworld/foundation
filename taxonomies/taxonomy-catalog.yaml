@@ -1,0 +1,344 @@
+version: 0.1.0
+status: draft
+namespace: odw.taxonomy
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical taxonomy catalog for grouping, organizing, discovering, and mapping OpenDataWorld data, analytics, governance, products, solutions, and agents.
+
+taxonomyFamilies:
+  - id: odw.taxonomy.family.industry
+    name: Industry
+    description: Industry-level grouping for organizations, data assets, products, and solutions.
+
+  - id: odw.taxonomy.family.sector
+    name: Sector
+    description: Sector-level grouping for public, private, nonprofit, research, and community contexts.
+
+  - id: odw.taxonomy.family.domain
+    name: Domain
+    description: Subject-matter grouping for data, analytics, and solutions.
+
+  - id: odw.taxonomy.family.subdomain
+    name: Subdomain
+    description: More specific grouping under a domain.
+
+  - id: odw.taxonomy.family.capability
+    name: Capability
+    description: Business, data, analytics, governance, or platform capability grouping.
+
+  - id: odw.taxonomy.family.function
+    name: Function
+    description: Organizational or operational function grouping.
+
+  - id: odw.taxonomy.family.process
+    name: Process
+    description: Process and workflow grouping.
+
+  - id: odw.taxonomy.family.role
+    name: Role
+    description: Human or system role grouping.
+
+  - id: odw.taxonomy.family.skill
+    name: Skill
+    description: Skill and competency grouping.
+
+  - id: odw.taxonomy.family.technology
+    name: Technology
+    description: Technology and platform grouping.
+
+  - id: odw.taxonomy.family.dataType
+    name: Data Type
+    description: Type of data represented or managed.
+
+  - id: odw.taxonomy.family.analyticsType
+    name: Analytics Type
+    description: Type of analytics, measurement, insight, or decision support.
+
+  - id: odw.taxonomy.family.agentType
+    name: Agent Type
+    description: Type of governed agent capability.
+
+  - id: odw.taxonomy.family.productCategory
+    name: Product Category
+    description: Product module grouping.
+
+  - id: odw.taxonomy.family.solutionCategory
+    name: Solution Category
+    description: Solution package grouping.
+
+  - id: odw.taxonomy.family.geography
+    name: Geography
+    description: Geographic grouping for regional, national, local, and cross-border use.
+
+taxonomies:
+  - id: odw.taxonomy.industry.healthcare
+    family: odw.taxonomy.family.industry
+    value: Healthcare
+    name: Healthcare
+    description: Healthcare, public health, care delivery, facilities, services, outcomes, and health system data.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.industry.education
+    family: odw.taxonomy.family.industry
+    value: Education
+    name: Education
+    description: Education, learning, training, skills, credentials, institutions, and workforce readiness data.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.industry.government
+    family: odw.taxonomy.family.industry
+    value: Government
+    name: Government
+    description: Government, public administration, civic services, open data, and public-sector operations.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.industry.finance
+    family: odw.taxonomy.family.industry
+    value: Finance
+    name: Finance
+    description: Finance, banking, insurance, markets, payments, risk, and financial inclusion data.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.industry.environment
+    family: odw.taxonomy.family.industry
+    value: Environment
+    name: Environment
+    description: Climate, environment, sustainability, natural resources, pollution, and resilience data.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.sector.public
+    family: odw.taxonomy.family.sector
+    value: PublicSector
+    name: Public Sector
+    description: Government and public institutions.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.sector.private
+    family: odw.taxonomy.family.sector
+    value: PrivateSector
+    name: Private Sector
+    description: Commercial organizations and enterprises.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.sector.nonprofit
+    family: odw.taxonomy.family.sector
+    value: Nonprofit
+    name: Nonprofit
+    description: Nonprofit, civil society, and community institutions.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.sector.research
+    family: odw.taxonomy.family.sector
+    value: Research
+    name: Research
+    description: Research institutions, labs, universities, and research communities.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.domain.healthFacilities
+    family: odw.taxonomy.family.domain
+    value: HealthFacilities
+    name: Health Facilities
+    description: Facilities, hospitals, clinics, care centers, capacity, services, and coverage data.
+    lifecycleState: Active
+    parent: odw.taxonomy.industry.healthcare
+
+  - id: odw.taxonomy.domain.openData
+    family: odw.taxonomy.family.domain
+    value: OpenData
+    name: Open Data
+    description: Public or open datasets, catalogs, portals, publication, access, and reuse.
+    lifecycleState: Active
+    parent: odw.taxonomy.industry.government
+
+  - id: odw.taxonomy.domain.skills
+    family: odw.taxonomy.family.domain
+    value: Skills
+    name: Skills
+    description: Skills, competencies, learning outcomes, credentials, and workforce capability data.
+    lifecycleState: Active
+    parent: odw.taxonomy.industry.education
+
+  - id: odw.taxonomy.capability.registry
+    family: odw.taxonomy.family.capability
+    value: Registry
+    name: Registry
+    description: Canonical records, lifecycle, official identities, and registry cards.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.capability.catalog
+    family: odw.taxonomy.family.capability
+    value: Catalog
+    name: Catalog
+    description: Discovery, browsing, filtering, search, and catalog pages.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.capability.governance
+    family: odw.taxonomy.family.capability
+    value: Governance
+    name: Governance
+    description: Policies, controls, approvals, audit, compliance, and accountability.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.capability.knowledgeGraph
+    family: odw.taxonomy.family.capability
+    value: KnowledgeGraph
+    name: Knowledge Graph
+    description: Connected graph of data, metadata, trust, provenance, lineage, decisions, outcomes, and agents.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.capability.decisionIntelligence
+    family: odw.taxonomy.family.capability
+    value: DecisionIntelligence
+    name: Decision Intelligence
+    description: Connecting data, evidence, insights, decisions, outcomes, value, learning, and improvement.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.dataType.structured
+    family: odw.taxonomy.family.dataType
+    value: StructuredData
+    name: Structured Data
+    description: Tabular or strongly structured data.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.dataType.unstructured
+    family: odw.taxonomy.family.dataType
+    value: UnstructuredData
+    name: Unstructured Data
+    description: Text, documents, images, audio, video, or other non-tabular data.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.dataType.stream
+    family: odw.taxonomy.family.dataType
+    value: StreamData
+    name: Stream Data
+    description: Event, telemetry, sensor, or continuously arriving data.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.analyticsType.descriptive
+    family: odw.taxonomy.family.analyticsType
+    value: DescriptiveAnalytics
+    name: Descriptive Analytics
+    description: Analytics describing what happened.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.analyticsType.diagnostic
+    family: odw.taxonomy.family.analyticsType
+    value: DiagnosticAnalytics
+    name: Diagnostic Analytics
+    description: Analytics explaining why something happened.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.analyticsType.predictive
+    family: odw.taxonomy.family.analyticsType
+    value: PredictiveAnalytics
+    name: Predictive Analytics
+    description: Analytics forecasting what may happen.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.analyticsType.prescriptive
+    family: odw.taxonomy.family.analyticsType
+    value: PrescriptiveAnalytics
+    name: Prescriptive Analytics
+    description: Analytics recommending what should be done.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.agentType.discovery
+    family: odw.taxonomy.family.agentType
+    value: DiscoveryAgent
+    name: Discovery Agent
+    description: Agent type for discovery of data, metadata, graph context, policies, and analytics.
+    lifecycleState: Active
+    mapsTo: odw.agent.type.discovery.v1
+
+  - id: odw.taxonomy.agentType.governance
+    family: odw.taxonomy.family.agentType
+    value: GovernanceAgent
+    name: Governance Agent
+    description: Agent type for governance review, policy mapping, control checks, and recommendations.
+    lifecycleState: Active
+    mapsTo: odw.agent.type.governance.v1
+
+  - id: odw.taxonomy.agentType.decisionSupport
+    family: odw.taxonomy.family.agentType
+    value: DecisionSupportAgent
+    name: Decision Support Agent
+    description: Agent type for decision brief preparation and evidence-based decision support.
+    lifecycleState: Active
+    mapsTo: odw.agent.type.decisionSupport.v1
+
+  - id: odw.taxonomy.productCategory.data
+    family: odw.taxonomy.family.productCategory
+    value: DataProductCategory
+    name: Data Product Category
+    description: Product modules related to data registry, catalog, quality, provenance, lineage, and publishing.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.productCategory.analytics
+    family: odw.taxonomy.family.productCategory
+    value: AnalyticsProductCategory
+    name: Analytics Product Category
+    description: Product modules related to metrics, insights, decision intelligence, and outcomes.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.productCategory.agent
+    family: odw.taxonomy.family.productCategory
+    value: AgentProductCategory
+    name: Agent Product Category
+    description: Product modules related to governed agents and agentic workflows.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.solutionCategory.openData
+    family: odw.taxonomy.family.solutionCategory
+    value: OpenDataSolution
+    name: Open Data Solution
+    description: Solution packages related to open data publication, portals, exchanges, and reuse.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.solutionCategory.enterpriseData
+    family: odw.taxonomy.family.solutionCategory
+    value: EnterpriseDataSolution
+    name: Enterprise Data Solution
+    description: Solution packages related to enterprise data marketplaces, catalogs, governance, and data products.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.solutionCategory.aiReadyData
+    family: odw.taxonomy.family.solutionCategory
+    value: AIReadyDataSolution
+    name: AI-Ready Data Solution
+    description: Solution packages related to AI-ready data, agentic data operations, and governed automation.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.geography.global
+    family: odw.taxonomy.family.geography
+    value: Global
+    name: Global
+    description: Global or multi-region scope.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.geography.national
+    family: odw.taxonomy.family.geography
+    value: National
+    name: National
+    description: Country or nation-level scope.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.geography.regional
+    family: odw.taxonomy.family.geography
+    value: Regional
+    name: Regional
+    description: State, province, region, or cross-jurisdictional scope.
+    lifecycleState: Active
+
+  - id: odw.taxonomy.geography.local
+    family: odw.taxonomy.family.geography
+    value: Local
+    name: Local
+    description: City, district, village, neighborhood, or local scope.
+    lifecycleState: Active
+
+catalogRules:
+  - Every taxonomy value must have id, family, value, name, description, and lifecycleState.
+  - Taxonomy values may map to registry records, classifications, schemas, products, solutions, or agent types.
+  - Domain-specific taxonomy extensions must map back to a canonical taxonomy family.
+  - Taxonomies organize and group; classifications govern state, sensitivity, access, quality, lifecycle, trust, and criticality.
+  - Taxonomy mappings should preserve version and provenance where used in published artifacts.
