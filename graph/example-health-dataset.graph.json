@@ -1,0 +1,349 @@
+{
+  "graphId": "odw:graph:example-health-dataset",
+  "name": "Example Health Dataset Graph",
+  "description": "Canonical example graph showing a public health facilities dataset flowing from source to publication, analytics, insight, decision, and outcome.",
+  "version": "0.1.0",
+  "status": "draft",
+  "createdAt": "2026-06-02T00:00:00Z",
+  "nodes": [
+    {
+      "id": "odw:org:health-ministry-example",
+      "type": "Organization",
+      "name": "Example Health Ministry",
+      "description": "Example public sector organization that owns and publishes health facility data.",
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "odw:team:data-stewards-example",
+      "type": "Team",
+      "name": "Example Data Stewardship Team",
+      "description": "Team responsible for metadata, classification, quality review, and lifecycle management.",
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "odw:person:public-health-planner-example",
+      "type": "Person",
+      "name": "Example Public Health Planner",
+      "description": "Example decision maker using data and insights for facility planning.",
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "odw:source:health-portal-example",
+      "type": "DataSource",
+      "name": "Example Health Facilities Portal",
+      "description": "Example government portal providing health facility records.",
+      "sourceType": "GovernmentPortal",
+      "owner": "odw:org:health-ministry-example",
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "odw:schema:health-facility-v1",
+      "type": "Schema",
+      "name": "Health Facility Schema v1",
+      "description": "Schema for public health facility records.",
+      "version": "1.0.0",
+      "lifecycleState": "Published"
+    },
+    {
+      "id": "odw:policy:open-data-access-v1",
+      "type": "Policy",
+      "name": "Open Data Access Policy v1",
+      "description": "Policy allowing public access to non-sensitive open data assets.",
+      "policyType": "AccessPolicy",
+      "version": "1.0.0",
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "odw:classification:healthcare-domain",
+      "type": "Classification",
+      "name": "Healthcare",
+      "description": "Healthcare domain classification.",
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "odw:classification:public-open-access",
+      "type": "Classification",
+      "name": "Public Open Access",
+      "description": "Public data sensitivity and open access classification.",
+      "dataSensitivity": "Public",
+      "dataAccessLevel": "OpenAccess",
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "odw:dataset:public-health-facilities-v1",
+      "type": "Dataset",
+      "name": "Public Health Facilities Dataset",
+      "description": "Example public dataset of health facilities with location and service availability metadata.",
+      "owner": "odw:org:health-ministry-example",
+      "steward": "odw:team:data-stewards-example",
+      "source": "odw:source:health-portal-example",
+      "schema": "odw:schema:health-facility-v1",
+      "classification": {
+        "domain": "Healthcare",
+        "dataSensitivity": "Public",
+        "dataAccessLevel": "OpenAccess",
+        "dataQualityTier": "Silver",
+        "dataLifecycleState": "Published",
+        "dataLicenseClass": "GovernmentOpenDataLicense",
+        "dataTrustLevel": "Verified"
+      },
+      "license": "GovernmentOpenDataLicense",
+      "accessPolicy": "odw:policy:open-data-access-v1",
+      "provenance": "odw:provenance:health-facilities-v1",
+      "lifecycleState": "Published",
+      "version": "1.0.0"
+    },
+    {
+      "id": "odw:provenance:health-facilities-v1",
+      "type": "ProvenanceRecord",
+      "name": "Health Facilities Dataset Provenance",
+      "description": "Provenance record for the public health facilities dataset.",
+      "subject": "odw:dataset:public-health-facilities-v1",
+      "source": "odw:source:health-portal-example",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "createdAt": "2026-06-02T00:00:00Z",
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "odw:lineage:health-facilities-to-dashboard-v1",
+      "type": "LineageRecord",
+      "name": "Health Facilities Dataset to Dashboard Lineage",
+      "description": "Lineage from source dataset to dashboard output.",
+      "sourceAsset": "odw:dataset:public-health-facilities-v1",
+      "targetAsset": "odw:dashboard:healthcare-access-v1",
+      "relationshipType": "feeds",
+      "executedAt": "2026-06-02T00:00:00Z",
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "odw:evidence:source-hash-health-facilities-v1",
+      "type": "Evidence",
+      "name": "Source File Hash Evidence",
+      "description": "Example checksum evidence for the source export used to publish the dataset.",
+      "source": "odw:source:health-portal-example",
+      "claim": "The dataset was generated from the referenced source export.",
+      "collectedAt": "2026-06-02T00:00:00Z",
+      "confidence": 0.95,
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "odw:trust:health-facilities-v1",
+      "type": "TrustAssessment",
+      "name": "Health Facilities Dataset Trust Assessment",
+      "description": "Example trust assessment for the public health facilities dataset.",
+      "subject": "odw:dataset:public-health-facilities-v1",
+      "trustContext": "Public discovery and analytics",
+      "trustScore": 0.82,
+      "trustLevel": "Verified",
+      "calculatedAt": "2026-06-02T00:00:00Z",
+      "validUntil": "2026-12-31T00:00:00Z",
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "odw:metric:facility-coverage-rate-v1",
+      "type": "Metric",
+      "name": "Facility Coverage Rate",
+      "description": "Example metric measuring facility availability by geography.",
+      "definition": "Number of active health facilities per defined population or geographic unit.",
+      "owner": "odw:org:health-ministry-example",
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "odw:dashboard:healthcare-access-v1",
+      "type": "Dashboard",
+      "name": "Healthcare Access Dashboard",
+      "description": "Example dashboard showing public health facility coverage.",
+      "owner": "odw:org:health-ministry-example",
+      "lifecycleState": "Published",
+      "version": "1.0.0"
+    },
+    {
+      "id": "odw:insight:facility-gap-v1",
+      "type": "Insight",
+      "name": "Facility Access Gap Insight",
+      "description": "Example insight identifying under-served regions based on facility coverage.",
+      "statement": "Some regions show lower facility coverage relative to population and geography.",
+      "evidence": ["odw:evidence:source-hash-health-facilities-v1"],
+      "confidence": 0.78,
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "odw:decision:facility-planning-v1",
+      "type": "Decision",
+      "name": "Facility Planning Decision",
+      "description": "Example planning decision informed by dataset, dashboard, and insight.",
+      "madeBy": "odw:person:public-health-planner-example",
+      "madeAt": "2026-06-02T00:00:00Z",
+      "selectedOption": "Prioritize review of under-served regions for facility planning.",
+      "evidence": ["odw:evidence:source-hash-health-facilities-v1"],
+      "lifecycleState": "Active"
+    },
+    {
+      "id": "odw:outcome:facility-planning-review-v1",
+      "type": "Outcome",
+      "name": "Facility Planning Review Outcome",
+      "description": "Example outcome representing a planning review triggered by data-informed decision.",
+      "measuredAt": "2026-06-02T00:00:00Z",
+      "lifecycleState": "Active"
+    }
+  ],
+  "edges": [
+    {
+      "id": "odw:edge:dataset-owned-by-org",
+      "type": "ownedBy",
+      "source": "odw:dataset:public-health-facilities-v1",
+      "target": "odw:org:health-ministry-example",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "provenance": "odw:provenance:health-facilities-v1"
+    },
+    {
+      "id": "odw:edge:dataset-stewarded-by-team",
+      "type": "stewardedBy",
+      "source": "odw:dataset:public-health-facilities-v1",
+      "target": "odw:team:data-stewards-example",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "provenance": "odw:provenance:health-facilities-v1"
+    },
+    {
+      "id": "odw:edge:source-produces-dataset",
+      "type": "produces",
+      "source": "odw:source:health-portal-example",
+      "target": "odw:dataset:public-health-facilities-v1",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "provenance": "odw:provenance:health-facilities-v1"
+    },
+    {
+      "id": "odw:edge:dataset-sourced-from-portal",
+      "type": "sourcedFrom",
+      "source": "odw:dataset:public-health-facilities-v1",
+      "target": "odw:source:health-portal-example",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "sourceVersion": "1.0.0",
+      "targetVersion": "2026-06-02",
+      "provenance": "odw:provenance:health-facilities-v1"
+    },
+    {
+      "id": "odw:edge:dataset-conforms-to-schema",
+      "type": "conformsTo",
+      "source": "odw:dataset:public-health-facilities-v1",
+      "target": "odw:schema:health-facility-v1",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "provenance": "odw:provenance:health-facilities-v1"
+    },
+    {
+      "id": "odw:edge:dataset-classified-healthcare",
+      "type": "classifiedAs",
+      "source": "odw:dataset:public-health-facilities-v1",
+      "target": "odw:classification:healthcare-domain",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "provenance": "odw:provenance:health-facilities-v1"
+    },
+    {
+      "id": "odw:edge:dataset-classified-public-open",
+      "type": "classifiedAs",
+      "source": "odw:dataset:public-health-facilities-v1",
+      "target": "odw:classification:public-open-access",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "provenance": "odw:provenance:health-facilities-v1"
+    },
+    {
+      "id": "odw:edge:dataset-governed-by-policy",
+      "type": "governedBy",
+      "source": "odw:dataset:public-health-facilities-v1",
+      "target": "odw:policy:open-data-access-v1",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "provenance": "odw:provenance:health-facilities-v1"
+    },
+    {
+      "id": "odw:edge:dataset-has-provenance",
+      "type": "hasProvenance",
+      "source": "odw:dataset:public-health-facilities-v1",
+      "target": "odw:provenance:health-facilities-v1",
+      "recordedAt": "2026-06-02T00:00:00Z"
+    },
+    {
+      "id": "odw:edge:dataset-has-lineage",
+      "type": "hasLineage",
+      "source": "odw:dataset:public-health-facilities-v1",
+      "target": "odw:lineage:health-facilities-to-dashboard-v1",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "provenance": "odw:provenance:health-facilities-v1"
+    },
+    {
+      "id": "odw:edge:dataset-has-trust",
+      "type": "hasTrustAssessment",
+      "source": "odw:dataset:public-health-facilities-v1",
+      "target": "odw:trust:health-facilities-v1",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "provenance": "odw:provenance:health-facilities-v1"
+    },
+    {
+      "id": "odw:edge:trust-has-evidence",
+      "type": "hasEvidence",
+      "source": "odw:trust:health-facilities-v1",
+      "target": "odw:evidence:source-hash-health-facilities-v1",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "provenance": "odw:provenance:health-facilities-v1"
+    },
+    {
+      "id": "odw:edge:dataset-feeds-dashboard",
+      "type": "feeds",
+      "source": "odw:dataset:public-health-facilities-v1",
+      "target": "odw:dashboard:healthcare-access-v1",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "sourceVersion": "1.0.0",
+      "targetVersion": "1.0.0",
+      "provenance": "odw:provenance:health-facilities-v1"
+    },
+    {
+      "id": "odw:edge:metric-based-on-dataset",
+      "type": "basedOn",
+      "source": "odw:metric:facility-coverage-rate-v1",
+      "target": "odw:dataset:public-health-facilities-v1",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "targetVersion": "1.0.0",
+      "provenance": "odw:provenance:health-facilities-v1"
+    },
+    {
+      "id": "odw:edge:dashboard-produces-insight",
+      "type": "produces",
+      "source": "odw:dashboard:healthcare-access-v1",
+      "target": "odw:insight:facility-gap-v1",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "provenance": "odw:provenance:health-facilities-v1"
+    },
+    {
+      "id": "odw:edge:insight-informs-decision",
+      "type": "informs",
+      "source": "odw:insight:facility-gap-v1",
+      "target": "odw:decision:facility-planning-v1",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "provenance": "odw:provenance:health-facilities-v1"
+    },
+    {
+      "id": "odw:edge:decision-based-on-dataset",
+      "type": "basedOn",
+      "source": "odw:decision:facility-planning-v1",
+      "target": "odw:dataset:public-health-facilities-v1",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "targetVersion": "1.0.0",
+      "provenance": "odw:provenance:health-facilities-v1"
+    },
+    {
+      "id": "odw:edge:decision-supported-by-evidence",
+      "type": "supports",
+      "source": "odw:evidence:source-hash-health-facilities-v1",
+      "target": "odw:decision:facility-planning-v1",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "provenance": "odw:provenance:health-facilities-v1"
+    },
+    {
+      "id": "odw:edge:decision-leads-to-outcome",
+      "type": "leadsTo",
+      "source": "odw:decision:facility-planning-v1",
+      "target": "odw:outcome:facility-planning-review-v1",
+      "recordedAt": "2026-06-02T00:00:00Z",
+      "provenance": "odw:provenance:health-facilities-v1"
+    }
+  ]
+}
