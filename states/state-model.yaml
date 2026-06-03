@@ -1,0 +1,313 @@
+version: 0.1.0
+status: draft
+namespace: odw.state
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical state model for OpenDataWorld object condition, lifecycle, current state, historical state, transitions, validity, evidence, policy, audit, and replay.
+
+coreIdea: >
+  State is the condition of a thing at a time within a context. State may change, but identity remains stable. Current state is a projection over historical state changes, events, transitions, versions, and evidence.
+
+abstraction: |
+  State = Subject + StateType + Value + Context + Time + Evidence + Transition
+
+classification:
+  primitive: true
+  reason: >
+    State is a root primitive because every governed object, journey, policy, trust assessment, decision, agent, registry record, graph relation, scan, computation, and publication depends on knowing what condition something is in, when, and why.
+
+statePrinciples:
+  - id: odw.state.principle.identityStableStateChanges
+    name: Identity Is Stable, State Changes
+    description: Object identity must remain stable while its state changes over time.
+
+  - id: odw.state.principle.currentStateProjection
+    name: Current State Is Projection
+    description: Current state should be reproducible from events, transitions, versions, or snapshots.
+
+  - id: odw.state.principle.temporal
+    name: State Is Temporal
+    description: State has observed, recorded, valid, effective, or transition time context.
+
+  - id: odw.state.principle.evidenceBacked
+    name: State Is Evidence Backed
+    description: Governed state changes should preserve reason, evidence, actor, policy, or event context.
+
+  - id: odw.state.principle.transitionGoverned
+    name: State Transitions Are Governed
+    description: Important state transitions may require policy checks, controls, approvals, and audit.
+
+  - id: odw.state.principle.appendOnlyHistory
+    name: State History Is Append Only
+    description: Prior state should not be destroyed by current-state updates.
+
+statePrimitives:
+  - id: odw.state.primitive.state
+    name: State
+    description: Condition or status of a subject at a point or interval in time.
+
+  - id: odw.state.primitive.stateType
+    name: State Type
+    description: Category of state, such as lifecycle, review, approval, trust, execution, publication, access, or health.
+
+  - id: odw.state.primitive.stateValue
+    name: State Value
+    description: Actual state value, such as Draft, Active, Published, Revoked, Approved, Failed, or Completed.
+
+  - id: odw.state.primitive.transition
+    name: Transition
+    description: Movement from one state to another.
+
+  - id: odw.state.primitive.transitionRule
+    name: Transition Rule
+    description: Condition that allows, blocks, or requires review before a state transition.
+
+  - id: odw.state.primitive.currentState
+    name: Current State
+    description: Latest projected state for a subject in a context.
+
+  - id: odw.state.primitive.historicalState
+    name: Historical State
+    description: Prior state preserved for audit, replay, or explanation.
+
+  - id: odw.state.primitive.terminalState
+    name: Terminal State
+    description: State after which no normal forward transition is expected.
+
+  - id: odw.state.primitive.rollback
+    name: Rollback
+    description: Governed transition back to a prior state while preserving history.
+
+stateFamilies:
+  - id: odw.state.family.lifecycle
+    name: Lifecycle State
+    description: Lifecycle state of governed objects.
+
+  - id: odw.state.family.review
+    name: Review State
+    description: Review status for artifacts requiring review.
+
+  - id: odw.state.family.approval
+    name: Approval State
+    description: Approval status for requests, publications, actions, exceptions, or decisions.
+
+  - id: odw.state.family.trust
+    name: Trust State
+    description: Trust level or certification state.
+
+  - id: odw.state.family.execution
+    name: Execution State
+    description: Runtime or job state for scans, journeys, workflows, agents, and computations.
+
+  - id: odw.state.family.publication
+    name: Publication State
+    description: Publication readiness and publication lifecycle state.
+
+  - id: odw.state.family.access
+    name: Access State
+    description: Access request, grant, denial, suspension, expiry, or revocation state.
+
+  - id: odw.state.family.health
+    name: Health State
+    description: Operational health state for systems, services, datasets, and agents.
+
+canonicalStateTypes:
+  - id: odw.state.type.lifecycle
+    family: odw.state.family.lifecycle
+    name: Lifecycle State
+    values:
+      - Draft
+      - Proposed
+      - Registered
+      - Active
+      - Published
+      - Deprecated
+      - Superseded
+      - Suspended
+      - Revoked
+      - Archived
+      - Retired
+      - Deleted
+
+  - id: odw.state.type.review
+    family: odw.state.family.review
+    name: Review State
+    values:
+      - NotReviewed
+      - PendingReview
+      - InReview
+      - Reviewed
+      - Approved
+      - Rejected
+      - ChangesRequested
+      - Revoked
+
+  - id: odw.state.type.approval
+    family: odw.state.family.approval
+    name: Approval State
+    values:
+      - NotRequired
+      - Required
+      - Requested
+      - Approved
+      - Rejected
+      - Expired
+      - Revoked
+
+  - id: odw.state.type.execution
+    family: odw.state.family.execution
+    name: Execution State
+    values:
+      - Planned
+      - Queued
+      - Running
+      - Waiting
+      - Completed
+      - Failed
+      - Cancelled
+      - Retried
+      - RolledBack
+
+  - id: odw.state.type.publication
+    family: odw.state.family.publication
+    name: Publication State
+    values:
+      - NotPublished
+      - ProposedForPublication
+      - PublicationBlocked
+      - PublicationApproved
+      - Published
+      - Unpublished
+      - Revoked
+      - Archived
+
+  - id: odw.state.type.access
+    family: odw.state.family.access
+    name: Access State
+    values:
+      - NotRequested
+      - Requested
+      - PendingApproval
+      - Granted
+      - Denied
+      - Suspended
+      - Expired
+      - Revoked
+
+  - id: odw.state.type.health
+    family: odw.state.family.health
+    name: Health State
+    values:
+      - Unknown
+      - Healthy
+      - Degraded
+      - Unavailable
+      - Recovering
+      - Failed
+
+canonicalFields:
+  state:
+    - id
+    - type
+    - subject
+    - subjectType
+    - stateType
+    - stateValue
+    - context
+    - reason
+    - evidence
+    - assertedBy
+    - observedAt
+    - recordedAt
+    - validFrom
+    - validTo
+    - lifecycleState
+    - version
+  transition:
+    - id
+    - subject
+    - fromState
+    - toState
+    - trigger
+    - actor
+    - reason
+    - policyDecision
+    - approval
+    - evidence
+    - eventTime
+    - recordedAt
+    - status
+    - traceId
+
+stateTransitionRules:
+  - id: odw.state.transition.draftToActive
+    name: Draft To Active
+    from: Draft
+    to: Active
+    requires:
+      - owner
+      - validation
+    description: Draft object may become active after minimum validation.
+
+  - id: odw.state.transition.activeToPublished
+    name: Active To Published
+    from: Active
+    to: Published
+    requires:
+      - publicationPolicy
+      - publicationControls
+      - approvalWhereRequired
+    description: Active object may become published only after publication readiness checks.
+
+  - id: odw.state.transition.anyToRevoked
+    name: Any To Revoked
+    from: Any
+    to: Revoked
+    requires:
+      - revocationReason
+      - revokedBy
+      - recordedAt
+    description: Any governed object may be revoked with reason and actor.
+
+  - id: odw.state.transition.publishedToDeprecated
+    name: Published To Deprecated
+    from: Published
+    to: Deprecated
+    requires:
+      - deprecationReason
+      - replacementWhereApplicable
+    description: Published object may be deprecated while preserving history and compatibility context.
+
+  - id: odw.state.transition.failedToRetried
+    name: Failed To Retried
+    from: Failed
+    to: Retried
+    requires:
+      - failureReason
+      - retryActor
+      - traceId
+    description: Failed execution may be retried while preserving failure state.
+
+stateRules:
+  - Every governed object must have a lifecycle state.
+  - Every state record must have subject, stateType, stateValue, recordedAt, lifecycleState, and version.
+  - Every state transition must have fromState, toState, trigger, actor, eventTime, and recordedAt.
+  - State changes used for policy, publication, trust, access, decisions, outcomes, agents, scans, or computations must preserve evidence or reason.
+  - Current state must be reproducible from transition records, events, versions, or snapshots.
+  - Terminal states must be explicitly defined where used.
+  - Revocation must preserve reason, actor, and time.
+  - Rollback must preserve both original transition and rollback transition.
+  - State values should map to classification lifecycle values where applicable.
+  - State must not be confused with identity; identity persists while state changes.
+
+relationshipToFoundation:
+  identity: State belongs to a subject identity or object identity and may be changed by an actor identity.
+  time: State is temporal and has observed, recorded, valid, event, and transition time.
+  location: State may be valid only within a spatial or jurisdictional scope.
+  relationship: Relationships may have state, and state changes may create or revoke relationships.
+  journey: Journey is a path through states and transitions.
+  policy: Policies constrain allowed state transitions.
+  control: Controls validate readiness for state changes.
+  scan: Scans observe state and may recommend transitions.
+  computation: Computations have execution state and produce output state changes.
+  audit: State transitions must be auditable when governed.
