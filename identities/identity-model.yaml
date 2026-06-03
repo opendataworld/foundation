@@ -1,0 +1,228 @@
+version: 0.1.0
+status: draft
+namespace: odw.identity
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical identity model for OpenDataWorld people, organizations, teams, roles, systems, services, agents, accounts, credentials, authority, ownership, and delegation.
+
+identityPrinciples:
+  - id: odw.identity.principle.stableIdentity
+    name: Stable Identity
+    description: Identity must remain stable even when state, role, relationship, account, credential, location, or ownership changes.
+
+  - id: odw.identity.principle.temporalState
+    name: Temporal State
+    description: Identity state is temporal and must preserve lifecycle history.
+
+  - id: odw.identity.principle.accountability
+    name: Accountability
+    description: Every governed action must be attributable to an identity.
+
+  - id: odw.identity.principle.delegation
+    name: Delegation
+    description: Authority may be delegated, but delegation must be explicit, scoped, temporal, and auditable.
+
+  - id: odw.identity.principle.noAnonymousGovernedAction
+    name: No Anonymous Governed Action
+    description: Governed actions on data, policy, trust, analytics, decisions, outcomes, or agents must not be anonymous.
+
+identityTypes:
+  - id: odw.identity.type.person
+    name: Person
+    description: Human individual with persistent identity independent of accounts, roles, employers, or systems.
+    graphNode: odw.graph.node.Person
+    lifecycleState: Active
+
+  - id: odw.identity.type.organization
+    name: Organization
+    description: Institution, company, agency, nonprofit, research body, community, or other legal or social entity.
+    graphNode: odw.graph.node.Organization
+    lifecycleState: Active
+
+  - id: odw.identity.type.team
+    name: Team
+    description: Group of people or roles with shared responsibility.
+    graphNode: odw.graph.node.Team
+    lifecycleState: Active
+
+  - id: odw.identity.type.role
+    name: Role
+    description: Function, responsibility, or authority assignment held by a person, team, system, or agent within a context.
+    lifecycleState: Active
+
+  - id: odw.identity.type.system
+    name: System
+    description: Technical system that produces, stores, transforms, exposes, or consumes data.
+    graphNode: odw.graph.node.System
+    lifecycleState: Active
+
+  - id: odw.identity.type.service
+    name: Service
+    description: Runtime service or API capability operating under an identity.
+    lifecycleState: Active
+
+  - id: odw.identity.type.agent
+    name: Agent
+    description: Governed autonomous or semi-autonomous software actor with owner, operator, purpose, policy, and audit context.
+    graphNode: odw.graph.node.Agent
+    schema: odw.schema.Agent.v1
+    lifecycleState: Active
+
+  - id: odw.identity.type.account
+    name: Account
+    description: System-specific account, login, or profile bound to one or more identities.
+    lifecycleState: Active
+
+  - id: odw.identity.type.credential
+    name: Credential
+    description: Verifiable or system-issued proof, secret, token, key, certificate, or assertion used to authenticate or authorize an identity.
+    lifecycleState: Active
+
+  - id: odw.identity.type.assetIdentity
+    name: Asset Identity
+    description: Identity assigned to a governed data asset, policy, schema, registry record, graph object, metric, decision, or agent artifact.
+    lifecycleState: Active
+
+relationshipTypes:
+  - id: odw.identity.relationship.owns
+    name: Owns
+    description: Accountable ownership relation from identity to governed object.
+    graphEdge: odw.graph.edge.ownedBy
+
+  - id: odw.identity.relationship.stewards
+    name: Stewards
+    description: Operational stewardship relation for data quality, metadata, classification, lifecycle, or governance.
+    graphEdge: odw.graph.edge.stewardedBy
+
+  - id: odw.identity.relationship.operates
+    name: Operates
+    description: Operational responsibility relation between identity and system, service, or agent.
+
+  - id: odw.identity.relationship.approves
+    name: Approves
+    description: Authority relation for approving access, publication, policy, decision, exception, or agent action.
+    graphEdge: odw.graph.edge.approvedBy
+
+  - id: odw.identity.relationship.delegates
+    name: Delegates
+    description: Scoped temporal transfer of authority from one identity to another.
+
+  - id: odw.identity.relationship.represents
+    name: Represents
+    description: Identity acts on behalf of another identity, organization, team, service, or legal entity.
+
+  - id: odw.identity.relationship.memberOf
+    name: Member Of
+    description: Membership relation between person and team, organization, or group.
+
+  - id: odw.identity.relationship.credentialedBy
+    name: Credentialed By
+    description: Credential issuance relation from authority to identity.
+
+authorityModel:
+  authorityTypes:
+    - id: odw.identity.authority.owner
+      name: Owner Authority
+      description: Authority of accountable owner over governed object.
+
+    - id: odw.identity.authority.steward
+      name: Steward Authority
+      description: Authority to maintain metadata, quality, classification, and lifecycle state.
+
+    - id: odw.identity.authority.approver
+      name: Approver Authority
+      description: Authority to approve access, publication, policy, decision, or exception.
+
+    - id: odw.identity.authority.operator
+      name: Operator Authority
+      description: Authority to operate systems, services, workflows, or agents.
+
+    - id: odw.identity.authority.publisher
+      name: Publisher Authority
+      description: Authority to publish artifacts to defined audiences.
+
+    - id: odw.identity.authority.auditor
+      name: Auditor Authority
+      description: Authority to review evidence, audit records, controls, and compliance posture.
+
+delegationModel:
+  requiredFields:
+    - delegator
+    - delegate
+    - authority
+    - scope
+    - validFrom
+    - validTo
+    - reason
+    - recordedAt
+  rules:
+    - Delegation must be explicit.
+    - Delegation must be scoped.
+    - Delegation must be temporal.
+    - Delegation must be auditable.
+    - Delegation must not exceed delegator authority.
+
+lifecycleStates:
+  - Draft
+  - Proposed
+  - Active
+  - Suspended
+  - Revoked
+  - Retired
+  - Archived
+
+canonicalFields:
+  identity:
+    - id
+    - type
+    - name
+    - description
+    - namespace
+    - lifecycleState
+    - createdAt
+    - updatedAt
+  account:
+    - accountId
+    - provider
+    - subject
+    - identity
+    - status
+    - createdAt
+    - updatedAt
+  credential:
+    - credentialId
+    - issuer
+    - subject
+    - credentialType
+    - issuedAt
+    - expiresAt
+    - status
+  relationship:
+    - source
+    - relationshipType
+    - target
+    - validFrom
+    - validTo
+    - recordedAt
+    - provenance
+
+identityRules:
+  - Every governed object must have identity.
+  - Every governed action must resolve to an actor identity.
+  - Every owner must resolve to an identity.
+  - Every steward must resolve to an identity.
+  - Every agent must have owner, operator, purpose, policy, lifecycle state, and audit context.
+  - Accounts are not identities; accounts are bindings to identities.
+  - Credentials are not identities; credentials are proofs or access instruments.
+  - Roles are contextual and temporal; person identity remains stable across role changes.
+  - Authority must be scoped and temporal.
+  - Delegated authority must be auditable.
+  - Revoked identities must not receive new access grants without reinstatement.
+  - Identity relationships must preserve time where used for decisions, approvals, or audits.
+
+relationshipToOtherPrimitives:
+  time: Identity is stable, but identity state, role, authority, credential, and delegation are temporal.
+  location: Identity may be scoped to jurisdiction, country, organization, or operating region.
+  graph: Identity nodes connect ownership, stewardship, approval, execution, and audit relationships.
+  policy: Policies evaluate subject identity, authority, role, purpose, resource, and context.
+  audit: Audit records must preserve actor identity and authority context at event time.
