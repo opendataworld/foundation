@@ -1,0 +1,203 @@
+version: 0.1.0
+status: draft
+namespace: odw.policies
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical policy catalog for OpenDataWorld governance, data publication, access, trust, analytics, decision, and agent workflows.
+
+policyFamilies:
+  - id: odw.policies.family.data
+    name: Data Policies
+    description: Policies for data ownership, stewardship, classification, schema, provenance, lineage, and lifecycle.
+
+  - id: odw.policies.family.publication
+    name: Publication Policies
+    description: Policies for publishing datasets, data products, insights, reports, dashboards, and public artifacts.
+
+  - id: odw.policies.family.access
+    name: Access Policies
+    description: Policies for access requests, access levels, approval, purpose, and usage context.
+
+  - id: odw.policies.family.trust
+    name: Trust Policies
+    description: Policies for trust assessments, evidence, review, certification, and revocation.
+
+  - id: odw.policies.family.analytics
+    name: Analytics Policies
+    description: Policies for metrics, insights, dashboards, decisions, outcomes, and value records.
+
+  - id: odw.policies.family.agent
+    name: Agent Policies
+    description: Policies for governed agent identity, tool use, data access, approvals, outputs, evaluation, and audit.
+
+policies:
+  - id: odw.policy.data.assetGovernance.v1
+    family: odw.policies.family.data
+    name: Data Asset Governance Policy
+    description: Defines minimum governance requirements for data assets.
+    policyType: DataGovernancePolicy
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Policy.v1
+    controls:
+      - odw.control.identity.everyGovernedObjectHasId.v1
+      - odw.control.data.ownerRequired.v1
+      - odw.control.data.stewardRequired.v1
+      - odw.control.data.classificationRequired.v1
+    appliesTo:
+      - DataAsset
+      - Dataset
+      - DataProduct
+
+  - id: odw.policy.data.datasetRegistration.v1
+    family: odw.policies.family.data
+    name: Dataset Registration Policy
+    description: Defines minimum requirements for registering datasets.
+    policyType: DataGovernancePolicy
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Policy.v1
+    controls:
+      - odw.control.data.ownerRequired.v1
+      - odw.control.data.stewardRequired.v1
+      - odw.control.data.datasetSourceRequired.v1
+      - odw.control.data.schemaRequired.v1
+    appliesTo:
+      - Dataset
+
+  - id: odw.policy.publication.datasetReadiness.v1
+    family: odw.policies.family.publication
+    name: Dataset Publication Readiness Policy
+    description: Defines readiness requirements before a dataset can be published.
+    policyType: PublicationPolicy
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Policy.v1
+    controls:
+      - odw.control.publication.datasetCompleteness.v1
+      - odw.control.publication.noUnknownSensitivity.v1
+      - odw.control.access.sensitiveNotOpen.v1
+      - odw.control.trust.evidenceRequired.v1
+    appliesTo:
+      - Dataset
+
+  - id: odw.policy.access.openData.v1
+    family: odw.policies.family.access
+    name: Open Data Access Policy
+    description: Defines access expectations for public/open datasets and data products.
+    policyType: AccessPolicy
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Policy.v1
+    controls:
+      - odw.control.publication.noUnknownSensitivity.v1
+      - odw.control.access.sensitiveNotOpen.v1
+    appliesTo:
+      - Dataset
+      - DataProduct
+
+  - id: odw.policy.trust.assessmentEvidence.v1
+    family: odw.policies.family.trust
+    name: Trust Assessment Evidence Policy
+    description: Defines evidence, review, and certification requirements for trust assessments.
+    policyType: TrustPolicy
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Policy.v1
+    controls:
+      - odw.control.trust.evidenceRequired.v1
+      - odw.control.trust.certifiedReviewerRequired.v1
+    appliesTo:
+      - TrustAssessment
+
+  - id: odw.policy.analytics.metricGovernance.v1
+    family: odw.policies.family.analytics
+    name: Metric Governance Policy
+    description: Defines minimum requirements for governed metric definitions.
+    policyType: AnalyticsPolicy
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Policy.v1
+    controls:
+      - odw.control.analytics.metricDefinitionRequired.v1
+    appliesTo:
+      - Metric
+
+  - id: odw.policy.analytics.insightGovernance.v1
+    family: odw.policies.family.analytics
+    name: Insight Governance Policy
+    description: Defines requirements for evidence-backed, confidence-scored, explainable insights.
+    policyType: AnalyticsPolicy
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Policy.v1
+    controls:
+      - odw.control.analytics.insightEvidenceRequired.v1
+    appliesTo:
+      - Insight
+
+  - id: odw.policy.decision.recordGovernance.v1
+    family: odw.policies.family.analytics
+    name: Decision Record Governance Policy
+    description: Defines requirements for data-informed, evidence-backed, auditable decision records.
+    policyType: DecisionPolicy
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Policy.v1
+    controls:
+      - odw.control.decision.dataVersionRequired.v1
+      - odw.control.decision.evidenceOrReasonRequired.v1
+      - odw.control.policy.versionRequired.v1
+    appliesTo:
+      - Decision
+
+  - id: odw.policy.outcome.measurement.v1
+    family: odw.policies.family.analytics
+    name: Outcome Measurement Policy
+    description: Defines requirements for outcome records and value-realization linkage.
+    policyType: OutcomePolicy
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Policy.v1
+    controls:
+      - odw.control.outcome.linkBackRequired.v1
+    appliesTo:
+      - Outcome
+
+  - id: odw.policy.agent.identityAndOperation.v1
+    family: odw.policies.family.agent
+    name: Agent Identity And Operation Policy
+    description: Defines minimum identity, ownership, operator, purpose, and policy requirements for governed agents.
+    policyType: AgentPolicy
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Policy.v1
+    controls:
+      - odw.control.agent.ownerOperatorRequired.v1
+      - odw.control.agent.policyRequired.v1
+    appliesTo:
+      - Agent
+
+  - id: odw.policy.agent.actionGovernance.v1
+    family: odw.policies.family.agent
+    name: Agent Action Governance Policy
+    description: Defines policy evaluation, audit, trace, and provenance requirements for governed agent actions.
+    policyType: AgentPolicy
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Policy.v1
+    controls:
+      - odw.control.agent.actionEvaluatedAndAudited.v1
+      - odw.control.agent.outputProvenanceRequired.v1
+    appliesTo:
+      - Agent
+      - AgentAction
+      - AgentOutput
+
+policyRules:
+  - Every policy must have id, family, name, description, policyType, lifecycleState, version, and appliesTo.
+  - Every policy should reference at least one control.
+  - Every policy should reference the canonical Policy schema.
+  - Policies should not redefine controls; policies group and apply controls to contexts.
+  - Active policies must have owner, approver, effective date, and version in implementation records.
+  - Policy exceptions must reference a policy, control, owner, approver, reason, expiry, and audit trail.
