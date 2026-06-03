@@ -1,0 +1,167 @@
+version: 0.1.0
+status: draft
+namespace: odw.brand
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical registry index for OpenDataWorld brand names, product names, solution names, taglines, domains, marks, logos, and brand usage records.
+
+records:
+  - id: odw.brand.name.openDataWorld.v1
+    type: BrandName
+    name: OpenDataWorld
+    description: Primary brand name for the OpenDataWorld ecosystem.
+    lifecycleState: Draft
+    version: 0.1.0
+    usageClass: PrimaryBrand
+
+  - id: odw.brand.name.foundation.v1
+    type: BrandName
+    name: OpenDataWorld Foundation
+    description: Brand name for the open foundation repository, models, schemas, graph specifications, registries, and reference architectures.
+    lifecycleState: Draft
+    version: 0.1.0
+    usageClass: FoundationBrand
+
+  - id: odw.brand.name.platform.v1
+    type: BrandName
+    name: OpenDataWorld Platform
+    description: Brand name for the runtime implementation of OpenDataWorld Foundation capabilities.
+    lifecycleState: Draft
+    version: 0.1.0
+    usageClass: PlatformBrand
+
+  - id: odw.brand.tagline.dataAnalyticsSolutionsForEveryone.v1
+    type: Tagline
+    name: Data and Analytics Solutions as a Service for Everyone
+    description: Canonical OpenDataWorld tagline and positioning statement.
+    lifecycleState: Draft
+    version: 0.1.0
+    usageClass: Positioning
+
+  - id: odw.brand.product.registry.v1
+    type: ProductName
+    name: OpenDataWorld Registry
+    description: Brand name for the registry product module.
+    lifecycleState: Draft
+    version: 0.1.0
+    productRef: odw.product.registry.v1
+
+  - id: odw.brand.product.catalog.v1
+    type: ProductName
+    name: OpenDataWorld Catalog
+    description: Brand name for the catalog product module.
+    lifecycleState: Draft
+    version: 0.1.0
+    productRef: odw.product.catalog.v1
+
+  - id: odw.brand.product.governance.v1
+    type: ProductName
+    name: OpenDataWorld Governance
+    description: Brand name for the governance product module.
+    lifecycleState: Draft
+    version: 0.1.0
+    productRef: odw.product.governance.v1
+
+  - id: odw.brand.product.knowledgeGraph.v1
+    type: ProductName
+    name: OpenDataWorld Knowledge Graph
+    description: Brand name for the knowledge graph product module.
+    lifecycleState: Draft
+    version: 0.1.0
+    productRef: odw.product.knowledgeGraph.v1
+
+  - id: odw.brand.product.analytics.v1
+    type: ProductName
+    name: OpenDataWorld Analytics
+    description: Brand name for the analytics product module.
+    lifecycleState: Draft
+    version: 0.1.0
+    productRef: odw.product.analytics.v1
+
+  - id: odw.brand.product.decisionIntelligence.v1
+    type: ProductName
+    name: OpenDataWorld Decision Intelligence
+    description: Brand name for the decision intelligence product module.
+    lifecycleState: Draft
+    version: 0.1.0
+    productRef: odw.product.decisionIntelligence.v1
+
+  - id: odw.brand.product.agenticWorkflows.v1
+    type: ProductName
+    name: OpenDataWorld Agentic Workflows
+    description: Brand name for the agentic workflows product module.
+    lifecycleState: Draft
+    version: 0.1.0
+    productRef: odw.product.agenticWorkflows.v1
+
+  - id: odw.brand.solution.openDataPortal.v1
+    type: SolutionName
+    name: Open Data Portal
+    description: Brand/solution name for open data portal solution package.
+    lifecycleState: Draft
+    version: 0.1.0
+    solutionRef: odw.solution.openDataPortal.v1
+
+  - id: odw.brand.solution.enterpriseDataMarketplace.v1
+    type: SolutionName
+    name: Enterprise Data Marketplace
+    description: Brand/solution name for enterprise data marketplace solution package.
+    lifecycleState: Draft
+    version: 0.1.0
+    solutionRef: odw.solution.enterpriseDataMarketplace.v1
+
+  - id: odw.brand.solution.decisionIntelligenceWorkspace.v1
+    type: SolutionName
+    name: Decision Intelligence Workspace
+    description: Brand/solution name for decision intelligence workspace solution package.
+    lifecycleState: Draft
+    version: 0.1.0
+    solutionRef: odw.solution.decisionIntelligenceWorkspace.v1
+
+  - id: odw.brand.solution.aiReadyDataFoundation.v1
+    type: SolutionName
+    name: AI-Ready Data Foundation
+    description: Brand/solution name for AI-ready data foundation solution package.
+    lifecycleState: Draft
+    version: 0.1.0
+    solutionRef: odw.solution.aiReadyDataFoundation.v1
+
+  - id: odw.brand.solution.agenticDataOperations.v1
+    type: SolutionName
+    name: Agentic Data Operations Platform
+    description: Brand/solution name for agentic data operations solution package.
+    lifecycleState: Draft
+    version: 0.1.0
+    solutionRef: odw.solution.agenticDataOperations.v1
+
+  - id: odw.brand.domain.openDataWorldOrg.v1
+    type: DomainName
+    name: opendataworld.org
+    description: Canonical public domain candidate for OpenDataWorld ecosystem.
+    lifecycleState: Draft
+    version: 0.1.0
+    usageClass: PublicDomain
+
+  - id: odw.brand.asset.logo.primary.v1
+    type: LogoAsset
+    name: OpenDataWorld Primary Logo
+    description: Placeholder registry record for primary OpenDataWorld logo asset.
+    lifecycleState: Draft
+    version: 0.1.0
+    expectedPath: brand/logo-primary.svg
+
+  - id: odw.brand.policy.usage.v1
+    type: BrandUsageRule
+    name: OpenDataWorld Brand Usage Policy
+    description: Policy record for acceptable use of OpenDataWorld names, logos, product names, solution names, taglines, and domains.
+    lifecycleState: Draft
+    version: 0.1.0
+    expectedPath: TRADEMARKS.md
+
+registryRules:
+  - Every brand registry record must declare lifecycleState and version.
+  - Product brand records should reference product registry records.
+  - Solution brand records should reference solution registry records.
+  - Brand names, logos, product names, solution names, taglines, and domains are governed by trademark and brand usage policy.
+  - Open content or open source licenses do not grant trademark rights unless explicitly stated.
+  - Community use should preserve attribution and avoid implying official endorsement without permission.
