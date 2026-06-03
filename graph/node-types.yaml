@@ -1,0 +1,417 @@
+version: 0.1.0
+status: draft
+namespace: https://opendataworld.org/ns#
+
+nodeTypes:
+  Person:
+    description: Human actor in the OpenDataWorld graph.
+    extends: Entity
+    required:
+      - id
+      - type
+      - name
+      - lifecycleState
+    allowedOutgoingEdges:
+      - owns
+      - stewards
+      - reviews
+      - approves
+      - accesses
+      - creates
+      - publishes
+      - executes
+    allowedIncomingEdges:
+      - memberOf
+      - reviewedBy
+      - approvedBy
+      - createdBy
+      - publishedBy
+
+  Organization:
+    description: Institution, company, agency, nonprofit, community, or other organization.
+    extends: Entity
+    required:
+      - id
+      - type
+      - name
+      - lifecycleState
+    allowedOutgoingEdges:
+      - owns
+      - operates
+      - publishes
+      - governs
+    allowedIncomingEdges:
+      - belongsTo
+      - operatedBy
+      - publishedBy
+
+  Team:
+    description: Group of people or roles with shared responsibility.
+    extends: Entity
+    required:
+      - id
+      - type
+      - name
+      - lifecycleState
+    allowedOutgoingEdges:
+      - stewards
+      - reviews
+      - approves
+      - operates
+    allowedIncomingEdges:
+      - memberOf
+      - stewardedBy
+
+  System:
+    description: Technical system that produces, stores, transforms, exposes, or consumes data.
+    extends: Entity
+    required:
+      - id
+      - type
+      - name
+      - lifecycleState
+    allowedOutgoingEdges:
+      - produces
+      - transforms
+      - serves
+      - records
+    allowedIncomingEdges:
+      - operatedBy
+      - sourcedFrom
+
+  Agent:
+    description: Governed autonomous or semi-autonomous software actor.
+    extends: Entity
+    required:
+      - id
+      - type
+      - name
+      - owner
+      - operator
+      - purpose
+      - lifecycleState
+    allowedOutgoingEdges:
+      - actsOn
+      - uses
+      - executes
+      - requests
+      - produces
+      - evaluatedBy
+    allowedIncomingEdges:
+      - operatedBy
+      - governedBy
+      - trustedBy
+
+  DataAsset:
+    description: Any governed object that contains, references, describes, produces, transforms, indexes, exposes, or represents data.
+    extends: Asset
+    required:
+      - id
+      - type
+      - name
+      - owner
+      - steward
+      - classification
+      - lifecycleState
+      - provenance
+    allowedOutgoingEdges:
+      - ownedBy
+      - stewardedBy
+      - classifiedAs
+      - governedBy
+      - hasProvenance
+      - hasLineage
+      - hasTrustAssessment
+      - describedBy
+      - dependsOn
+    allowedIncomingEdges:
+      - uses
+      - supports
+      - derivedFrom
+      - transformedInto
+
+  Dataset:
+    description: Governed collection of structured, semi-structured, or unstructured data.
+    extends: DataAsset
+    required:
+      - id
+      - type
+      - name
+      - owner
+      - steward
+      - source
+      - schema
+      - classification
+      - license
+      - accessPolicy
+      - provenance
+      - lifecycleState
+      - version
+    allowedOutgoingEdges:
+      - sourcedFrom
+      - conformsTo
+      - governedBy
+      - hasProvenance
+      - hasLineage
+      - hasTrustAssessment
+      - hasQualityProfile
+      - publishedIn
+      - supports
+      - feeds
+    allowedIncomingEdges:
+      - derivedFrom
+      - uses
+      - basedOn
+      - trains
+      - scores
+
+  DataProduct:
+    description: Packaged data asset with consumers, interfaces, quality expectations, access rules, and service expectations.
+    extends: DataAsset
+    required:
+      - id
+      - type
+      - name
+      - owner
+      - steward
+      - intendedConsumers
+      - accessPolicy
+      - lifecycleState
+    allowedOutgoingEdges:
+      - contains
+      - servedThrough
+      - governedBy
+      - hasTrustAssessment
+      - supports
+    allowedIncomingEdges:
+      - uses
+      - subscribesTo
+
+  DataSource:
+    description: Origin or immediate provider of data.
+    extends: Entity
+    required:
+      - id
+      - type
+      - name
+      - sourceType
+      - owner
+      - lifecycleState
+    allowedOutgoingEdges:
+      - produces
+      - feeds
+    allowedIncomingEdges:
+      - sourcedFrom
+      - operatedBy
+
+  Schema:
+    description: Formal structure, field, type, and validation definition.
+    extends: Asset
+    required:
+      - id
+      - type
+      - name
+      - version
+      - lifecycleState
+    allowedOutgoingEdges:
+      - defines
+      - validates
+      - mappedTo
+    allowedIncomingEdges:
+      - conformsTo
+
+  Policy:
+    description: Governed rule set that determines allowed, denied, required, or escalated behavior.
+    extends: Asset
+    required:
+      - id
+      - type
+      - name
+      - policyType
+      - version
+      - lifecycleState
+    allowedOutgoingEdges:
+      - appliesTo
+      - contains
+      - constrains
+    allowedIncomingEdges:
+      - governedBy
+      - evaluatedBy
+
+  AccessDecision:
+    description: Recorded policy decision for a subject action on a resource under context.
+    extends: Event
+    required:
+      - id
+      - type
+      - subject
+      - action
+      - resource
+      - policyVersion
+      - decision
+      - decidedAt
+    allowedOutgoingEdges:
+      - evaluatedBy
+      - appliesTo
+      - decidedFor
+      - hasEvidence
+    allowedIncomingEdges:
+      - allowedBy
+      - deniedBy
+      - requiresApprovalFrom
+
+  ProvenanceRecord:
+    description: Origin, custody, method, evidence, and history record.
+    extends: Evidence
+    required:
+      - id
+      - type
+      - subject
+      - source
+      - recordedAt
+    allowedOutgoingEdges:
+      - hasEvidence
+      - createdBy
+      - collectedBy
+      - publishedBy
+    allowedIncomingEdges:
+      - hasProvenance
+
+  LineageRecord:
+    description: Flow, dependency, transformation, and impact record across data assets.
+    extends: Evidence
+    required:
+      - id
+      - type
+      - sourceAsset
+      - targetAsset
+      - relationshipType
+      - executedAt
+    allowedOutgoingEdges:
+      - sourcedFrom
+      - transformedInto
+      - produced
+    allowedIncomingEdges:
+      - hasLineage
+
+  TrustAssessment:
+    description: Contextual, temporal, evidence-backed trust evaluation.
+    extends: Evidence
+    required:
+      - id
+      - type
+      - subject
+      - trustContext
+      - trustLevel
+      - calculatedAt
+    allowedOutgoingEdges:
+      - assesses
+      - basedOn
+      - hasEvidence
+      - reviewedBy
+    allowedIncomingEdges:
+      - hasTrustAssessment
+
+  Evidence:
+    description: Information supporting a claim, score, decision, validation, or audit finding.
+    extends: Thing
+    required:
+      - id
+      - type
+      - source
+      - collectedAt
+    allowedOutgoingEdges:
+      - supports
+      - references
+    allowedIncomingEdges:
+      - hasEvidence
+      - basedOn
+
+  Metric:
+    description: Defined measurement for analytics, quality, trust, performance, or value.
+    extends: Asset
+    required:
+      - id
+      - type
+      - name
+      - definition
+      - owner
+    allowedOutgoingEdges:
+      - measures
+      - basedOn
+      - supports
+    allowedIncomingEdges:
+      - measuredBy
+
+  Insight:
+    description: Evidence-backed interpretation or finding from data or analytics.
+    extends: Asset
+    required:
+      - id
+      - type
+      - name
+      - statement
+      - evidence
+      - confidence
+    allowedOutgoingEdges:
+      - basedOn
+      - supports
+      - informs
+      - recommends
+    allowedIncomingEdges:
+      - produces
+      - explains
+
+  Decision:
+    description: Selected course of action or judgment based on data, evidence, constraints, and context.
+    extends: Event
+    required:
+      - id
+      - type
+      - madeBy
+      - madeAt
+      - selectedOption
+      - evidence
+    allowedOutgoingEdges:
+      - basedOn
+      - supportedBy
+      - constrainedBy
+      - selected
+      - leadsTo
+      - produces
+    allowedIncomingEdges:
+      - informs
+      - supportsDecision
+
+  Outcome:
+    description: Result produced by an action, decision, workflow, system, or service.
+    extends: Event
+    required:
+      - id
+      - type
+      - name
+      - measuredAt
+    allowedOutgoingEdges:
+      - impacts
+      - generates
+      - improves
+    allowedIncomingEdges:
+      - produces
+      - leadsTo
+
+  Workflow:
+    description: Governed sequence or graph of actions, actors, policies, tools, and decisions.
+    extends: Asset
+    required:
+      - id
+      - type
+      - name
+      - owner
+      - lifecycleState
+    allowedOutgoingEdges:
+      - contains
+      - executes
+      - governedBy
+      - produces
+    allowedIncomingEdges:
+      - usedBy
