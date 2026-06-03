@@ -1,0 +1,191 @@
+version: 0.1.0
+status: draft
+namespace: odw.analytics
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical registry index for OpenDataWorld analytics, insights, decisions, outcomes, value, learning, and improvement records.
+
+records:
+  - id: odw.analytics.type.metric.v1
+    type: AnalyticsObjectType
+    name: Metric
+    description: Governed measurement definition used for analysis, reporting, insights, decisions, and outcomes.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Metric.v1
+    graphNode: odw.graph.node.Metric
+    dependsOn:
+      - odw.schema.Metric.v1
+      - odw.foundation.model.decisionIntelligence
+
+  - id: odw.analytics.type.kpi.v1
+    type: AnalyticsObjectType
+    name: KPI
+    description: Metric tied to a goal, target, threshold, or performance expectation.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.analytics.type.metric.v1
+      - odw.architecture.analytics.reference
+
+  - id: odw.analytics.type.report.v1
+    type: AnalyticsObjectType
+    name: Report
+    description: Governed analytical presentation asset for recurring or one-time reporting.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.analytics.type.metric.v1
+      - odw.schema.Dataset.v1
+
+  - id: odw.analytics.type.dashboard.v1
+    type: AnalyticsObjectType
+    name: Dashboard
+    description: Governed visual analytics asset based on data, metrics, and defined refresh context.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.analytics.type.metric.v1
+      - odw.schema.Dataset.v1
+
+  - id: odw.analytics.type.benchmark.v1
+    type: AnalyticsObjectType
+    name: Benchmark
+    description: Comparative analytical asset using governed metrics, populations, cohorts, or reference groups.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.analytics.type.metric.v1
+
+  - id: odw.analytics.type.forecast.v1
+    type: AnalyticsObjectType
+    name: Forecast
+    description: Analytical projection with assumptions, method, confidence, and limitations.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.analytics.type.metric.v1
+      - odw.schema.Insight.v1
+
+  - id: odw.analytics.type.insight.v1
+    type: AnalyticsObjectType
+    name: Insight
+    description: Governed evidence-backed interpretation, observation, trend, risk, opportunity, or recommendation.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Insight.v1
+    graphNode: odw.graph.node.Insight
+    dependsOn:
+      - odw.schema.Insight.v1
+      - odw.schema.Metric.v1
+      - odw.schema.TrustAssessment.v1
+
+  - id: odw.analytics.type.recommendation.v1
+    type: AnalyticsObjectType
+    name: Recommendation
+    description: Suggested action based on data, metrics, insights, evidence, constraints, and context.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.analytics.type.insight.v1
+      - odw.foundation.model.decisionIntelligence
+
+  - id: odw.analytics.type.decision.v1
+    type: AnalyticsObjectType
+    name: Decision
+    description: Data-informed, evidence-backed decision record with assumptions, constraints, alternatives, selected option, rationale, and outcome linkage.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Decision.v1
+    graphNode: odw.graph.node.Decision
+    dependsOn:
+      - odw.schema.Decision.v1
+      - odw.schema.Insight.v1
+      - odw.foundation.model.decisionIntelligence
+
+  - id: odw.analytics.type.outcome.v1
+    type: AnalyticsObjectType
+    name: Outcome
+    description: Result produced by a decision, action, workflow, service, or program.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Outcome.v1
+    graphNode: odw.graph.node.Outcome
+    dependsOn:
+      - odw.schema.Outcome.v1
+      - odw.schema.Decision.v1
+      - odw.foundation.model.decisionIntelligence
+
+  - id: odw.analytics.type.value.v1
+    type: AnalyticsObjectType
+    name: Value
+    description: Value realized through outcomes, including public, operational, financial, research, social, compliance, risk, time, quality, or decision value.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.analytics.type.outcome.v1
+      - odw.foundation.model.decisionIntelligence
+
+  - id: odw.analytics.type.learning.v1
+    type: AnalyticsObjectType
+    name: Learning
+    description: Lesson captured from outcomes and value realization to improve future data, policies, metrics, workflows, services, and decisions.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.analytics.type.outcome.v1
+      - odw.analytics.type.value.v1
+
+  - id: odw.analytics.type.improvementAction.v1
+    type: AnalyticsObjectType
+    name: Improvement Action
+    description: Action proposed or taken to improve data, analytics, governance, services, workflows, or future decisions.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.analytics.type.learning.v1
+
+  - id: odw.analytics.example.facilityCoverageMetric.v1
+    type: ExampleAnalyticsRecord
+    name: Facility Coverage Rate Metric Example
+    description: Example metric from the health dataset graph.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Metric.v1
+    graphExample: odw.graph.example.healthDataset.v1
+
+  - id: odw.analytics.example.facilityGapInsight.v1
+    type: ExampleAnalyticsRecord
+    name: Facility Access Gap Insight Example
+    description: Example insight from the health dataset graph.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Insight.v1
+    graphExample: odw.graph.example.healthDataset.v1
+
+  - id: odw.analytics.example.facilityPlanningDecision.v1
+    type: ExampleAnalyticsRecord
+    name: Facility Planning Decision Example
+    description: Example decision from the health dataset graph.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Decision.v1
+    graphExample: odw.graph.example.healthDataset.v1
+
+  - id: odw.analytics.example.facilityPlanningOutcome.v1
+    type: ExampleAnalyticsRecord
+    name: Facility Planning Outcome Example
+    description: Example outcome from the health dataset graph.
+    lifecycleState: Draft
+    version: 0.1.0
+    schema: odw.schema.Outcome.v1
+    graphExample: odw.graph.example.healthDataset.v1
+
+registryRules:
+  - Every analytics registry record must declare lifecycleState and version.
+  - Every metric should reference governed data assets or data products.
+  - Every insight should reference evidence, confidence, explanation, and review status.
+  - Every decision should preserve data, evidence, assumptions, constraints, alternatives, selected option, rationale, and outcome linkage.
+  - Every outcome should link back to a decision, action, workflow, service, or program where possible.
+  - Every value record should be evidence-backed or marked as estimated.
+  - Every learning record should reference an outcome or value record where possible.
