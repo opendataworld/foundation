@@ -1,0 +1,254 @@
+version: 0.1.0
+status: draft
+namespace: odw.versioning
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical model for simulation, draft, copy, versions, snapshots, branches, variants, proposals, baselines, and replay across OpenDataWorld governed objects.
+
+coreIdea: >
+  Governed systems need safe change. Drafts allow work before activation. Copies allow reuse without mutating originals. Versions preserve history. Simulations allow testing possible futures without changing current truth.
+
+abstraction: |
+  Versioning = Identity + State + Time + Copy + Draft + Snapshot + Branch + ChangeSet + Simulation
+
+classification:
+  primitive: false
+  composition: true
+  composedFrom:
+    - Identity
+    - Time
+    - State
+    - Relationship
+    - Policy
+    - Evidence
+    - Audit
+
+versioningPrinciples:
+  - id: odw.versioning.principle.identityStable
+    name: Identity Is Stable
+    description: Canonical identity remains stable across versions, drafts, copies, branches, and simulations.
+
+  - id: odw.versioning.principle.appendOnlyHistory
+    name: Append-Only History
+    description: Prior versions should not be destroyed by new versions.
+
+  - id: odw.versioning.principle.draftBeforeActivation
+    name: Draft Before Activation
+    description: Significant changes should begin as drafts before becoming active or published.
+
+  - id: odw.versioning.principle.copyDoesNotMutateOriginal
+    name: Copy Does Not Mutate Original
+    description: A copy creates a new object or branch without silently changing the source.
+
+  - id: odw.versioning.principle.simulationIsNotTruth
+    name: Simulation Is Not Truth
+    description: Simulation output must not replace actual current state unless promoted through governed decision and approval.
+
+  - id: odw.versioning.principle.replayable
+    name: Replayable
+    description: Important versions, changes, and simulations should be replayable from inputs, parameters, and context.
+
+objects:
+  - id: odw.versioning.object.version
+    name: Version
+    description: Immutable or traceable state of a governed object at a point in its change history.
+
+  - id: odw.versioning.object.draft
+    name: Draft
+    description: Work-in-progress proposed state that is not yet active, approved, or published.
+
+  - id: odw.versioning.object.copy
+    name: Copy
+    description: New object or branch derived from an existing object.
+
+  - id: odw.versioning.object.snapshot
+    name: Snapshot
+    description: Captured state of an object, graph, registry, dataset, policy, or system at a specific time.
+
+  - id: odw.versioning.object.branch
+    name: Branch
+    description: Divergent line of change from a baseline version.
+
+  - id: odw.versioning.object.variant
+    name: Variant
+    description: Alternative form of an object for a different context, geography, audience, scenario, or use case.
+
+  - id: odw.versioning.object.changeSet
+    name: Change Set
+    description: Group of proposed or applied changes.
+
+  - id: odw.versioning.object.baseline
+    name: Baseline
+    description: Reference version used for comparison, simulation, validation, or release.
+
+  - id: odw.versioning.object.simulation
+    name: Simulation
+    description: Controlled execution of a hypothetical scenario against a model, graph, dataset, policy, journey, decision, agent, or system state.
+
+  - id: odw.versioning.object.scenario
+    name: Scenario
+    description: Assumptions, inputs, parameters, and conditions used for simulation.
+
+canonicalFields:
+  versionedObject:
+    - id
+    - canonicalId
+    - type
+    - version
+    - parentVersion
+    - baseVersion
+    - lifecycleState
+    - createdAt
+    - updatedAt
+    - createdBy
+    - changeReason
+    - provenance
+  draft:
+    - id
+    - sourceObject
+    - baseVersion
+    - proposedVersion
+    - author
+    - purpose
+    - changes
+    - reviewStatus
+    - createdAt
+    - updatedAt
+    - expiresAt
+    - status
+  copy:
+    - id
+    - sourceObject
+    - sourceVersion
+    - targetObject
+    - copyType
+    - copiedBy
+    - copiedAt
+    - retainedLinks
+    - detachedLinks
+    - reason
+  snapshot:
+    - id
+    - subject
+    - subjectType
+    - snapshotTime
+    - capturedBy
+    - contentHash
+    - storageReference
+    - provenance
+  changeSet:
+    - id
+    - subject
+    - baseVersion
+    - changes
+    - author
+    - reason
+    - createdAt
+    - reviewStatus
+    - approval
+  simulation:
+    - id
+    - name
+    - description
+    - subject
+    - subjectType
+    - baseline
+    - scenario
+    - assumptions
+    - parameters
+    - model
+    - inputVersions
+    - startedAt
+    - completedAt
+    - executedBy
+    - result
+    - confidence
+    - limitations
+    - evidence
+    - status
+
+copyTypes:
+  - id: odw.versioning.copy.clone
+    name: Clone
+    description: Copy intended to preserve most source structure and values.
+
+  - id: odw.versioning.copy.fork
+    name: Fork
+    description: Copy that creates an independent line of change.
+
+  - id: odw.versioning.copy.template
+    name: Template Copy
+    description: Copy created from a template for reuse.
+
+  - id: odw.versioning.copy.snapshotCopy
+    name: Snapshot Copy
+    description: Copy made from a frozen point-in-time snapshot.
+
+  - id: odw.versioning.copy.redactedCopy
+    name: Redacted Copy
+    description: Copy with restricted, sensitive, or unnecessary information removed.
+
+  - id: odw.versioning.copy.derivedCopy
+    name: Derived Copy
+    description: Copy produced by transformation, computation, or adaptation.
+
+simulationTypes:
+  - id: odw.versioning.simulation.whatIf
+    name: What-If Simulation
+    description: Explore possible outcomes under changed assumptions or inputs.
+
+  - id: odw.versioning.simulation.policyImpact
+    name: Policy Impact Simulation
+    description: Simulate how policy changes affect access, publication, decisions, or controls.
+
+  - id: odw.versioning.simulation.dataQualityImpact
+    name: Data Quality Impact Simulation
+    description: Simulate impact of data quality changes on metrics, insights, and decisions.
+
+  - id: odw.versioning.simulation.agentDryRun
+    name: Agent Dry Run
+    description: Simulate agent plan or tool use without executing real-world mutation.
+
+  - id: odw.versioning.simulation.journeySimulation
+    name: Journey Simulation
+    description: Simulate a journey path, state transition, approval path, or outcome.
+
+  - id: odw.versioning.simulation.computationDryRun
+    name: Computation Dry Run
+    description: Simulate computation execution plan, cost, output schema, or lineage before execution.
+
+lifecycleStates:
+  - Draft
+  - Proposed
+  - InReview
+  - Approved
+  - Active
+  - Published
+  - Superseded
+  - Deprecated
+  - Archived
+  - Revoked
+
+rules:
+  - Every versioned object must have canonicalId, version, lifecycleState, createdAt, and updatedAt.
+  - Every draft must reference source object or declare that it is a new object draft.
+  - Drafts must not be treated as active truth until approved or promoted.
+  - Copies must preserve sourceObject, sourceVersion, copiedBy, and copiedAt.
+  - Copies must declare whether relationships are retained, detached, or remapped.
+  - Simulations must declare baseline, scenario, assumptions, parameters, model, input versions, and execution identity.
+  - Simulation results must be marked simulated and must not overwrite actual state without governed promotion.
+  - Snapshots must preserve snapshotTime and subject reference.
+  - Change sets must preserve baseVersion, author, reason, and review status.
+  - Version history must be queryable after supersession or archival.
+  - Promotion from draft, copy, or simulation to active state must pass applicable policies and controls.
+
+relationshipToFoundation:
+  identity: Versions, drafts, copies, and simulations must preserve author, owner, copiedBy, executedBy, and approver identities.
+  time: Versioning depends on createdAt, updatedAt, snapshotTime, copiedAt, startedAt, completedAt, and effective time.
+  state: Draft, Active, Published, Superseded, Archived, and Revoked are state values over time.
+  relationship: Copies and versions preserve derivation, parent, fork, baseline, and supersession relationships.
+  policy: Policy governs promotion, publication, copying, simulation, and retention.
+  control: Controls validate readiness before promotion or publication.
+  scan: Scans can compare versions, inspect drafts, and validate copies or simulations.
+  computation: Computations produce derived versions and may run dry simulations.
+  audit: Every significant version, copy, promotion, or simulation must be audit-recorded.
