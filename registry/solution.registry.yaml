@@ -1,0 +1,166 @@
+version: 0.1.0
+status: draft
+namespace: odw.solution
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical registry index for OpenDataWorld solution packages that combine products, models, schemas, graph, governance, analytics, and agents into reusable real-world offerings.
+
+records:
+  - id: odw.solution.openDataPortal.v1
+    type: Solution
+    name: Open Data Portal
+    description: Solution package for publishing, discovering, governing, and consuming open datasets and data products.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.product.catalog.v1
+      - odw.product.publishing.v1
+      - odw.product.governance.v1
+      - odw.product.registry.v1
+
+  - id: odw.solution.publicDataExchange.v1
+    type: Solution
+    name: Public Data Exchange
+    description: Solution package for structured exchange of governed public data across institutions, publishers, developers, researchers, and consumers.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.product.registry.v1
+      - odw.product.catalog.v1
+      - odw.product.trust.v1
+      - odw.product.lineage.v1
+
+  - id: odw.solution.enterpriseDataMarketplace.v1
+    type: Solution
+    name: Enterprise Data Marketplace
+    description: Solution package for internal and partner-facing governed data discovery, access, subscription, reuse, and accountability.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.product.catalog.v1
+      - odw.product.governance.v1
+      - odw.product.trust.v1
+      - odw.product.decisionIntelligence.v1
+
+  - id: odw.solution.datasetCatalog.v1
+    type: Solution
+    name: Dataset Catalog
+    description: Solution package for registering, classifying, searching, and publishing datasets with ownership, stewardship, quality, provenance, and lineage context.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.product.catalog.v1
+      - odw.product.registry.v1
+      - odw.data.type.dataset.v1
+
+  - id: odw.solution.dataProductPlatform.v1
+    type: Solution
+    name: Data Product Platform
+    description: Solution package for packaging governed datasets into reusable data products with consumers, interfaces, SLOs, quality expectations, access policy, and support model.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.product.registry.v1
+      - odw.product.catalog.v1
+      - odw.data.type.dataProduct.v1
+      - odw.schema.DataProduct.v1
+
+  - id: odw.solution.governanceWorkbench.v1
+    type: Solution
+    name: Governance Workbench
+    description: Solution package for ownership, stewardship, classification, policy, approval, audit, exception, and publication readiness workflows.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.product.governance.v1
+      - odw.governance.policy.publicationReadiness.v1
+      - odw.governance.control.publishedDatasetCompleteness.v1
+
+  - id: odw.solution.qualityTrustHub.v1
+    type: Solution
+    name: Quality and Trust Hub
+    description: Solution package for quality profiles, trust assessments, evidence, known issues, review status, and trust monitoring.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.product.quality.v1
+      - odw.product.trust.v1
+      - odw.schema.TrustAssessment.v1
+
+  - id: odw.solution.knowledgeGraphExplorer.v1
+    type: Solution
+    name: Knowledge Graph Explorer
+    description: Solution package for exploring data, metadata, governance, trust, provenance, lineage, analytics, decisions, outcomes, and agents as a connected graph.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.product.knowledgeGraph.v1
+      - odw.graph.nodeTypes.v1
+      - odw.graph.edgeTypes.v1
+
+  - id: odw.solution.analyticsPortal.v1
+    type: Solution
+    name: Analytics Portal
+    description: Solution package for metrics, KPIs, reports, dashboards, benchmarks, forecasts, insights, and governed analytical assets.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.product.analytics.v1
+      - odw.product.insights.v1
+      - odw.analytics.type.metric.v1
+      - odw.analytics.type.insight.v1
+
+  - id: odw.solution.decisionIntelligenceWorkspace.v1
+    type: Solution
+    name: Decision Intelligence Workspace
+    description: Solution package for connecting data, trust, metrics, insights, evidence, assumptions, constraints, alternatives, decisions, actions, outcomes, value, learning, and improvement.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.product.decisionIntelligence.v1
+      - odw.schema.Decision.v1
+      - odw.schema.Outcome.v1
+      - odw.foundation.model.decisionIntelligence
+
+  - id: odw.solution.researchDataRepository.v1
+    type: Solution
+    name: Research Data Repository
+    description: Solution package for registering, documenting, publishing, citing, governing, and reusing research datasets and related analytical artifacts.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.product.catalog.v1
+      - odw.product.publishing.v1
+      - odw.product.trust.v1
+      - odw.product.lineage.v1
+
+  - id: odw.solution.aiReadyDataFoundation.v1
+    type: Solution
+    name: AI-Ready Data Foundation
+    description: Solution package for preparing governed, trusted, provenance-backed, lineage-aware, policy-bound data assets for AI and agentic workflows.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.product.registry.v1
+      - odw.product.trust.v1
+      - odw.product.lineage.v1
+      - odw.product.agenticWorkflows.v1
+
+  - id: odw.solution.agenticDataOperations.v1
+    type: Solution
+    name: Agentic Data Operations Platform
+    description: Solution package for governed agents supporting discovery, metadata enrichment, classification, schema mapping, quality, lineage, analytics, insights, publishing, governance, and decision support.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.product.agenticWorkflows.v1
+      - odw.agent.type.discovery.v1
+      - odw.agent.type.governance.v1
+      - odw.agent.type.decisionSupport.v1
+
+registryRules:
+  - Every solution record must declare lifecycleState and version.
+  - Every solution should depend on one or more product records.
+  - Solutions package capabilities for users and institutions; they must not redefine canonical foundation models.
+  - Solution implementation details belong in solution or platform repositories, not the Foundation registry.
+  - Domain-specific solutions may extend this registry under domain namespaces such as odw.solution.healthcare.*, odw.solution.education.*, or odw.solution.publicSector.*.
