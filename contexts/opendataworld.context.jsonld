@@ -1,0 +1,249 @@
+{
+  "@context": {
+    "odw": "https://opendataworld.org/ns#",
+    "schema": "https://schema.org/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "id": "@id",
+    "type": "@type",
+    "name": "schema:name",
+    "description": "schema:description",
+    "createdAt": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updatedAt": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "version": "schema:version",
+    "license": "schema:license",
+
+    "Thing": "schema:Thing",
+    "Person": "schema:Person",
+    "Organization": "schema:Organization",
+    "Dataset": "schema:Dataset",
+    "DataCatalog": "dcat:Catalog",
+    "DataSource": "odw:DataSource",
+    "DataAsset": "odw:DataAsset",
+    "DataProduct": "odw:DataProduct",
+    "DataElement": "odw:DataElement",
+    "Schema": "odw:Schema",
+    "Policy": "odw:Policy",
+    "Rule": "odw:Rule",
+    "Agent": "odw:Agent",
+    "Workflow": "odw:Workflow",
+    "Metric": "odw:Metric",
+    "Insight": "odw:Insight",
+    "Decision": "odw:Decision",
+    "Outcome": "odw:Outcome",
+    "Evidence": "odw:Evidence",
+    "TrustAssessment": "odw:TrustAssessment",
+    "ProvenanceRecord": "odw:ProvenanceRecord",
+    "LineageRecord": "odw:LineageRecord",
+    "AccessDecision": "odw:AccessDecision",
+    "Classification": "odw:Classification",
+    "TaxonomyClass": "odw:TaxonomyClass",
+    "OntologyClass": "odw:OntologyClass",
+
+    "owner": {
+      "@id": "odw:owner",
+      "@type": "@id"
+    },
+    "steward": {
+      "@id": "odw:steward",
+      "@type": "@id"
+    },
+    "source": {
+      "@id": "odw:source",
+      "@type": "@id"
+    },
+    "schema": {
+      "@id": "odw:schema",
+      "@type": "@id"
+    },
+    "classification": "odw:classification",
+    "accessPolicy": {
+      "@id": "odw:accessPolicy",
+      "@type": "@id"
+    },
+    "provenance": {
+      "@id": "odw:provenance",
+      "@type": "@id"
+    },
+    "lineage": {
+      "@id": "odw:lineage",
+      "@type": "@id"
+    },
+    "trustAssessment": {
+      "@id": "odw:trustAssessment",
+      "@type": "@id"
+    },
+    "lifecycleState": "odw:lifecycleState",
+    "dataSensitivity": "odw:dataSensitivity",
+    "dataAccessLevel": "odw:dataAccessLevel",
+    "dataQualityTier": "odw:dataQualityTier",
+    "dataLifecycleState": "odw:dataLifecycleState",
+    "dataLicenseClass": "odw:dataLicenseClass",
+    "dataTrustLevel": "odw:dataTrustLevel",
+    "dataCriticality": "odw:dataCriticality",
+
+    "ownedBy": {
+      "@id": "odw:ownedBy",
+      "@type": "@id"
+    },
+    "stewardedBy": {
+      "@id": "odw:stewardedBy",
+      "@type": "@id"
+    },
+    "sourcedFrom": {
+      "@id": "odw:sourcedFrom",
+      "@type": "@id"
+    },
+    "conformsTo": {
+      "@id": "dcterms:conformsTo",
+      "@type": "@id"
+    },
+    "classifiedAs": {
+      "@id": "odw:classifiedAs",
+      "@type": "@id"
+    },
+    "governedBy": {
+      "@id": "odw:governedBy",
+      "@type": "@id"
+    },
+    "hasProvenance": {
+      "@id": "odw:hasProvenance",
+      "@type": "@id"
+    },
+    "hasLineage": {
+      "@id": "odw:hasLineage",
+      "@type": "@id"
+    },
+    "hasTrustAssessment": {
+      "@id": "odw:hasTrustAssessment",
+      "@type": "@id"
+    },
+    "hasEvidence": {
+      "@id": "odw:hasEvidence",
+      "@type": "@id"
+    },
+    "derivedFrom": {
+      "@id": "prov:wasDerivedFrom",
+      "@type": "@id"
+    },
+    "generatedBy": {
+      "@id": "prov:wasGeneratedBy",
+      "@type": "@id"
+    },
+    "usedBy": {
+      "@id": "odw:usedBy",
+      "@type": "@id"
+    },
+    "basedOn": {
+      "@id": "odw:basedOn",
+      "@type": "@id"
+    },
+    "feeds": {
+      "@id": "odw:feeds",
+      "@type": "@id"
+    },
+    "supports": {
+      "@id": "odw:supports",
+      "@type": "@id"
+    },
+    "informs": {
+      "@id": "odw:informs",
+      "@type": "@id"
+    },
+    "leadsTo": {
+      "@id": "odw:leadsTo",
+      "@type": "@id"
+    },
+    "impacts": {
+      "@id": "odw:impacts",
+      "@type": "@id"
+    },
+    "accesses": {
+      "@id": "odw:accesses",
+      "@type": "@id"
+    },
+    "evaluatedBy": {
+      "@id": "odw:evaluatedBy",
+      "@type": "@id"
+    },
+    "approvedBy": {
+      "@id": "odw:approvedBy",
+      "@type": "@id"
+    },
+    "recordedBy": {
+      "@id": "odw:recordedBy",
+      "@type": "@id"
+    },
+
+    "recordedAt": {
+      "@id": "odw:recordedAt",
+      "@type": "xsd:dateTime"
+    },
+    "validFrom": {
+      "@id": "odw:validFrom",
+      "@type": "xsd:dateTime"
+    },
+    "validTo": {
+      "@id": "odw:validTo",
+      "@type": "xsd:dateTime"
+    },
+    "calculatedAt": {
+      "@id": "odw:calculatedAt",
+      "@type": "xsd:dateTime"
+    },
+    "validUntil": {
+      "@id": "odw:validUntil",
+      "@type": "xsd:dateTime"
+    },
+    "madeAt": {
+      "@id": "odw:madeAt",
+      "@type": "xsd:dateTime"
+    },
+    "decidedAt": {
+      "@id": "odw:decidedAt",
+      "@type": "xsd:dateTime"
+    },
+    "measuredAt": {
+      "@id": "odw:measuredAt",
+      "@type": "xsd:dateTime"
+    },
+    "collectedAt": {
+      "@id": "odw:collectedAt",
+      "@type": "xsd:dateTime"
+    },
+
+    "trustScore": "odw:trustScore",
+    "trustLevel": "odw:trustLevel",
+    "trustContext": "odw:trustContext",
+    "confidence": "odw:confidence",
+    "decision": "odw:decision",
+    "selectedOption": "odw:selectedOption",
+    "evidence": {
+      "@id": "odw:evidence",
+      "@type": "@id"
+    },
+    "statement": "odw:statement",
+    "claim": "odw:claim",
+    "policyType": "odw:policyType",
+    "policyVersion": "odw:policyVersion",
+    "sourceType": "odw:sourceType",
+    "relationshipType": "odw:relationshipType",
+    "sourceAsset": {
+      "@id": "odw:sourceAsset",
+      "@type": "@id"
+    },
+    "targetAsset": {
+      "@id": "odw:targetAsset",
+      "@type": "@id"
+    }
+  }
+}
