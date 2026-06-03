@@ -1,0 +1,235 @@
+version: 0.1.0
+status: draft
+namespace: odw.objective
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical objective model for goals, intent, success criteria, strategy, metrics, outcomes, constraints, priorities, decisions, agents, products, solutions, and value realization.
+
+coreIdea: >
+  An objective defines why action is taken. It states the desired future state, success criteria, scope, priority, constraints, owner, measures, expected outcomes, and value to be realized.
+
+abstraction: |
+  Objective = Intent + DesiredState + Scope + Metric + Constraint + Priority + Outcome + Value
+
+classification:
+  primitive: true
+  reason: >
+    Objective is a root primitive because decisions, journeys, agents, products, solutions, policies, controls, projects, and analytics require a declared purpose and success definition.
+
+objectivePrinciples:
+  - id: odw.objective.principle.explicitIntent
+    name: Explicit Intent
+    description: Important actions, decisions, journeys, agents, products, and solutions should declare why they exist.
+
+  - id: odw.objective.principle.measurable
+    name: Measurable
+    description: Objectives should define success criteria, metrics, indicators, outcomes, or evidence of completion.
+
+  - id: odw.objective.principle.contextual
+    name: Contextual
+    description: Objectives exist within scope, time, location, identity, policy, constraints, and available capabilities.
+
+  - id: odw.objective.principle.prioritized
+    name: Prioritized
+    description: Objectives should support priority, tradeoff, dependency, and conflict resolution.
+
+  - id: odw.objective.principle.outcomeLinked
+    name: Outcome Linked
+    description: Objectives should link to expected and actual outcomes where applicable.
+
+  - id: odw.objective.principle.revisable
+    name: Revisable
+    description: Objectives may evolve, but versions, reasons, and decision context must be preserved.
+
+objectivePrimitives:
+  - id: odw.objective.primitive.objective
+    name: Objective
+    description: Desired result or future state.
+
+  - id: odw.objective.primitive.intent
+    name: Intent
+    description: Purpose or reason behind an objective.
+
+  - id: odw.objective.primitive.desiredState
+    name: Desired State
+    description: Target state to achieve.
+
+  - id: odw.objective.primitive.successCriteria
+    name: Success Criteria
+    description: Conditions used to judge whether objective is achieved.
+
+  - id: odw.objective.primitive.priority
+    name: Priority
+    description: Relative importance or ordering of objective.
+
+  - id: odw.objective.primitive.tradeoff
+    name: Tradeoff
+    description: Choice between competing objectives, constraints, risks, or resources.
+
+  - id: odw.objective.primitive.keyResult
+    name: Key Result
+    description: Measurable result that supports objective achievement.
+
+  - id: odw.objective.primitive.target
+    name: Target
+    description: Desired metric value, threshold, state, or outcome.
+
+  - id: odw.objective.primitive.value
+    name: Value
+    description: Benefit or impact expected from objective achievement.
+
+objectiveFamilies:
+  - id: odw.objective.family.strategic
+    name: Strategic Objectives
+    description: Long-term institutional, ecosystem, product, or mission objectives.
+
+  - id: odw.objective.family.operational
+    name: Operational Objectives
+    description: Objectives for operations, service delivery, reliability, quality, efficiency, and execution.
+
+  - id: odw.objective.family.data
+    name: Data Objectives
+    description: Objectives for data quality, availability, governance, publication, reuse, and interoperability.
+
+  - id: odw.objective.family.analytics
+    name: Analytics Objectives
+    description: Objectives for metrics, insights, decisions, outcomes, learning, and value realization.
+
+  - id: odw.objective.family.agent
+    name: Agent Objectives
+    description: Objectives assigned to governed agents or agentic workflows.
+
+  - id: odw.objective.family.product
+    name: Product Objectives
+    description: Objectives for product modules, adoption, capability, quality, support, and roadmap.
+
+  - id: odw.objective.family.solution
+    name: Solution Objectives
+    description: Objectives for solution packages and real-world outcome delivery.
+
+canonicalObjectiveTypes:
+  - id: odw.objective.type.goal
+    family: odw.objective.family.strategic
+    name: Goal
+    description: Broad desired result.
+
+  - id: odw.objective.type.keyResult
+    family: odw.objective.family.strategic
+    name: Key Result
+    description: Measurable result supporting a goal.
+
+  - id: odw.objective.type.outcomeTarget
+    family: odw.objective.family.analytics
+    name: Outcome Target
+    description: Desired outcome or impact target.
+
+  - id: odw.objective.type.qualityTarget
+    family: odw.objective.family.data
+    name: Quality Target
+    description: Desired data or service quality level.
+
+  - id: odw.objective.type.trustTarget
+    family: odw.objective.family.data
+    name: Trust Target
+    description: Desired trust level or evidence-backed readiness level.
+
+  - id: odw.objective.type.agentTaskObjective
+    family: odw.objective.family.agent
+    name: Agent Task Objective
+    description: Objective assigned to a governed agent task or action.
+
+  - id: odw.objective.type.valueRealizationTarget
+    family: odw.objective.family.analytics
+    name: Value Realization Target
+    description: Desired value to be realized from decision, action, product, or solution.
+
+canonicalFields:
+  objective:
+    - id
+    - type
+    - name
+    - description
+    - family
+    - objectiveType
+    - owner
+    - sponsor
+    - intent
+    - desiredState
+    - scope
+    - priority
+    - constraints
+    - dependencies
+    - successCriteria
+    - metrics
+    - targets
+    - expectedOutcomes
+    - actualOutcomes
+    - value
+    - risks
+    - assumptions
+    - validFrom
+    - validTo
+    - lifecycleState
+    - version
+  successCriteria:
+    - id
+    - objective
+    - statement
+    - metric
+    - targetValue
+    - threshold
+    - evidenceRequired
+    - evaluationMethod
+  target:
+    - id
+    - metric
+    - baseline
+    - targetValue
+    - unit
+    - dueAt
+    - confidence
+  tradeoff:
+    - id
+    - objective
+    - competingObjective
+    - constraint
+    - decision
+    - rationale
+    - recordedAt
+
+objectiveLifecycleStates:
+  - Draft
+  - Proposed
+  - Active
+  - Paused
+  - Completed
+  - Failed
+  - Superseded
+  - Cancelled
+  - Archived
+
+objectiveRules:
+  - Every objective must have id, name, intent, owner, lifecycleState, and version.
+  - Every active objective should have success criteria or an explicit reason why success criteria are not yet measurable.
+  - Every measurable objective should reference metrics, targets, or evidence.
+  - Objectives used by agents must define scope, constraints, allowed capabilities, and success criteria.
+  - Objectives used by decisions should preserve alternatives, tradeoffs, assumptions, and expected outcomes.
+  - Objectives may conflict; conflicts should be resolved through priority, policy, constraints, or decision records.
+  - Completed objectives should link to outcomes and value records where possible.
+  - Superseded objectives must preserve replacement objective and reason.
+  - Objective changes must preserve version, actor, reason, and time.
+
+relationshipToFoundation:
+  identity: Objectives have owners, sponsors, actors, agents, and accountable identities.
+  time: Objectives have validity, due dates, milestones, review windows, and completion times.
+  location: Objectives may be scoped to country, jurisdiction, region, boundary, or service area.
+  relationship: Objectives relate to capabilities, constraints, resources, risks, decisions, outcomes, and value.
+  state: Objectives have lifecycle and achievement state.
+  event: Objective creation, update, review, completion, and cancellation are events.
+  capability: Capabilities are selected and executed to achieve objectives.
+  constraint: Constraints limit how objectives may be pursued.
+  policy: Policies govern objective pursuit, approval, risk, and acceptable tradeoffs.
+  journey: Journeys operationalize objectives through stages, actions, and outcomes.
+  analytics: Metrics and insights evaluate objective progress.
+  decision: Decisions resolve objective tradeoffs and select action paths.
+  outcome: Outcomes measure whether objectives were achieved.
