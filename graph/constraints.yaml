@@ -1,0 +1,387 @@
+version: 0.1.0
+status: draft
+namespace: https://opendataworld.org/ns#
+
+constraints:
+  EveryNodeMustHaveIdentity:
+    description: Every graph node must have a stable identifier and type.
+    appliesTo: "*"
+    requiredProperties:
+      - id
+      - type
+    severity: error
+
+  EveryGovernedNodeMustHaveLifecycleState:
+    description: Every governed node must declare lifecycle state.
+    appliesTo:
+      - DataAsset
+      - Dataset
+      - DataProduct
+      - DataSource
+      - Schema
+      - Policy
+      - Agent
+      - Workflow
+      - Metric
+      - Insight
+      - Decision
+    requiredProperties:
+      - lifecycleState
+    severity: error
+
+  EveryDataAssetMustHaveOwner:
+    description: Every data asset must have an accountable owner.
+    appliesTo:
+      - DataAsset
+      - Dataset
+      - DataProduct
+    mustHaveOutgoingEdges:
+      - ownedBy
+    severity: error
+
+  EveryDataAssetMustHaveSteward:
+    description: Every data asset must have a responsible steward.
+    appliesTo:
+      - DataAsset
+      - Dataset
+      - DataProduct
+    mustHaveOutgoingEdges:
+      - stewardedBy
+    severity: error
+
+  EveryDataAssetMustHaveClassification:
+    description: Every data asset must be classified.
+    appliesTo:
+      - DataAsset
+      - Dataset
+      - DataProduct
+      - DataSource
+    mustHaveOutgoingEdges:
+      - classifiedAs
+    severity: error
+
+  EveryDatasetMustHaveSource:
+    description: Every dataset must reference its source.
+    appliesTo:
+      - Dataset
+    mustHaveOutgoingEdges:
+      - sourcedFrom
+    severity: error
+
+  EveryDatasetMustHaveSchemaOrException:
+    description: Every dataset must conform to a schema unless an explicit schema exception exists.
+    appliesTo:
+      - Dataset
+    anyOf:
+      - mustHaveOutgoingEdges:
+          - conformsTo
+      - mustHaveProperty:
+          schemaException: true
+    severity: error
+
+  PublishedDatasetMustBeComplete:
+    description: Published datasets must have minimum governance, trust, and discovery links.
+    appliesTo:
+      - Dataset
+    when:
+      lifecycleState: Published
+    requiredProperties:
+      - license
+      - accessPolicy
+      - version
+    mustHaveOutgoingEdges:
+      - ownedBy
+      - stewardedBy
+      - sourcedFrom
+      - conformsTo
+      - classifiedAs
+      - governedBy
+      - hasProvenance
+      - hasTrustAssessment
+    severity: error
+
+  PublishedDatasetMustNotHaveUnknownSensitivity:
+    description: Published datasets must not have Unknown sensitivity.
+    appliesTo:
+      - Dataset
+    when:
+      lifecycleState: Published
+    prohibitedClassificationValues:
+      dataSensitivity:
+        - Unknown
+    severity: error
+
+  SensitiveDatasetMustNotBeOpenAccess:
+    description: Sensitive datasets cannot be open access.
+    appliesTo:
+      - Dataset
+      - DataAsset
+      - DataProduct
+    whenClassificationIn:
+      dataSensitivity:
+        - Confidential
+        - Restricted
+        - Secret
+        - PersonalData
+        - SensitivePersonalData
+        - FinancialData
+        - HealthData
+        - GovernmentRestrictedData
+        - ChildData
+        - LocationData
+        - BiometricData
+        - CredentialData
+    prohibitedClassificationValues:
+      dataAccessLevel:
+        - OpenAccess
+    severity: error
+
+  EveryDataProductMustDeclareConsumers:
+    description: Every data product must declare intended consumers.
+    appliesTo:
+      - DataProduct
+    requiredProperties:
+      - intendedConsumers
+    severity: error
+
+  EveryDataProductMustContainData:
+    description: Every data product must contain or serve at least one data asset or dataset.
+    appliesTo:
+      - DataProduct
+    anyOf:
+      - mustHaveOutgoingEdges:
+          - contains
+      - mustHaveOutgoingEdges:
+          - servedThrough
+    severity: error
+
+  EveryTransformationMustHaveLineage:
+    description: Every transformation edge must preserve lineage.
+    appliesToEdges:
+      - transformedInto
+      - derivedFrom
+    requiredProperties:
+      - recordedAt
+    mustHaveEvidence: true
+    severity: error
+
+  EveryLineageEdgeMustBeTemporal:
+    description: Lineage relationships must include time context.
+    appliesToEdges:
+      - sourcedFrom
+      - derivedFrom
+      - transformedInto
+      - dependsOn
+      - feeds
+    requiredProperties:
+      - recordedAt
+    severity: error
+
+  EveryTrustAssessmentMustHaveEvidence:
+    description: Trust assessments must be evidence-backed or explicitly state evidence is unavailable.
+    appliesTo:
+      - TrustAssessment
+    anyOf:
+      - mustHaveOutgoingEdges:
+          - hasEvidence
+      - mustHaveProperty:
+          evidenceUnavailable: true
+    severity: error
+
+  CertifiedTrustRequiresReviewer:
+    description: Certified trust level requires an authorized reviewer.
+    appliesTo:
+      - TrustAssessment
+    when:
+      trustLevel: Certified
+    mustHaveOutgoingEdges:
+      - reviewedBy
+    severity: error
+
+  RevokedTrustRequiresReason:
+    description: Revoked trust must preserve reason and timestamp.
+    appliesTo:
+      - TrustAssessment
+    when:
+      trustLevel: Revoked
+    requiredProperties:
+      - revocationReason
+      - calculatedAt
+    severity: error
+
+  EveryPolicyMustBeVersioned:
+    description: Every policy must have a version and lifecycle state.
+    appliesTo:
+      - Policy
+    requiredProperties:
+      - version
+      - lifecycleState
+    severity: error
+
+  EveryAccessDecisionMustReferencePolicyVersion:
+    description: Every access decision must preserve the policy version used.
+    appliesTo:
+      - AccessDecision
+    requiredProperties:
+      - policyVersion
+      - decision
+      - decidedAt
+    mustHaveOutgoingEdges:
+      - evaluatedBy
+      - appliesTo
+    severity: error
+
+  EveryApprovalMustHaveApproverIdentity:
+    description: Every approval must reference an approving identity.
+    appliesTo:
+      - Approval
+    requiredProperties:
+      - approvedAt
+      - decision
+    mustHaveOutgoingEdges:
+      - approvedBy
+    severity: error
+
+  EveryDecisionMustHaveDecisionMaker:
+    description: Every decision must identify who or what made it.
+    appliesTo:
+      - Decision
+    requiredProperties:
+      - madeBy
+      - madeAt
+      - selectedOption
+    severity: error
+
+  EveryDecisionMustHaveEvidenceOrReason:
+    description: Every decision should be evidence-backed or document why evidence is unavailable.
+    appliesTo:
+      - Decision
+    anyOf:
+      - mustHaveOutgoingEdges:
+          - supportedBy
+      - mustHaveOutgoingEdges:
+          - hasEvidence
+      - mustHaveProperty:
+          evidenceUnavailableReason: true
+    severity: error
+
+  EveryDecisionUsingDataMustReferenceDataVersion:
+    description: Decisions based on data must preserve data asset version references.
+    appliesTo:
+      - Decision
+    whenHasOutgoingEdges:
+      - basedOn
+    requiredRelationshipProperties:
+      basedOn:
+        - targetVersion
+        - recordedAt
+    severity: error
+
+  EveryOutcomeMustLinkBackToDecisionOrAction:
+    description: Outcomes must be attributable to a decision, action, or workflow.
+    appliesTo:
+      - Outcome
+    mustHaveIncomingEdges:
+      - produces
+      - leadsTo
+    severity: warning
+
+  EveryAgentMustHaveOwnerAndOperator:
+    description: Agents must have owner, operator, purpose, and lifecycle state.
+    appliesTo:
+      - Agent
+    requiredProperties:
+      - owner
+      - operator
+      - purpose
+      - lifecycleState
+    severity: error
+
+  EveryAgentMustBeGovernedByPolicy:
+    description: Every agent must be governed by at least one policy.
+    appliesTo:
+      - Agent
+    mustHaveOutgoingEdges:
+      - governedBy
+    severity: error
+
+  EveryAgentActionMustBePolicyEvaluated:
+    description: Every agent action on data must reference policy evaluation.
+    appliesToEdges:
+      - actsOn
+    whenSourceType: Agent
+    requiredCompanionEdges:
+      - evaluatedBy
+      - recordedBy
+    severity: error
+
+  EveryAgentActionOnSensitiveDataRequiresAudit:
+    description: Agent actions on sensitive data must produce audit records.
+    appliesToEdges:
+      - actsOn
+      - accesses
+    whenSourceType: Agent
+    whenTargetClassificationIn:
+      dataSensitivity:
+        - Confidential
+        - Restricted
+        - Secret
+        - PersonalData
+        - SensitivePersonalData
+        - FinancialData
+        - HealthData
+        - GovernmentRestrictedData
+    requiredCompanionEdges:
+      - recordedBy
+    severity: error
+
+  EveryPublishedAssetMustHaveProvenance:
+    description: Published assets must have provenance.
+    appliesTo:
+      - Dataset
+      - DataProduct
+      - Report
+      - Dashboard
+      - Insight
+    when:
+      lifecycleState: Published
+    mustHaveOutgoingEdges:
+      - hasProvenance
+    severity: error
+
+  EveryPublishedAssetMustHaveLicenseOrTerms:
+    description: Published assets must have license or usage terms.
+    appliesTo:
+      - Dataset
+      - DataProduct
+      - Report
+      - Dashboard
+      - Insight
+    when:
+      lifecycleState: Published
+    anyOf:
+      - requiredProperties:
+          - license
+      - requiredProperties:
+          - usageTerms
+    severity: error
+
+  EveryGraphProjectionMustBeTraceable:
+    description: Graph projections must trace back to source records, events, snapshots, or registry records.
+    appliesTo:
+      - CatalogProjection
+      - GraphProjection
+      - RegistryProjection
+    anyOf:
+      - mustHaveOutgoingEdges:
+          - derivedFrom
+      - requiredProperties:
+          - sourceEvents
+      - requiredProperties:
+          - sourceSnapshot
+    severity: error
+
+constraintSeverity:
+  error: Invalid graph state. Must be fixed before publication, certification, or automated action.
+  warning: Weak graph state. Should be reviewed before high-impact use.
+  info: Advisory rule for improving graph quality.
