@@ -1,0 +1,313 @@
+version: 0.1.0
+status: draft
+namespace: odw.event
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical event model for OpenDataWorld facts, changes, observations, actions, state transitions, audits, journeys, scans, computations, simulations, policies, and outcomes.
+
+coreIdea: >
+  An event is a recorded occurrence. Events explain what happened, who or what caused it, when it happened, where it happened, what changed, what evidence supports it, and how it affects state, relationships, journeys, decisions, and outcomes.
+
+abstraction: |
+  Event = Occurrence + Actor + Subject + Time + Context + Evidence + Effect
+
+classification:
+  primitive: true
+  reason: >
+    Event is a root primitive because state changes, journeys, audits, scans, computations, simulations, policies, and outcomes depend on recorded occurrences.
+
+eventPrinciples:
+  - id: odw.event.principle.appendOnly
+    name: Append Only
+    description: Events should be appended, not overwritten, so history remains replayable.
+
+  - id: odw.event.principle.temporal
+    name: Temporal
+    description: Every event must preserve eventTime and recordedAt.
+
+  - id: odw.event.principle.actorAware
+    name: Actor Aware
+    description: Governed events should identify the actor, system, service, or agent involved.
+
+  - id: odw.event.principle.contextual
+    name: Contextual
+    description: Events should preserve relevant context such as policy, location, journey, scan, computation, or decision context.
+
+  - id: odw.event.principle.replayable
+    name: Replayable
+    description: Important state projections should be reproducible from event history.
+
+  - id: odw.event.principle.evidenceBacked
+    name: Evidence Backed
+    description: Events that affect governance, trust, decisions, outcomes, access, publication, or audit should reference evidence or provenance.
+
+eventPrimitives:
+  - id: odw.event.primitive.event
+    name: Event
+    description: Recorded occurrence.
+
+  - id: odw.event.primitive.actor
+    name: Actor
+    description: Identity that caused, initiated, observed, or recorded the event.
+
+  - id: odw.event.primitive.subject
+    name: Subject
+    description: Object, identity, dataset, policy, agent, journey, state, relationship, computation, or decision affected by the event.
+
+  - id: odw.event.primitive.eventType
+    name: Event Type
+    description: Semantic type of occurrence.
+
+  - id: odw.event.primitive.effect
+    name: Effect
+    description: Resulting change, observation, emission, or state impact caused by the event.
+
+  - id: odw.event.primitive.causation
+    name: Causation
+    description: Relationship to the event or action that caused this event.
+
+  - id: odw.event.primitive.correlation
+    name: Correlation
+    description: Relationship to other events in the same trace, journey, workflow, or transaction.
+
+  - id: odw.event.primitive.eventStream
+    name: Event Stream
+    description: Ordered sequence of events for a subject, process, journey, or system.
+
+eventFamilies:
+  - id: odw.event.family.identity
+    name: Identity Events
+    description: Events involving identity creation, activation, suspension, delegation, credentialing, or revocation.
+
+  - id: odw.event.family.state
+    name: State Events
+    description: Events that create, update, transition, revoke, or project state.
+
+  - id: odw.event.family.relationship
+    name: Relationship Events
+    description: Events that assert, verify, update, revoke, or supersede relationships.
+
+  - id: odw.event.family.data
+    name: Data Events
+    description: Events involving dataset registration, ingestion, validation, transformation, publication, archival, or revocation.
+
+  - id: odw.event.family.policy
+    name: Policy Events
+    description: Events involving policy drafting, review, approval, activation, evaluation, exception, expiry, or retirement.
+
+  - id: odw.event.family.control
+    name: Control Events
+    description: Events involving control checks, failures, exceptions, remediation, or approval gates.
+
+  - id: odw.event.family.trust
+    name: Trust Events
+    description: Events involving trust assessment, review, certification, expiry, revocation, or reassessment.
+
+  - id: odw.event.family.analytics
+    name: Analytics Events
+    description: Events involving metric creation, insight generation, decision making, outcome measurement, or value assessment.
+
+  - id: odw.event.family.agent
+    name: Agent Events
+    description: Events involving agent planning, tool use, policy evaluation, approval, action, output, evaluation, or audit.
+
+  - id: odw.event.family.scan
+    name: Scan Events
+    description: Events involving scan start, observation, finding, completion, failure, or review.
+
+  - id: odw.event.family.computation
+    name: Computation Events
+    description: Events involving computation planning, execution, partition processing, output creation, failure, retry, or completion.
+
+  - id: odw.event.family.audit
+    name: Audit Events
+    description: Events recorded for governance traceability and accountability.
+
+canonicalEventTypes:
+  - id: odw.event.type.created
+    family: odw.event.family.state
+    name: Created
+    description: A governed object was created.
+
+  - id: odw.event.type.updated
+    family: odw.event.family.state
+    name: Updated
+    description: A governed object was updated.
+
+  - id: odw.event.type.stateChanged
+    family: odw.event.family.state
+    name: State Changed
+    description: Subject transitioned from one state to another.
+
+  - id: odw.event.type.relationshipAsserted
+    family: odw.event.family.relationship
+    name: Relationship Asserted
+    description: A relationship was asserted between source and target.
+
+  - id: odw.event.type.relationshipRevoked
+    family: odw.event.family.relationship
+    name: Relationship Revoked
+    description: A relationship was revoked.
+
+  - id: odw.event.type.policyEvaluated
+    family: odw.event.family.policy
+    name: Policy Evaluated
+    description: A policy evaluation occurred.
+
+  - id: odw.event.type.controlChecked
+    family: odw.event.family.control
+    name: Control Checked
+    description: A control check occurred.
+
+  - id: odw.event.type.approved
+    family: odw.event.family.policy
+    name: Approved
+    description: Approval was granted.
+
+  - id: odw.event.type.rejected
+    family: odw.event.family.policy
+    name: Rejected
+    description: Approval or request was rejected.
+
+  - id: odw.event.type.datasetRegistered
+    family: odw.event.family.data
+    name: Dataset Registered
+    description: Dataset was registered.
+
+  - id: odw.event.type.datasetPublished
+    family: odw.event.family.data
+    name: Dataset Published
+    description: Dataset was published.
+
+  - id: odw.event.type.trustAssessed
+    family: odw.event.family.trust
+    name: Trust Assessed
+    description: Trust assessment was calculated or recorded.
+
+  - id: odw.event.type.insightGenerated
+    family: odw.event.family.analytics
+    name: Insight Generated
+    description: Insight was generated or recorded.
+
+  - id: odw.event.type.decisionMade
+    family: odw.event.family.analytics
+    name: Decision Made
+    description: Decision was made.
+
+  - id: odw.event.type.outcomeMeasured
+    family: odw.event.family.analytics
+    name: Outcome Measured
+    description: Outcome was measured.
+
+  - id: odw.event.type.scanStarted
+    family: odw.event.family.scan
+    name: Scan Started
+    description: Scan started.
+
+  - id: odw.event.type.scanFindingRecorded
+    family: odw.event.family.scan
+    name: Scan Finding Recorded
+    description: Scan finding was recorded.
+
+  - id: odw.event.type.scanCompleted
+    family: odw.event.family.scan
+    name: Scan Completed
+    description: Scan completed.
+
+  - id: odw.event.type.agentActionExecuted
+    family: odw.event.family.agent
+    name: Agent Action Executed
+    description: Agent action was executed.
+
+  - id: odw.event.type.toolInvoked
+    family: odw.event.family.agent
+    name: Tool Invoked
+    description: Tool was invoked by an agent, service, workflow, or user.
+
+  - id: odw.event.type.computationStarted
+    family: odw.event.family.computation
+    name: Computation Started
+    description: Computation job started.
+
+  - id: odw.event.type.computationCompleted
+    family: odw.event.family.computation
+    name: Computation Completed
+    description: Computation job completed.
+
+  - id: odw.event.type.computationFailed
+    family: odw.event.family.computation
+    name: Computation Failed
+    description: Computation job failed.
+
+canonicalFields:
+  event:
+    - id
+    - type
+    - eventType
+    - family
+    - subject
+    - subjectType
+    - actor
+    - action
+    - effect
+    - context
+    - policyDecision
+    - evidence
+    - causationId
+    - correlationId
+    - traceId
+    - eventTime
+    - recordedAt
+    - location
+    - sourceSystem
+    - lifecycleState
+    - version
+  effect:
+    - affectedObject
+    - affectedProperty
+    - previousValue
+    - newValue
+    - stateTransition
+    - relationshipChange
+    - outputReference
+  stream:
+    - id
+    - subject
+    - streamType
+    - events
+    - orderingKey
+    - createdAt
+    - updatedAt
+
+eventLifecycleStates:
+  - Recorded
+  - Verified
+  - Superseded
+  - Corrected
+  - Revoked
+  - Archived
+
+eventRules:
+  - Every event must have id, eventType, subject, eventTime, recordedAt, lifecycleState, and version.
+  - Every governed event should have actor or sourceSystem.
+  - Events that change state must preserve previous state, new state, actor, eventTime, and recordedAt.
+  - Events that affect policy, trust, publication, access, decision, outcome, agent action, or audit must preserve evidence or reason.
+  - Events should be append-only; corrections should be represented as corrective events, not destructive edits.
+  - Events that are part of a journey, workflow, scan, computation, or transaction should preserve correlationId or traceId.
+  - Event order should be reproducible using eventTime, recordedAt, and ordering key.
+  - State current value should be reproducible from events, transitions, versions, or snapshots.
+  - Event revocation must preserve revocation reason, revokedBy, and revokedAt where applicable.
+  - Events crossing jurisdictional boundaries should preserve spatial context.
+
+relationshipToFoundation:
+  identity: Events identify actor, subject, recorder, approver, or system identities.
+  time: Events are temporal primitives and must preserve eventTime and recordedAt.
+  location: Events may occur at, inside, or across spatial scope and jurisdiction.
+  relationship: Events assert, update, revoke, or verify relationships.
+  state: Events cause or explain state transitions.
+  journey: Journeys progress through events.
+  scan: Scans produce observation and finding events.
+  computation: Computations emit start, progress, retry, failure, and completion events.
+  simulation: Simulations replay or generate hypothetical events that must remain marked as simulated.
+  audit: Audit is a governed event stream.
+  policy: Policies evaluate events and may trigger controls, approvals, or actions.
