@@ -1,0 +1,142 @@
+version: 0.1.0
+status: draft
+namespace: odw.product
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical registry index for OpenDataWorld product modules that package platform capabilities into reusable offerings.
+
+records:
+  - id: odw.product.registry.v1
+    type: Product
+    name: OpenDataWorld Registry
+    description: Product module for canonical governed records, registry cards, lifecycle states, and official object identity.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.foundation.model.registry
+      - odw.schema.Dataset.v1
+      - odw.schema.Policy.v1
+
+  - id: odw.product.catalog.v1
+    type: Product
+    name: OpenDataWorld Catalog
+    description: Product module for discovery, search, browsing, filters, catalog pages, and consumer-facing asset navigation.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.product.registry.v1
+      - odw.data.type.dataset.v1
+      - odw.data.type.dataProduct.v1
+
+  - id: odw.product.governance.v1
+    type: Product
+    name: OpenDataWorld Governance
+    description: Product module for policies, controls, approvals, audit records, exceptions, and governance workflows.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.governance.policy.openDataAccess.v1
+      - odw.governance.policy.publicationReadiness.v1
+      - odw.schema.Policy.v1
+
+  - id: odw.product.quality.v1
+    type: Product
+    name: OpenDataWorld Quality
+    description: Product module for quality profiles, validation results, issue detection, data health, and quality improvement.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.data.type.qualityProfile.v1
+      - odw.schema.TrustAssessment.v1
+
+  - id: odw.product.trust.v1
+    type: Product
+    name: OpenDataWorld Trust
+    description: Product module for contextual trust assessments, evidence references, review status, trust scoring, and trust monitoring.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.schema.TrustAssessment.v1
+      - odw.foundation.model.trust
+
+  - id: odw.product.lineage.v1
+    type: Product
+    name: OpenDataWorld Lineage
+    description: Product module for lineage records, dependency tracking, impact analysis, root-cause analysis, and transformation traceability.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.foundation.model.lineage
+      - odw.data.type.lineageRecord.v1
+      - odw.graph.edge.derivedFrom
+
+  - id: odw.product.knowledgeGraph.v1
+    type: Product
+    name: OpenDataWorld Knowledge Graph
+    description: Product module for graph records, node and edge contracts, graph queries, connected discovery, and semantic interoperability.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.foundation.model.knowledgeGraph
+      - odw.graph.nodeTypes.v1
+      - odw.graph.edgeTypes.v1
+
+  - id: odw.product.publishing.v1
+    type: Product
+    name: OpenDataWorld Publishing
+    description: Product module for publishing datasets, data products, insights, dashboards, reports, metadata, schema.org, and JSON-LD outputs.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.governance.policy.publicationReadiness.v1
+      - odw.product.catalog.v1
+
+  - id: odw.product.analytics.v1
+    type: Product
+    name: OpenDataWorld Analytics
+    description: Product module for metrics, KPIs, reports, dashboards, benchmarks, forecasts, and governed analytical assets.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.analytics.type.metric.v1
+      - odw.analytics.type.kpi.v1
+      - odw.schema.Metric.v1
+
+  - id: odw.product.insights.v1
+    type: Product
+    name: OpenDataWorld Insights
+    description: Product module for evidence-backed insights, explanations, recommendations, confidence, limitations, and review status.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.analytics.type.insight.v1
+      - odw.schema.Insight.v1
+
+  - id: odw.product.decisionIntelligence.v1
+    type: Product
+    name: OpenDataWorld Decision Intelligence
+    description: Product module for decision records, evidence, assumptions, constraints, alternatives, outcomes, value, learning, and improvement.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.foundation.model.decisionIntelligence
+      - odw.schema.Decision.v1
+      - odw.schema.Outcome.v1
+
+  - id: odw.product.agenticWorkflows.v1
+    type: Product
+    name: OpenDataWorld Agentic Workflows
+    description: Product module for governed agents, tools, skills, tasks, approvals, evaluations, trust, and audit-backed automation.
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.schema.Agent.v1
+      - odw.agent.type.discovery.v1
+      - odw.agent.type.governance.v1
+
+registryRules:
+  - Every product record must declare lifecycleState and version.
+  - Every product must map to one or more foundation, schema, graph, data, governance, analytics, or agent records.
+  - Product records must not redefine canonical foundation terms.
+  - Product implementation details belong in platform repositories, not the foundation registry.
+  - Product packaging, pricing, deployment, and support models should be defined in product-specific repositories or commercial documentation.
