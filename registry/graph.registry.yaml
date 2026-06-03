@@ -1,0 +1,280 @@
+version: 0.1.0
+status: draft
+namespace: odw.graph
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical registry of OpenDataWorld graph contracts, constraints, validation rules, semantic context, and reference examples.
+
+records:
+  - id: odw.graph.spec.readme.v1
+    type: GraphSpecificationDocument
+    name: OpenDataWorld Graph Specification README
+    description: Documentation index for the OpenDataWorld graph package.
+    path: graph/README.md
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.foundation.model.knowledgeGraph
+
+  - id: odw.graph.nodeTypes.v1
+    type: GraphNodeTypeContract
+    name: Graph Node Types Contract
+    description: Defines allowed node types, required fields, inheritance, and allowed edges.
+    path: graph/node-types.yaml
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.foundation.model.knowledgeGraph
+      - odw.foundation.model.namespace
+
+  - id: odw.graph.edgeTypes.v1
+    type: GraphEdgeTypeContract
+    name: Graph Edge Types Contract
+    description: Defines allowed edge types, source and target compatibility, cardinality, temporal behavior, provenance, evidence, and audit requirements.
+    path: graph/edge-types.yaml
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.graph.nodeTypes.v1
+      - odw.foundation.model.knowledgeGraph
+
+  - id: odw.graph.constraints.v1
+    type: GraphConstraintContract
+    name: Graph Constraints Contract
+    description: Defines hard graph validity constraints, lifecycle gates, publication gates, governance rules, trust rules, decision rules, and agent rules.
+    path: graph/constraints.yaml
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.graph.nodeTypes.v1
+      - odw.graph.edgeTypes.v1
+      - odw.foundation.model.trust
+      - odw.foundation.model.provenance
+      - odw.foundation.model.lineage
+
+  - id: odw.graph.validationRules.v1
+    type: GraphValidationRuleContract
+    name: Graph Validation Rules Contract
+    description: Defines validation phases, checks, severity model, and validation report shape.
+    path: graph/graph-validation-rules.yaml
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.graph.nodeTypes.v1
+      - odw.graph.edgeTypes.v1
+      - odw.graph.constraints.v1
+
+  - id: odw.graph.example.healthDataset.v1
+    type: GraphExample
+    name: Example Health Dataset Graph
+    description: Canonical example graph showing source-to-dataset-to-dashboard-to-insight-to-decision-to-outcome flow.
+    path: graph/example-health-dataset.graph.json
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.graph.nodeTypes.v1
+      - odw.graph.edgeTypes.v1
+      - odw.graph.validationRules.v1
+      - odw.schema.Dataset.v1
+      - odw.schema.Decision.v1
+      - odw.schema.Outcome.v1
+
+  - id: odw.graph.context.opendataworld.v1
+    type: JSONLDContext
+    name: OpenDataWorld JSON-LD Context
+    description: Semantic interoperability context mapping OpenDataWorld graph terms to JSON-LD, schema.org, DCAT, DCTerms, and PROV-O identifiers.
+    path: contexts/opendataworld.context.jsonld
+    contextId: https://opendataworld.org/foundation/contexts/opendataworld.context.jsonld
+    lifecycleState: Draft
+    version: 0.1.0
+    dependsOn:
+      - odw.foundation.model.knowledgeGraph
+      - odw.graph.nodeTypes.v1
+      - odw.graph.edgeTypes.v1
+
+nodeTypeRecords:
+  - id: odw.graph.node.Person
+    type: GraphNodeType
+    name: Person
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.Organization
+    type: GraphNodeType
+    name: Organization
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.Team
+    type: GraphNodeType
+    name: Team
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.System
+    type: GraphNodeType
+    name: System
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.Agent
+    type: GraphNodeType
+    name: Agent
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.DataAsset
+    type: GraphNodeType
+    name: DataAsset
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.Dataset
+    type: GraphNodeType
+    name: Dataset
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.DataProduct
+    type: GraphNodeType
+    name: DataProduct
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.DataSource
+    type: GraphNodeType
+    name: DataSource
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.Schema
+    type: GraphNodeType
+    name: Schema
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.Policy
+    type: GraphNodeType
+    name: Policy
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.AccessDecision
+    type: GraphNodeType
+    name: AccessDecision
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.ProvenanceRecord
+    type: GraphNodeType
+    name: ProvenanceRecord
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.LineageRecord
+    type: GraphNodeType
+    name: LineageRecord
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.TrustAssessment
+    type: GraphNodeType
+    name: TrustAssessment
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.Evidence
+    type: GraphNodeType
+    name: Evidence
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.Metric
+    type: GraphNodeType
+    name: Metric
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.Insight
+    type: GraphNodeType
+    name: Insight
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.Decision
+    type: GraphNodeType
+    name: Decision
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.Outcome
+    type: GraphNodeType
+    name: Outcome
+    definedIn: odw.graph.nodeTypes.v1
+  - id: odw.graph.node.Workflow
+    type: GraphNodeType
+    name: Workflow
+    definedIn: odw.graph.nodeTypes.v1
+
+edgeTypeRecords:
+  - id: odw.graph.edge.ownedBy
+    type: GraphEdgeType
+    name: ownedBy
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.stewardedBy
+    type: GraphEdgeType
+    name: stewardedBy
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.sourcedFrom
+    type: GraphEdgeType
+    name: sourcedFrom
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.conformsTo
+    type: GraphEdgeType
+    name: conformsTo
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.classifiedAs
+    type: GraphEdgeType
+    name: classifiedAs
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.governedBy
+    type: GraphEdgeType
+    name: governedBy
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.hasProvenance
+    type: GraphEdgeType
+    name: hasProvenance
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.hasLineage
+    type: GraphEdgeType
+    name: hasLineage
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.hasTrustAssessment
+    type: GraphEdgeType
+    name: hasTrustAssessment
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.hasEvidence
+    type: GraphEdgeType
+    name: hasEvidence
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.basedOn
+    type: GraphEdgeType
+    name: basedOn
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.derivedFrom
+    type: GraphEdgeType
+    name: derivedFrom
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.transformedInto
+    type: GraphEdgeType
+    name: transformedInto
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.dependsOn
+    type: GraphEdgeType
+    name: dependsOn
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.feeds
+    type: GraphEdgeType
+    name: feeds
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.supports
+    type: GraphEdgeType
+    name: supports
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.informs
+    type: GraphEdgeType
+    name: informs
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.leadsTo
+    type: GraphEdgeType
+    name: leadsTo
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.impacts
+    type: GraphEdgeType
+    name: impacts
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.accesses
+    type: GraphEdgeType
+    name: accesses
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.evaluatedBy
+    type: GraphEdgeType
+    name: evaluatedBy
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.approvedBy
+    type: GraphEdgeType
+    name: approvedBy
+    definedIn: odw.graph.edgeTypes.v1
+  - id: odw.graph.edge.recordedBy
+    type: GraphEdgeType
+    name: recordedBy
+    definedIn: odw.graph.edgeTypes.v1
+
+registryRules:
+  - Every graph contract must declare version, lifecycleState, owner, and license.
+  - Node and edge type records must resolve to the canonical node-types or edge-types contract.
+  - Constraint records must reference the graph node and edge contracts they validate.
+  - Example graphs must validate against node, edge, constraint, and validation contracts before publication.
+  - JSON-LD contexts must preserve stable term mappings across minor versions.
