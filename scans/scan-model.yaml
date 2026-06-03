@@ -1,0 +1,319 @@
+version: 0.1.0
+status: draft
+namespace: odw.scan
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical scan model for governed observation, discovery, inspection, indexing, validation, evidence collection, and change detection before action.
+
+coreIdea: >
+  Scan is governed observation before action. A scan observes, inspects, discovers, indexes, validates, measures, or detects change in a subject within a defined scope, time, location, method, policy, and evidence context.
+
+abstraction: |
+  Scan = Subject + Scope + Method + Observation + Evidence + Finding + Recommendation
+
+classification:
+  primitive: false
+  composition: true
+  composedFrom:
+    - Identity
+    - Time
+    - Location
+    - Scope
+    - Method
+    - Observation
+    - Evidence
+    - Policy
+    - Control
+    - Audit
+
+scanPrinciples:
+  - id: odw.scan.principle.observationBeforeAction
+    name: Observation Before Action
+    description: Scan observes before changing anything.
+
+  - id: odw.scan.principle.nonDestructive
+    name: Non-Destructive By Default
+    description: Scan should not mutate the subject unless explicitly configured as a remediation or transformation action.
+
+  - id: odw.scan.principle.scoped
+    name: Scoped
+    description: Scan must declare its subject and boundary.
+
+  - id: odw.scan.principle.evidenceBacked
+    name: Evidence Backed
+    description: Scan findings should reference observations or evidence.
+
+  - id: odw.scan.principle.repeatable
+    name: Repeatable
+    description: Scan should preserve method, version, parameters, and execution context so results can be compared or reproduced.
+
+  - id: odw.scan.principle.temporal
+    name: Temporal
+    description: Scan has startedAt, completedAt, observedAt, and recordedAt context.
+
+  - id: odw.scan.principle.policyAware
+    name: Policy Aware
+    description: Scan may be governed by access, privacy, security, quality, publication, or agent policies.
+
+whatScanIs:
+  - Observation
+  - Discovery
+  - Inspection
+  - Indexing
+  - Validation
+  - Measurement
+  - Evidence Collection
+  - Change Detection
+  - Risk Detection
+  - Gap Detection
+
+whatScanIsNot:
+  - Mutation
+  - Remediation
+  - Transformation
+  - Approval
+  - Final Decision
+  - Publication
+  - Certification
+
+scanQuestions:
+  - What exists?
+  - What changed?
+  - What is missing?
+  - What is valid?
+  - What is invalid?
+  - What is risky?
+  - What is connected?
+  - What evidence was found?
+  - What should be reviewed next?
+  - What action is recommended?
+
+scanTypes:
+  - id: odw.scan.type.repository
+    name: Repository Scan
+    description: Scan of repository files, directories, commits, branches, workflows, configuration, and documentation.
+
+  - id: odw.scan.type.file
+    name: File Scan
+    description: Scan of file content, metadata, structure, format, and references.
+
+  - id: odw.scan.type.schema
+    name: Schema Scan
+    description: Scan of schema definitions, required fields, compatibility, and validation constraints.
+
+  - id: odw.scan.type.data
+    name: Data Scan
+    description: Scan of data assets, records, distributions, quality, classifications, and metadata.
+
+  - id: odw.scan.type.metadata
+    name: Metadata Scan
+    description: Scan for completeness, consistency, missing fields, tags, glossary links, and ownership metadata.
+
+  - id: odw.scan.type.security
+    name: Security Scan
+    description: Scan for security-relevant findings, configuration gaps, exposed secrets, risky dependencies, or vulnerable patterns.
+
+  - id: odw.scan.type.compliance
+    name: Compliance Scan
+    description: Scan for compliance obligations, control coverage, policy gaps, and evidence availability.
+
+  - id: odw.scan.type.quality
+    name: Quality Scan
+    description: Scan for quality issues, freshness, completeness, validity, duplication, and anomalies.
+
+  - id: odw.scan.type.graph
+    name: Graph Scan
+    description: Scan for graph completeness, invalid edges, missing nodes, orphan assets, cycles, dead ends, and constraint failures.
+
+  - id: odw.scan.type.policy
+    name: Policy Scan
+    description: Scan for policy applicability, missing policies, stale policies, exceptions, and effective-date gaps.
+
+  - id: odw.scan.type.lineage
+    name: Lineage Scan
+    description: Scan for missing, stale, inconsistent, or broken lineage records.
+
+  - id: odw.scan.type.trust
+    name: Trust Scan
+    description: Scan for missing trust assessments, expired trust, evidence gaps, low trust, or revoked trust.
+
+  - id: odw.scan.type.change
+    name: Change Scan
+    description: Scan for changes since a prior point, event, version, commit, snapshot, or review.
+
+  - id: odw.scan.type.dependency
+    name: Dependency Scan
+    description: Scan for dependencies, upstream/downstream impact, version conflicts, and missing dependency metadata.
+
+  - id: odw.scan.type.capability
+    name: Capability Scan
+    description: Scan for available capabilities, missing capabilities, overlapping capabilities, and capability gaps.
+
+scanPrimitives:
+  - id: odw.scan.primitive.scan
+    name: Scan
+    description: Governed observation instance.
+
+  - id: odw.scan.primitive.subject
+    name: Subject
+    description: Object, asset, repository, dataset, graph, system, policy, or scope being scanned.
+
+  - id: odw.scan.primitive.scope
+    name: Scope
+    description: Boundary of what is included and excluded in the scan.
+
+  - id: odw.scan.primitive.scanner
+    name: Scanner
+    description: Person, system, service, or agent performing the scan.
+
+  - id: odw.scan.primitive.method
+    name: Method
+    description: Scan method, rule set, query, algorithm, tool, or procedure.
+
+  - id: odw.scan.primitive.observation
+    name: Observation
+    description: Raw observed fact or signal discovered during scan.
+
+  - id: odw.scan.primitive.evidence
+    name: Evidence
+    description: Supporting reference, record, sample, file, line, graph path, metric, proof, or trace.
+
+  - id: odw.scan.primitive.finding
+    name: Finding
+    description: Interpreted result derived from observations and evidence.
+
+  - id: odw.scan.primitive.recommendation
+    name: Recommendation
+    description: Suggested next review, fix, action, decision, or escalation.
+
+canonicalFields:
+  scan:
+    - id
+    - type
+    - name
+    - description
+    - scanType
+    - subject
+    - subjectType
+    - scope
+    - scanner
+    - method
+    - methodVersion
+    - policies
+    - controls
+    - startedAt
+    - completedAt
+    - status
+    - observations
+    - evidence
+    - findings
+    - recommendations
+    - confidence
+    - result
+    - traceId
+    - createdAt
+    - updatedAt
+    - lifecycleState
+    - version
+  finding:
+    - id
+    - scan
+    - severity
+    - category
+    - statement
+    - evidence
+    - confidence
+    - affectedObjects
+    - recommendedAction
+    - status
+    - recordedAt
+  observation:
+    - id
+    - scan
+    - observedObject
+    - observedProperty
+    - observedValue
+    - observedAt
+    - evidence
+
+scanLifecycleStates:
+  - Draft
+  - Planned
+  - Running
+  - Completed
+  - Failed
+  - Cancelled
+  - Reviewed
+  - Archived
+
+findingSeverity:
+  - info
+  - warning
+  - error
+  - critical
+
+referenceScans:
+  - id: odw.scan.reference.foundationCompleteness.v1
+    type: ScanDefinition
+    name: Foundation Completeness Scan
+    description: Scan Foundation repository for missing models, schemas, registries, controls, policies, languages, and documentation.
+    scanTypes:
+      - Repository Scan
+      - File Scan
+      - Schema Scan
+      - Graph Scan
+      - Policy Scan
+    expectedFindings:
+      - Missing artifacts
+      - Duplicate concepts
+      - Broken references
+      - Stale registry records
+      - Unmapped schemas
+      - Unmapped controls
+
+  - id: odw.scan.reference.graphValidity.v1
+    type: ScanDefinition
+    name: Graph Validity Scan
+    description: Scan graph nodes, edges, constraints, and validation rules for consistency.
+    scanTypes:
+      - Graph Scan
+    dependsOn:
+      - odw.graph.nodeTypes.v1
+      - odw.graph.edgeTypes.v1
+      - odw.graph.constraints.v1
+      - odw.graph.validationRules.v1
+
+  - id: odw.scan.reference.policyControlCoverage.v1
+    type: ScanDefinition
+    name: Policy Control Coverage Scan
+    description: Scan policies and controls to identify unmapped policies, orphan controls, missing evidence, and validation gaps.
+    scanTypes:
+      - Policy Scan
+      - Compliance Scan
+    dependsOn:
+      - odw.policy.data.assetGovernance.v1
+      - odw.control.data.ownerRequired.v1
+
+scanRules:
+  - Every scan must declare subject, scope, scanner, method, startedAt, status, lifecycleState, and version.
+  - Every completed scan must have completedAt and result.
+  - Every finding must reference evidence or explicitly state evidenceUnavailable.
+  - Every destructive remediation must not be represented as scan; it must be represented as action or transformation.
+  - Scans may recommend actions but must not silently execute them.
+  - Scan methods must be versioned where findings affect governance, publication, trust, or decisions.
+  - Change scans must declare baseline and comparison point.
+  - Repository scans should preserve commit or branch reference.
+  - Data scans should preserve dataset ID and version.
+  - Graph scans should preserve graph contract versions.
+  - Policy scans should preserve effective policy version.
+  - Agent-executed scans must preserve agent identity, policy decision, and audit trace.
+
+relationshipToPrimitives:
+  identity: Scanner, owner, subject, reviewer, and actor must resolve to identities.
+  time: Scan has startedAt, completedAt, observedAt, recordedAt, baseline, and comparison time.
+  location: Scan may be scoped to country, jurisdiction, boundary, system location, or repository location.
+  journey: Scan may be a stage in a journey before validation, approval, action, transformation, or publication.
+  policy: Scan may be required by policy and may identify policy gaps.
+  control: Scan findings may satisfy or fail controls.
+  evidence: Scan produces evidence and findings.
+  audit: Governed scans must be audit-recorded.
