@@ -1,0 +1,331 @@
+version: 0.1.0
+status: draft
+namespace: odw.classification
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical classification catalog for OpenDataWorld data, governance, trust, analytics, decision, outcome, and agent workflows.
+
+classificationFamilies:
+  - id: odw.classification.family.domain
+    name: Domain
+    description: Subject or institutional domain for a data, analytics, product, or solution artifact.
+
+  - id: odw.classification.family.assetType
+    name: Asset Type
+    description: Type of data, analytics, governance, or agent asset.
+
+  - id: odw.classification.family.sensitivity
+    name: Sensitivity
+    description: Sensitivity and protection class for data and related artifacts.
+
+  - id: odw.classification.family.accessLevel
+    name: Access Level
+    description: Access model for data, products, analytics, and services.
+
+  - id: odw.classification.family.qualityTier
+    name: Quality Tier
+    description: Quality maturity and readiness tier.
+
+  - id: odw.classification.family.lifecycleState
+    name: Lifecycle State
+    description: Lifecycle status of governed records and artifacts.
+
+  - id: odw.classification.family.licenseClass
+    name: License Class
+    description: Usage rights and license classification.
+
+  - id: odw.classification.family.trustLevel
+    name: Trust Level
+    description: Trust classification for evidence-backed usage contexts.
+
+  - id: odw.classification.family.criticality
+    name: Criticality
+    description: Operational, public, business, or decision criticality.
+
+classifications:
+  - id: odw.classification.sensitivity.public
+    family: odw.classification.family.sensitivity
+    value: Public
+    name: Public
+    description: Intended for public use and publication subject to policy and license.
+    lifecycleState: Active
+
+  - id: odw.classification.sensitivity.open
+    family: odw.classification.family.sensitivity
+    value: Open
+    name: Open
+    description: Intended for open reuse with clear license, provenance, and publication review.
+    lifecycleState: Active
+
+  - id: odw.classification.sensitivity.internal
+    family: odw.classification.family.sensitivity
+    value: Internal
+    name: Internal
+    description: Intended for internal organizational use.
+    lifecycleState: Active
+
+  - id: odw.classification.sensitivity.confidential
+    family: odw.classification.family.sensitivity
+    value: Confidential
+    name: Confidential
+    description: Restricted to authorized users and governed usage contexts.
+    lifecycleState: Active
+
+  - id: odw.classification.sensitivity.restricted
+    family: odw.classification.family.sensitivity
+    value: Restricted
+    name: Restricted
+    description: Requires explicit access policy, approval, and audit controls.
+    lifecycleState: Active
+
+  - id: odw.classification.sensitivity.personalData
+    family: odw.classification.family.sensitivity
+    value: PersonalData
+    name: Personal Data
+    description: Data relating to an identifiable person and requiring privacy-aware handling.
+    lifecycleState: Active
+
+  - id: odw.classification.sensitivity.healthData
+    family: odw.classification.family.sensitivity
+    value: HealthData
+    name: Health Data
+    description: Health-related data requiring regulated or context-specific governance.
+    lifecycleState: Active
+
+  - id: odw.classification.sensitivity.unknown
+    family: odw.classification.family.sensitivity
+    value: Unknown
+    name: Unknown Sensitivity
+    description: Sensitivity has not yet been classified. Must not be used for publication readiness.
+    lifecycleState: Active
+
+  - id: odw.classification.access.openAccess
+    family: odw.classification.family.accessLevel
+    value: OpenAccess
+    name: Open Access
+    description: Accessible openly subject to license, usage terms, and publication controls.
+    lifecycleState: Active
+
+  - id: odw.classification.access.publicReadOnly
+    family: odw.classification.family.accessLevel
+    value: PublicReadOnly
+    name: Public Read Only
+    description: Publicly readable without modification rights.
+    lifecycleState: Active
+
+  - id: odw.classification.access.organizationInternal
+    family: odw.classification.family.accessLevel
+    value: OrganizationInternal
+    name: Organization Internal
+    description: Available only within the owning or authorized organization.
+    lifecycleState: Active
+
+  - id: odw.classification.access.roleRestricted
+    family: odw.classification.family.accessLevel
+    value: RoleRestricted
+    name: Role Restricted
+    description: Access restricted by role or entitlement.
+    lifecycleState: Active
+
+  - id: odw.classification.access.approvalRequired
+    family: odw.classification.family.accessLevel
+    value: ApprovalRequired
+    name: Approval Required
+    description: Access requires approval workflow before use.
+    lifecycleState: Active
+
+  - id: odw.classification.access.noAccess
+    family: odw.classification.family.accessLevel
+    value: NoAccess
+    name: No Access
+    description: Access is not allowed except through explicitly governed exception or lifecycle transition.
+    lifecycleState: Active
+
+  - id: odw.classification.quality.unassessed
+    family: odw.classification.family.qualityTier
+    value: Unassessed
+    name: Unassessed
+    description: Quality has not yet been assessed.
+    lifecycleState: Active
+
+  - id: odw.classification.quality.bronze
+    family: odw.classification.family.qualityTier
+    value: Bronze
+    name: Bronze
+    description: Basic metadata and quality checks exist.
+    lifecycleState: Active
+
+  - id: odw.classification.quality.silver
+    family: odw.classification.family.qualityTier
+    value: Silver
+    name: Silver
+    description: Moderate quality validation, provenance, and usability context exist.
+    lifecycleState: Active
+
+  - id: odw.classification.quality.gold
+    family: odw.classification.family.qualityTier
+    value: Gold
+    name: Gold
+    description: Strong quality validation, stewardship, documentation, and trust context exist.
+    lifecycleState: Active
+
+  - id: odw.classification.quality.certified
+    family: odw.classification.family.qualityTier
+    value: Certified
+    name: Certified
+    description: Quality has passed certification review for defined usage context.
+    lifecycleState: Active
+
+  - id: odw.classification.trust.unknown
+    family: odw.classification.family.trustLevel
+    value: Unknown
+    name: Unknown Trust
+    description: Trust has not yet been assessed.
+    lifecycleState: Active
+
+  - id: odw.classification.trust.low
+    family: odw.classification.family.trustLevel
+    value: Low
+    name: Low Trust
+    description: Limited confidence for use without review.
+    lifecycleState: Active
+
+  - id: odw.classification.trust.medium
+    family: odw.classification.family.trustLevel
+    value: Medium
+    name: Medium Trust
+    description: Moderate confidence with known limitations.
+    lifecycleState: Active
+
+  - id: odw.classification.trust.high
+    family: odw.classification.family.trustLevel
+    value: High
+    name: High Trust
+    description: High confidence for defined usage context.
+    lifecycleState: Active
+
+  - id: odw.classification.trust.verified
+    family: odw.classification.family.trustLevel
+    value: Verified
+    name: Verified Trust
+    description: Trust assessment is backed by evidence and review.
+    lifecycleState: Active
+
+  - id: odw.classification.trust.certified
+    family: odw.classification.family.trustLevel
+    value: Certified
+    name: Certified Trust
+    description: Trust assessment has passed certification requirements for defined context.
+    lifecycleState: Active
+
+  - id: odw.classification.trust.revoked
+    family: odw.classification.family.trustLevel
+    value: Revoked
+    name: Revoked Trust
+    description: Trust has been revoked and must not be used without remediation.
+    lifecycleState: Active
+
+  - id: odw.classification.lifecycle.draft
+    family: odw.classification.family.lifecycleState
+    value: Draft
+    name: Draft
+    description: Work in progress, not yet official.
+    lifecycleState: Active
+
+  - id: odw.classification.lifecycle.registered
+    family: odw.classification.family.lifecycleState
+    value: Registered
+    name: Registered
+    description: Officially recorded in registry but not necessarily approved or published.
+    lifecycleState: Active
+
+  - id: odw.classification.lifecycle.active
+    family: odw.classification.family.lifecycleState
+    value: Active
+    name: Active
+    description: Active governed record.
+    lifecycleState: Active
+
+  - id: odw.classification.lifecycle.published
+    family: odw.classification.family.lifecycleState
+    value: Published
+    name: Published
+    description: Published for intended audience after applicable readiness checks.
+    lifecycleState: Active
+
+  - id: odw.classification.lifecycle.deprecated
+    family: odw.classification.family.lifecycleState
+    value: Deprecated
+    name: Deprecated
+    description: Still available but no longer recommended for new use.
+    lifecycleState: Active
+
+  - id: odw.classification.lifecycle.archived
+    family: odw.classification.family.lifecycleState
+    value: Archived
+    name: Archived
+    description: Retained for history, audit, or reference.
+    lifecycleState: Active
+
+  - id: odw.classification.lifecycle.revoked
+    family: odw.classification.family.lifecycleState
+    value: Revoked
+    name: Revoked
+    description: Withdrawn or invalidated for governed use.
+    lifecycleState: Active
+
+  - id: odw.classification.license.openData
+    family: odw.classification.family.licenseClass
+    value: OpenDataLicense
+    name: Open Data License
+    description: License class for open data reuse with stated terms.
+    lifecycleState: Active
+
+  - id: odw.classification.license.internalUse
+    family: odw.classification.family.licenseClass
+    value: InternalUseOnly
+    name: Internal Use Only
+    description: Usage limited to internal organizational purposes.
+    lifecycleState: Active
+
+  - id: odw.classification.license.contractRequired
+    family: odw.classification.family.licenseClass
+    value: ContractRequired
+    name: Contract Required
+    description: Usage requires contract, agreement, or explicit permission.
+    lifecycleState: Active
+
+  - id: odw.classification.criticality.low
+    family: odw.classification.family.criticality
+    value: Low
+    name: Low Criticality
+    description: Low operational, public, business, or decision criticality.
+    lifecycleState: Active
+
+  - id: odw.classification.criticality.medium
+    family: odw.classification.family.criticality
+    value: Medium
+    name: Medium Criticality
+    description: Moderate operational, public, business, or decision criticality.
+    lifecycleState: Active
+
+  - id: odw.classification.criticality.high
+    family: odw.classification.family.criticality
+    value: High
+    name: High Criticality
+    description: High operational, public, business, or decision criticality.
+    lifecycleState: Active
+
+  - id: odw.classification.criticality.missionCritical
+    family: odw.classification.family.criticality
+    value: MissionCritical
+    name: Mission Critical
+    description: Critical to essential operations, public value, high-impact decisions, or regulated obligations.
+    lifecycleState: Active
+
+catalogRules:
+  - Every classification value must have id, family, value, name, description, and lifecycleState.
+  - Published assets must not use Unknown sensitivity.
+  - Sensitive classifications must not be paired with OpenAccess without explicit exception and policy basis.
+  - Certified quality or trust values require review or certification evidence.
+  - Classification extensions must map back to canonical OpenDataWorld classification families.
