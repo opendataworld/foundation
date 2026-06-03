@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendataworld.org/foundation/schemas/trust-assessment.schema.json",
+  "title": "TrustAssessment",
+  "description": "Canonical OpenDataWorld schema for contextual, temporal, evidence-backed trust assessment.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "type",
+    "subject",
+    "subjectType",
+    "trustContext",
+    "trustScore",
+    "trustLevel",
+    "calculatedAt",
+    "method",
+    "version",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "canonicalId": { "type": "string" },
+    "type": { "const": "TrustAssessment" },
+    "subject": { "type": "string" },
+    "subjectType": {
+      "type": "string",
+      "enum": ["Dataset", "DataProduct", "DataSource", "Agent", "Organization", "System", "Evidence", "Insight", "Decision", "Service", "Policy", "Other"]
+    },
+    "trustContext": { "type": "string" },
+    "trustScore": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "trustLevel": {
+      "type": "string",
+      "enum": ["Unknown", "Low", "Medium", "High", "Verified", "Certified", "Revoked"]
+    },
+    "calculatedAt": { "type": "string", "format": "date-time" },
+    "validUntil": { "type": "string", "format": "date-time" },
+    "method": { "type": "string" },
+    "methodVersion": { "type": "string" },
+    "inputs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "evidence": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "evidenceUnavailable": {
+      "type": "boolean",
+      "default": false
+    },
+    "dimensions": {
+      "type": "object",
+      "properties": {
+        "identityVerification": { "type": "number", "minimum": 0, "maximum": 1 },
+        "provenanceCompleteness": { "type": "number", "minimum": 0, "maximum": 1 },
+        "lineageCompleteness": { "type": "number", "minimum": 0, "maximum": 1 },
+        "qualityScore": { "type": "number", "minimum": 0, "maximum": 1 },
+        "freshnessScore": { "type": "number", "minimum": 0, "maximum": 1 },
+        "policyCompliance": { "type": "number", "minimum": 0, "maximum": 1 },
+        "evidenceStrength": { "type": "number", "minimum": 0, "maximum": 1 },
+        "certificationStatus": { "type": "number", "minimum": 0, "maximum": 1 },
+        "usageReliability": { "type": "number", "minimum": 0, "maximum": 1 },
+        "humanReview": { "type": "number", "minimum": 0, "maximum": 1 }
+      },
+      "additionalProperties": true
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "explanation": { "type": "string" },
+    "reviewStatus": {
+      "type": "string",
+      "enum": ["NotReviewed", "PendingReview", "Reviewed", "Certified", "Rejected", "Revoked"]
+    },
+    "reviewer": { "type": "string" },
+    "revocationReason": { "type": "string" },
+    "version": { "type": "string" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "metadata": { "type": "object", "additionalProperties": true }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "trustLevel": { "const": "Certified" } } },
+      "then": { "required": ["reviewer"] }
+    },
+    {
+      "if": { "properties": { "trustLevel": { "const": "Revoked" } } },
+      "then": { "required": ["revocationReason"] }
+    },
+    {
+      "if": { "properties": { "evidenceUnavailable": { "const": false } } },
+      "then": { "properties": { "evidence": { "minItems": 1 } } }
+    }
+  ]
+}
