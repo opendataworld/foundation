@@ -1,0 +1,366 @@
+version: 0.1.0
+status: draft
+namespace: odw.relationship
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical relationship model for OpenDataWorld connections between identities, data, policies, controls, graph nodes, analytics, agents, locations, journeys, scans, computations, decisions, outcomes, and evidence.
+
+coreIdea: >
+  Relationship is the governed connection between two or more things. A relationship states how subjects and objects are connected, when that connection is valid, where it applies, who asserted it, what evidence supports it, and what policies or controls govern it.
+
+abstraction: |
+  Relationship = Source + Predicate + Target + Context + Time + Evidence + Governance
+
+classification:
+  primitive: true
+  reason: >
+    Relationship is a root primitive because identity, data, policy, trust, lineage, journey, scan, computation, decision, and outcome models all depend on explicit connections.
+
+relationshipPrinciples:
+  - id: odw.relationship.principle.explicit
+    name: Explicit Relationship
+    description: Important connections must be explicit, named, and typed.
+
+  - id: odw.relationship.principle.directional
+    name: Directional Relationship
+    description: A relationship has source, predicate, and target, even when an inverse relationship also exists.
+
+  - id: odw.relationship.principle.contextual
+    name: Contextual Relationship
+    description: Relationships may depend on purpose, policy, jurisdiction, trust context, or usage context.
+
+  - id: odw.relationship.principle.temporal
+    name: Temporal Relationship
+    description: Relationships may have validFrom, validTo, recordedAt, assertedAt, revokedAt, and version context.
+
+  - id: odw.relationship.principle.evidenceBacked
+    name: Evidence Backed Relationship
+    description: Governed relationships should preserve evidence, provenance, source, or assertion authority.
+
+  - id: odw.relationship.principle.auditable
+    name: Auditable Relationship
+    description: Relationship creation, update, revocation, and override must be auditable where governance matters.
+
+relationshipPrimitives:
+  - id: odw.relationship.primitive.relationship
+    name: Relationship
+    description: Typed connection between source and target.
+
+  - id: odw.relationship.primitive.source
+    name: Source
+    description: Subject or origin of relationship.
+
+  - id: odw.relationship.primitive.predicate
+    name: Predicate
+    description: Relationship type or semantic verb.
+
+  - id: odw.relationship.primitive.target
+    name: Target
+    description: Object or destination of relationship.
+
+  - id: odw.relationship.primitive.context
+    name: Context
+    description: Scope in which relationship is meaningful or valid.
+
+  - id: odw.relationship.primitive.inverse
+    name: Inverse Relationship
+    description: Reverse relationship semantics where applicable.
+
+  - id: odw.relationship.primitive.cardinality
+    name: Cardinality
+    description: Expected number of sources and targets.
+
+  - id: odw.relationship.primitive.assertion
+    name: Assertion
+    description: Claim that a relationship exists.
+
+  - id: odw.relationship.primitive.evidence
+    name: Evidence
+    description: Support for relationship assertion.
+
+relationshipFamilies:
+  - id: odw.relationship.family.identity
+    name: Identity Relationships
+    description: Relationships for membership, ownership, stewardship, approval, operation, delegation, representation, and credentialing.
+
+  - id: odw.relationship.family.data
+    name: Data Relationships
+    description: Relationships for source, schema, classification, distribution, derivation, transformation, dependency, consumption, and production.
+
+  - id: odw.relationship.family.governance
+    name: Governance Relationships
+    description: Relationships for policy applicability, control mapping, approval, exception, audit, and compliance.
+
+  - id: odw.relationship.family.trust
+    name: Trust Relationships
+    description: Relationships for evidence, trust assessment, review, certification, revocation, and confidence.
+
+  - id: odw.relationship.family.analytics
+    name: Analytics Relationships
+    description: Relationships for metrics, insights, recommendations, decisions, outcomes, value, learning, and improvement.
+
+  - id: odw.relationship.family.spatial
+    name: Spatial Relationships
+    description: Relationships for location, jurisdiction, containment, coverage, proximity, route, and boundary.
+
+  - id: odw.relationship.family.temporal
+    name: Temporal Relationships
+    description: Relationships for before, after, during, since, until, within, and as-of validity.
+
+  - id: odw.relationship.family.agent
+    name: Agent Relationships
+    description: Relationships for agents, tools, skills, actions, plans, memory, evaluation, outputs, and audit events.
+
+  - id: odw.relationship.family.computation
+    name: Computation Relationships
+    description: Relationships connecting input, function, partition, execution, output, validation, lineage, and audit.
+
+canonicalRelationshipTypes:
+  - id: odw.relationship.type.ownedBy
+    family: odw.relationship.family.identity
+    predicate: ownedBy
+    name: Owned By
+    description: Source is accountable to target owner.
+    graphEdge: odw.graph.edge.ownedBy
+
+  - id: odw.relationship.type.stewardedBy
+    family: odw.relationship.family.identity
+    predicate: stewardedBy
+    name: Stewarded By
+    description: Source is stewarded by target identity.
+    graphEdge: odw.graph.edge.stewardedBy
+
+  - id: odw.relationship.type.operatedBy
+    family: odw.relationship.family.identity
+    predicate: operatedBy
+    name: Operated By
+    description: Source is operated by target identity.
+
+  - id: odw.relationship.type.approvedBy
+    family: odw.relationship.family.governance
+    predicate: approvedBy
+    name: Approved By
+    description: Source was approved by target identity.
+    graphEdge: odw.graph.edge.approvedBy
+
+  - id: odw.relationship.type.governedBy
+    family: odw.relationship.family.governance
+    predicate: governedBy
+    name: Governed By
+    description: Source is governed by target policy, rule, control, or governance record.
+    graphEdge: odw.graph.edge.governedBy
+
+  - id: odw.relationship.type.appliesTo
+    family: odw.relationship.family.governance
+    predicate: appliesTo
+    name: Applies To
+    description: Source policy, rule, control, classification, or schema applies to target.
+
+  - id: odw.relationship.type.sourcedFrom
+    family: odw.relationship.family.data
+    predicate: sourcedFrom
+    name: Sourced From
+    description: Source data asset originates from target data source.
+    graphEdge: odw.graph.edge.sourcedFrom
+
+  - id: odw.relationship.type.conformsTo
+    family: odw.relationship.family.data
+    predicate: conformsTo
+    name: Conforms To
+    description: Source conforms to target schema, standard, profile, or contract.
+    graphEdge: odw.graph.edge.conformsTo
+
+  - id: odw.relationship.type.classifiedAs
+    family: odw.relationship.family.governance
+    predicate: classifiedAs
+    name: Classified As
+    description: Source is classified using target classification.
+    graphEdge: odw.graph.edge.classifiedAs
+
+  - id: odw.relationship.type.hasProvenance
+    family: odw.relationship.family.data
+    predicate: hasProvenance
+    name: Has Provenance
+    description: Source has target provenance record.
+    graphEdge: odw.graph.edge.hasProvenance
+
+  - id: odw.relationship.type.hasLineage
+    family: odw.relationship.family.data
+    predicate: hasLineage
+    name: Has Lineage
+    description: Source has target lineage record.
+    graphEdge: odw.graph.edge.hasLineage
+
+  - id: odw.relationship.type.derivedFrom
+    family: odw.relationship.family.data
+    predicate: derivedFrom
+    name: Derived From
+    description: Source is derived from target.
+    graphEdge: odw.graph.edge.derivedFrom
+
+  - id: odw.relationship.type.transformedInto
+    family: odw.relationship.family.data
+    predicate: transformedInto
+    name: Transformed Into
+    description: Source is transformed into target.
+    graphEdge: odw.graph.edge.transformedInto
+
+  - id: odw.relationship.type.dependsOn
+    family: odw.relationship.family.data
+    predicate: dependsOn
+    name: Depends On
+    description: Source depends on target.
+    graphEdge: odw.graph.edge.dependsOn
+
+  - id: odw.relationship.type.hasTrustAssessment
+    family: odw.relationship.family.trust
+    predicate: hasTrustAssessment
+    name: Has Trust Assessment
+    description: Source has target trust assessment.
+    graphEdge: odw.graph.edge.hasTrustAssessment
+
+  - id: odw.relationship.type.hasEvidence
+    family: odw.relationship.family.trust
+    predicate: hasEvidence
+    name: Has Evidence
+    description: Source is supported by target evidence.
+    graphEdge: odw.graph.edge.hasEvidence
+
+  - id: odw.relationship.type.basedOn
+    family: odw.relationship.family.analytics
+    predicate: basedOn
+    name: Based On
+    description: Source is based on target data, metric, insight, evidence, context, or decision input.
+    graphEdge: odw.graph.edge.basedOn
+
+  - id: odw.relationship.type.informs
+    family: odw.relationship.family.analytics
+    predicate: informs
+    name: Informs
+    description: Source informs target decision, insight, recommendation, or action.
+    graphEdge: odw.graph.edge.informs
+
+  - id: odw.relationship.type.leadsTo
+    family: odw.relationship.family.analytics
+    predicate: leadsTo
+    name: Leads To
+    description: Source leads to target outcome, action, state, or journey stage.
+    graphEdge: odw.graph.edge.leadsTo
+
+  - id: odw.relationship.type.impacts
+    family: odw.relationship.family.analytics
+    predicate: impacts
+    name: Impacts
+    description: Source affects target value, outcome, asset, process, or stakeholder.
+    graphEdge: odw.graph.edge.impacts
+
+  - id: odw.relationship.type.locatedIn
+    family: odw.relationship.family.spatial
+    predicate: locatedIn
+    name: Located In
+    description: Source is located within target place, boundary, jurisdiction, or region.
+
+  - id: odw.relationship.type.withinJurisdiction
+    family: odw.relationship.family.spatial
+    predicate: withinJurisdiction
+    name: Within Jurisdiction
+    description: Source is within target jurisdiction.
+
+  - id: odw.relationship.type.near
+    family: odw.relationship.family.spatial
+    predicate: near
+    name: Near
+    description: Source is near target within a defined distance or spatial rule.
+
+  - id: odw.relationship.type.before
+    family: odw.relationship.family.temporal
+    predicate: before
+    name: Before
+    description: Source event or state occurs before target event or state.
+
+  - id: odw.relationship.type.after
+    family: odw.relationship.family.temporal
+    predicate: after
+    name: After
+    description: Source event or state occurs after target event or state.
+
+  - id: odw.relationship.type.during
+    family: odw.relationship.family.temporal
+    predicate: during
+    name: During
+    description: Source is valid or occurs during target interval.
+
+  - id: odw.relationship.type.usesTool
+    family: odw.relationship.family.agent
+    predicate: usesTool
+    name: Uses Tool
+    description: Agent, workflow, or action uses target tool.
+
+  - id: odw.relationship.type.produces
+    family: odw.relationship.family.computation
+    predicate: produces
+    name: Produces
+    description: Source produces target output, artifact, dataset, event, or outcome.
+
+  - id: odw.relationship.type.consumes
+    family: odw.relationship.family.computation
+    predicate: consumes
+    name: Consumes
+    description: Source consumes target input, dataset, service, or resource.
+
+canonicalFields:
+  - id
+  - type
+  - source
+  - predicate
+  - target
+  - family
+  - context
+  - sourceType
+  - targetType
+  - cardinality
+  - inverse
+  - evidence
+  - provenance
+  - policy
+  - confidence
+  - assertedBy
+  - assertedAt
+  - validFrom
+  - validTo
+  - recordedAt
+  - revokedAt
+  - lifecycleState
+  - version
+
+relationshipLifecycleStates:
+  - Draft
+  - Proposed
+  - Asserted
+  - Verified
+  - Active
+  - Superseded
+  - Deprecated
+  - Revoked
+  - Archived
+
+relationshipRules:
+  - Every governed relationship must have source, predicate, target, recordedAt, lifecycleState, and version.
+  - Every temporal relationship must preserve event time, valid time, or recorded time.
+  - Every relationship used for decision, trust, lineage, policy, approval, or audit must preserve evidence or provenance.
+  - Every relationship with jurisdictional meaning should preserve spatial scope.
+  - Every relationship assertion must preserve assertedBy where accountability matters.
+  - Revoked relationships must preserve revocation reason, revokedAt, and revoker identity where applicable.
+  - Relationships should map to graph edge types where graph representation exists.
+  - Inverse relationships must be explicit where automated reasoning depends on them.
+  - Relationship current state must be reproducible from assertions, updates, revocations, and versions.
+
+relationshipToFoundation:
+  identity: Relationships connect owners, stewards, approvers, operators, agents, systems, and accounts.
+  time: Relationships have asserted, valid, recorded, effective, and revoked time contexts.
+  location: Relationships may have spatial scope, jurisdiction, containment, coverage, proximity, or route.
+  graph: Graph edges are relationship records projected into graph form.
+  policy: Policies constrain which relationships are allowed, required, blocked, or approval-gated.
+  journey: Journey transitions are temporal relationships between states and stages.
+  scan: Scan findings identify missing, invalid, weak, or risky relationships.
+  computation: Computation creates data relationships such as derivedFrom, producedBy, consumes, and transformedInto.
