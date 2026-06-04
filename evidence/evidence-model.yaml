@@ -1,0 +1,212 @@
+version: 0.1.0
+status: draft
+namespace: odw.evidence
+owner: OpenDataWorld Contributors
+license: Apache-2.0
+purpose: Canonical evidence model for OpenDataWorld trust, analytics, insights, decisions, policies, controls, scans, audits, outcomes, claims, and value realization.
+
+coreIdea: >
+  Evidence is governed support for a claim, finding, decision, trust assessment, policy evaluation, control result, insight, outcome, or value statement. Evidence explains why something should be believed, accepted, reviewed, rejected, approved, or acted upon.
+
+abstraction: |
+  Evidence = Claim + Source + Method + Observation + Artifact + Time + Provenance + Confidence
+
+classification:
+  primitive: true
+  reason: >
+    Evidence is a root primitive because trust, decisions, approvals, audits, scans, policies, controls, insights, outcomes, and value claims depend on support that can be inspected and traced.
+
+evidencePrinciples:
+  - id: odw.evidence.principle.traceable
+    name: Traceable
+    description: Evidence should preserve source, method, time, provenance, and context.
+
+  - id: odw.evidence.principle.claimBound
+    name: Claim Bound
+    description: Evidence should support a specific claim, finding, decision, assessment, or outcome.
+
+  - id: odw.evidence.principle.reviewable
+    name: Reviewable
+    description: Evidence should be inspectable by authorized reviewers.
+
+  - id: odw.evidence.principle.contextual
+    name: Contextual
+    description: Evidence strength depends on context, purpose, policy, trust level, source, and method.
+
+  - id: odw.evidence.principle.temporal
+    name: Temporal
+    description: Evidence has collectedAt, observedAt, recordedAt, validFrom, validTo, or expiry context.
+
+  - id: odw.evidence.principle.nonAbsolute
+    name: Non Absolute
+    description: Evidence supports confidence; it does not always prove absolute truth.
+
+evidenceFamilies:
+  - id: odw.evidence.family.document
+    name: Document Evidence
+    description: Documents, files, reports, policies, contracts, publications, certificates, or records.
+
+  - id: odw.evidence.family.data
+    name: Data Evidence
+    description: Dataset records, samples, distributions, query results, statistics, or profiles.
+
+  - id: odw.evidence.family.observation
+    name: Observation Evidence
+    description: Observations from scans, sensors, logs, monitoring, reviews, inspections, or measurements.
+
+  - id: odw.evidence.family.audit
+    name: Audit Evidence
+    description: Audit events, traces, approvals, access logs, policy evaluations, or execution records.
+
+  - id: odw.evidence.family.provenance
+    name: Provenance Evidence
+    description: Source, origin, custody, collection method, author, publisher, or issuer evidence.
+
+  - id: odw.evidence.family.lineage
+    name: Lineage Evidence
+    description: Transformation, dependency, derivation, or impact evidence.
+
+  - id: odw.evidence.family.review
+    name: Review Evidence
+    description: Human or authority review, certification, verification, sign-off, or rejection evidence.
+
+  - id: odw.evidence.family.simulation
+    name: Simulation Evidence
+    description: Evidence produced by scenarios, dry-runs, forecasts, experiments, or simulations.
+
+evidenceTypes:
+  - id: odw.evidence.type.sourceReference
+    family: odw.evidence.family.provenance
+    name: Source Reference
+    description: Reference to source system, publisher, file, API, record, or origin.
+
+  - id: odw.evidence.type.dataSample
+    family: odw.evidence.family.data
+    name: Data Sample
+    description: Sample records or values used as evidence.
+
+  - id: odw.evidence.type.queryResult
+    family: odw.evidence.family.data
+    name: Query Result
+    description: Result from a query used as evidence.
+
+  - id: odw.evidence.type.scanFinding
+    family: odw.evidence.family.observation
+    name: Scan Finding
+    description: Finding produced by a governed scan.
+
+  - id: odw.evidence.type.auditEvent
+    family: odw.evidence.family.audit
+    name: Audit Event
+    description: Audit event used as evidence.
+
+  - id: odw.evidence.type.approvalRecord
+    family: odw.evidence.family.audit
+    name: Approval Record
+    description: Approval, rejection, or review decision used as evidence.
+
+  - id: odw.evidence.type.certificate
+    family: odw.evidence.family.review
+    name: Certificate
+    description: Certification or verification record.
+
+  - id: odw.evidence.type.lineagePath
+    family: odw.evidence.family.lineage
+    name: Lineage Path
+    description: Data lineage path used as evidence.
+
+  - id: odw.evidence.type.metricResult
+    family: odw.evidence.family.data
+    name: Metric Result
+    description: Metric value or calculation result used as evidence.
+
+  - id: odw.evidence.type.simulationResult
+    family: odw.evidence.family.simulation
+    name: Simulation Result
+    description: Simulated result used as supporting evidence, clearly marked as simulated.
+
+canonicalFields:
+  evidence:
+    - id
+    - type
+    - name
+    - description
+    - family
+    - evidenceType
+    - supports
+    - claim
+    - source
+    - sourceType
+    - method
+    - artifact
+    - observation
+    - confidence
+    - limitations
+    - provenance
+    - collectedBy
+    - collectedAt
+    - observedAt
+    - recordedAt
+    - validFrom
+    - validTo
+    - reviewStatus
+    - lifecycleState
+    - version
+  claim:
+    - id
+    - statement
+    - subject
+    - context
+    - assertedBy
+    - assertedAt
+    - evidence
+    - confidence
+  review:
+    - id
+    - evidence
+    - reviewer
+    - reviewStatus
+    - rationale
+    - reviewedAt
+
+evidenceLifecycleStates:
+  - Draft
+  - Collected
+  - Reviewed
+  - Verified
+  - Rejected
+  - Superseded
+  - Revoked
+  - Archived
+
+reviewStatuses:
+  - NotReviewed
+  - PendingReview
+  - Reviewed
+  - Verified
+  - Rejected
+  - Revoked
+
+evidenceRules:
+  - Every evidence record must have id, evidenceType, source or artifact, recordedAt, lifecycleState, and version.
+  - Evidence used for trust, approval, publication, decision, outcome, or value claims should reference the claim or object it supports.
+  - Evidence should preserve provenance where available.
+  - Simulation evidence must be clearly marked as simulated and must not be treated as observed fact.
+  - Evidence may expire or lose relevance; validTo or review cadence should be used for time-sensitive evidence.
+  - Evidence confidence should be contextual and should not be treated as universal truth.
+  - Revoked evidence must preserve revocation reason, revokedBy, and revokedAt where applicable.
+  - Evidence used in decisions must remain queryable after decisions are made.
+  - Evidence access must follow applicable data sensitivity, access, and privacy policies.
+
+relationshipToFoundation:
+  identity: Evidence has collectors, reviewers, issuers, publishers, and claimants.
+  time: Evidence has observed, collected, recorded, valid, expiry, and review times.
+  location: Evidence may be spatially scoped to country, jurisdiction, region, boundary, or source location.
+  relationship: Evidence supports claims, findings, trust assessments, policies, controls, decisions, outcomes, and value records.
+  state: Evidence has lifecycle and review state.
+  event: Evidence may be created by events or used to explain events.
+  scan: Scans produce observations, findings, and evidence.
+  trust: Trust assessments require evidence or explicit evidence-unavailable reason.
+  analytics: Insights and metrics use evidence.
+  decision: Decisions preserve evidence used at decision time.
+  audit: Audit records are evidence for governed activity.
